@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Chapter 50</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+        }
+        header a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+        header .title {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .verse {
+            margin-bottom: 15px;
+        }
+        .verse-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
+            <img src="Suxcedo.png" alt="Suxcedo Logo">
+        </a>
+        <div class="title">Genesis Chapter 50</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 50')">
+            <button class="search-button">Search</button>
+        </div>
+
+        <script>
+            const searchIndex = {
+                "genesis 1": "gen chapter 1.html",
+                "genesis 2": "gen chapter 2.html",
+                "genesis 3": "gen chapter 3.html",
+                "genesis 4": "gen chapter 4.html",
+                "genesis 5": "gen chapter 5.html",
+                "genesis 6": "gen chapter 6.html",
+                "genesis 7": "gen chapter 7.html",
+                "genesis 8": "gen chapter 8.html",
+                "genesis 9": "gen chapter 9.html",
+                "genesis 10": "gen chapter 10.html",
+                "genesis 11": "gen chapter 11.html",
+                "genesis 12": "gen chapter 12.html",
+                "genesis 13": "gen chapter 13.html",
+                "genesis 14": "gen chapter 14.html",
+                "genesis 15": "gen chapter 15.html",
+                "genesis 16": "gen chapter 16.html",
+                "genesis 17": "gen chapter 17.html",
+                "genesis 18": "gen chapter 18.html",
+                "genesis 19": "gen chapter 19.html",
+                "genesis 20": "gen chapter 20.html",
+                "genesis 21": "gen chapter 21.html",
+                "genesis 22": "gen chapter 22.html",
+                "genesis 23": "gen chapter 23.html",
+                "genesis 24": "gen chapter 24.html",
+                "genesis 25": "gen chapter 25.html",
+                "genesis 26": "gen chapter 26.html",
+                "genesis 27": "gen chapter 27.html",
+                "genesis 28": "gen chapter 28.html",
+                "genesis 29": "gen chapter 29.html",
+                "genesis 30": "gen chapter 30.html",
+                "genesis 31": "gen chapter 31.html",
+                "genesis 32": "gen chapter 32.html",
+                "genesis 33": "gen chapter 33.html",
+                "genesis 35": "gen chapter 35.html",
+                "genesis 36": "gen chapter 36.html",
+                "genesis 37": "gen chapter 37.html",
+                "genesis 38": "gen chapter 38.html",
+                "genesis 39": "gen chapter 39.html",
+                "genesis 40": "gen chapter 40.html",
+                "genesis 41": "gen chapter 41.html",
+                "genesis 42": "gen chapter 42.html",
+                "genesis 43": "gen chapter 43.html",
+                "genesis 44": "gen chapter 44.html",
+                "genesis 45": "gen chapter 45.html",
+                "genesis 46": "gen chapter 46.html",
+                "genesis 47": "gen chapter 47.html",
+                "genesis 48": "gen chapter 48.html",
+                "genesis 49": "gen chapter 49.html",
+                "genesis 50": "gen chapter 50.html"
+            };
+
+            function searchBible() {
+                const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+                if (searchIndex[query]) {
+                    window.location.href = searchIndex[query];
+                } else {
+                    alert("Chapter not found. Please try again (e.g., 'Genesis 50').");
+                }
+            }
+
+            document.querySelector(".search-button").addEventListener("click", searchBible);
+            document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    searchBible();
+                }
+            });
+        </script>
+    </header>
+
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+        <div style="background-color: lightblue; padding: 10px;">
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2049.html">Previous Chapter</a>
+        </div>
+        <div style="background-color: lightcoral; padding: 10px;">
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">Next Chapter</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Genesis 50 (KJV)</h1>
+        <div class="verse"><span class="verse-number">1.</span> And Joseph fell upon his father's face, and wept upon him, and kissed him.</div>
+        <div class="verse"><span class="verse-number">2.</span> And Joseph commanded his servants the physicians to embalm his father: and the physicians embalmed Israel.</div>
+        <div class="verse"><span class="verse-number">3.</span> And forty days were fulfilled for him; for so are fulfilled the days of those which are embalmed: and the Egyptians mourned for him threescore and ten days.</div>
+        <div class="verse"><span class="verse-number">4.</span> And when the days of his mourning were past, Joseph spake unto the house of Pharaoh, saying, If now I have found grace in your eyes, speak, I pray you, in the ears of Pharaoh, saying,</div>
+        <div class="verse"><span class="verse-number">5.</span> My father made me swear, saying, Lo, I die: in my grave which I have digged for me in the land of Canaan, there shalt thou bury me. Now therefore let me go up, I pray thee, and bury my father, and I will come again.</div>
+        <div class="verse"><span class="verse-number">6.</span> And Pharaoh said, Go up, and bury thy father, according as he made thee swear.</div>
+        <div class="verse"><span class="verse-number">7.</span> And Joseph went up to bury his father: and with him went up all the servants of Pharaoh, the elders of his house, and all the elders of the land of Egypt,</div>
+        <div class="verse"><span class="verse-number">8.</span> And all the house of Joseph, and his brethren, and his father's house: only their little ones, and their flocks, and their herds, they left in the land of Goshen.</div>
+        <div class="verse"><span class="verse-number">9.</span> And there went up with him both chariots and horsemen: and it was a very great company.</div>
+        <div class="verse"><span class="verse-number">10.</span> And they came to the threshingfloor of Atad, which is beyond Jordan, and there they mourned with a great and very sore lamentation: and he made a mourning for his father seven days.</div>
+        <div class="verse"><span class="verse-number">11.</span> And when the inhabitants of the land, the Canaanites, saw the mourning in the floor of Atad, they said, This is a grievous mourning to the Egyptians: wherefore the name of it was called Abel-mizraim, which is beyond Jordan.</div>
+        <div class="verse"><span class="verse-number">12.</span> And his sons did unto him according as he commanded them:</div>
+        <div class="verse"><span class="verse-number">13.</span> For his sons carried him into the land of Canaan, and buried him in the cave of the field of Machpelah, which Abraham bought with the field for a possession of a buryingplace of Ephron the Hittite, before Mamre.</div>
+        <div class="verse"><span class="verse-number">14.</span> And Joseph returned into Egypt, he and his brethren, and all that went up with him to bury his father, after he had buried his father.</div>
+        <div class="verse"><span class="verse-number">15.</span> And when Joseph's brethren saw that their father was dead, they said, Joseph will peradventure hate us, and will certainly requite us all the evil which we did unto him.</div>
+        <div class="verse"><span class="verse-number">16.</span> And they sent a messenger unto Joseph, saying, Thy father did command before he died, saying,</div>
+        <div class="verse"><span class="verse-number">17.</span> So shall ye say unto Joseph, Forgive, I pray thee now, the trespass of thy brethren, and their sin; for they did unto thee evil: and now, we pray thee, forgive the trespass of the servants of the God of thy father. And Joseph wept when they spake unto him.</div>
+        <div class="verse"><span class="verse-number">18.</span> And his brethren also went and fell down before his face; and they said, Behold, we be thy servants.</div>
+        <div class="verse"><span class="verse-number">19.</span> And Joseph said unto them, Fear not: for am I in the place of God?</div>
+        <div class="verse"><span class="verse-number">20.</span> But as for you, ye thought evil against me; but God meant it unto good, to bring to pass, as it is this day, to save much people alive.</div>
+        <div class="verse"><span class="verse-number">21.</span> Now therefore fear ye not: I will nourish you, and your little ones. And he comforted them, and spake kindly unto them.</div>
+        <div class="verse"><span class="verse-number">22.</span> And Joseph dwelt in Egypt, he, and his father's house: and Joseph lived an hundred and ten years.</div>
+        <div class="verse"><span class="verse-number">23.</span> And Joseph saw Ephraim's children of the third generation: the children also of Machir the son of Manasseh were brought up upon Joseph's knees.</div>
+        <div class="verse"><span class="verse-number">24.</span> And Joseph said unto his brethren, I die: and God will surely visit you, and bring you out of this land unto the land which he sware to Abraham, to Isaac, and to Jacob.</div>
+        <div class="verse"><span class="verse-number">25.</span> And Joseph took an oath of the children of Israel, saying, God will surely visit you, and ye shall carry up my bones from hence.</div>
+        <div class="verse"><span class="verse-number">26.</span> So Joseph died, being an hundred and ten years old: and they embalmed him, and he was put in a coffin in Egypt.</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Bible Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

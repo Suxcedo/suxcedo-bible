@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Chapter 3</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+    
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+        }
+    
+        header a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+    
+        header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+    
+        header .title {
+            flex-grow: 1;
+            text-align: center;
+        }
+    
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+    
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .verse {
+            margin-bottom: 15px;
+        }
+    
+        .verse-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+    
+    <body>
+        <header>
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
+                <img src="Suxcedo.png" alt="Suxcedo Logo">
+            </a>
+            <div class="title">Genesis Chapter 3</div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 1')">
+                <button class="search-button">Search</button>
+            </div>
+
+            <script>
+                // Example search index mapping chapters and URLs
+                const searchIndex = {
+                "genesis 1": "gen chapter 1.html",
+                "genesis 2": "gen chapter 2.html",
+                "genesis 3": "gen chapter 3.html",
+                "genesis 4": "gen chapter 4.html",
+                "genesis 5": "gen chapter 5.html",
+                "genesis 6": "gen chapter 6.html",
+                "genesis 7": "gen chapter 7.html",
+                "genesis 8": "gen chapter 8.html",
+                "genesis 9": "gen chapter 9.html",
+                "genesis 10": "gen chapter 10.html",
+                "genesis 11": "gen chapter 11.html",
+                "genesis 12": "gen chapter 12.html",
+                "genesis 13": "gen chapter 13.html",
+                "genesis 14": "gen chapter 14.html",
+                "genesis 15": "gen chapter 15.html",
+                "genesis 16": "gen chapter 16.html",
+                "genesis 17": "gen chapter 17.html",
+                "genesis 18": "gen chapter 18.html",
+                "genesis 19": "gen chapter 19.html",
+                "genesis 20": "gen chapter 20.html",
+                "genesis 21": "gen chapter 21.html",
+                "genesis 22": "gen chapter 22.html",
+                "genesis 23": "gen chapter 23.html",
+                "genesis 24": "gen chapter 24.html",
+                "genesis 25": "gen chapter 25.html",
+                "genesis 26": "gen chapter 26.html",
+                "genesis 27": "gen chapter 27.html",
+                "genesis 28": "gen chapter 28.html",
+                "genesis 29": "gen chapter 29.html",
+                "genesis 30": "gen chapter 30.html",
+                "genesis 31": "gen chapter 31.html",
+                "genesis 32": "gen chapter 32.html",
+                "genesis 33": "gen chapter 33.html",
+                "genesis 35": "gen chapter 35.html",
+                "genesis 36": "gen chapter 36.html",
+                "genesis 37": "gen chapter 37.html",
+                "genesis 38": "gen chapter 38.html",
+                "genesis 39": "gen chapter 39.html",
+                "genesis 40": "gen chapter 40.html",
+                "genesis 41": "gen chapter 41.html",
+                "genesis 42": "gen chapter 42.html",
+                "genesis 43": "gen chapter 43.html",
+                "genesis 44": "gen chapter 44.html",
+                "genesis 45": "gen chapter 45.html",
+                "genesis 46": "gen chapter 46.html",
+                "genesis 47": "gen chapter 47.html",
+                "genesis 48": "gen chapter 48.html",
+                "genesis 49": "gen chapter 49.html",
+                "genesis 50": "gen chapter 50.html"
+            };
+            
+                // Function to handle search
+                function searchBible() {
+                    const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+                    if (searchIndex[query]) {
+                        window.location.href = searchIndex[query];
+                    } else {
+                        alert("Chapter not found. Please try again (e.g., 'Genesis 4').");
+                    }
+                }
+            
+                document.querySelector(".search-button").addEventListener("click", searchBible);
+                document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        searchBible();
+                    }
+                });
+            </script>
+        </header>
+   
+    
+
+
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div style="background-color: lightblue; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/GEN%20CHAPTER%202.html">Previous Chapter</a></div>
+            <div style="background-color: lightcoral; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%204.html">Next Chapter</div></a>
+          </div>
+          
+
+
+    <div class="container">
+        <div class="verse">
+            <span class="verse-number">1.</span> Now the serpent was more crafty than any of the wild animals the Lord God had made. He said to the woman, "Did God really say, 'You must not eat from any tree in the garden'?"
+        </div>
+        <div class="verse">
+            <span class="verse-number">2.</span> The woman said to the serpent, "We may eat fruit from the trees in the garden,
+        </div>
+        <div class="verse">
+            <span class="verse-number">3.</span> but God did say, 'You must not eat fruit from the tree that is in the middle of the garden, and you must not touch it, or you will die.'"
+        </div>
+        <div class="verse">
+            <span class="verse-number">4.</span> "You will not certainly die," the serpent said to the woman.
+        </div>
+        <div class="verse">
+            <span class="verse-number">5.</span> "For God knows that when you eat from it your eyes will be opened, and you will be like God, knowing good and evil."
+        </div>
+        <div class="verse">
+            <span class="verse-number">6.</span> When the woman saw that the fruit of the tree was good for food and pleasing to the eye, and also desirable for gaining wisdom, she took some and ate it. She also gave some to her husband, who was with her, and he ate it.
+        </div>
+        <div class="verse">
+            <span class="verse-number">7.</span> Then the eyes of both of them were opened, and they realized they were naked; so they sewed fig leaves together and made coverings for themselves.
+        </div>
+        <div class="verse">
+            <span class="verse-number">8.</span> Then the man and his wife heard the sound of the Lord God as he was walking in the garden in the cool of the day, and they hid from the Lord God among the trees of the garden.
+        </div>
+        <div class="verse">
+            <span class="verse-number">9.</span> But the Lord God called to the man, "Where are you?"
+        </div>
+        <div class="verse">
+            <span class="verse-number">10.</span> He answered, "I heard you in the garden, and I was afraid because I was naked; so I hid."
+        </div>
+        <div class="verse">
+            <span class="verse-number">11.</span> And he said, "Who told you that you were naked? Have you eaten from the tree that I commanded you not to eat from?"
+        </div>
+        <div class="verse">
+            <span class="verse-number">12.</span> The man said, "The woman you put here with me—she gave me some fruit from the tree, and I ate it."
+        </div>
+        <div class="verse">
+            <span class="verse-number">13.</span> Then the Lord God said to the woman, "What is this you have done?" The woman said, "The serpent deceived me, and I ate."
+        </div>
+        <div class="verse">
+            <span class="verse-number">14.</span> So the Lord God said to the serpent, "Because you have done this, "Cursed are you above all livestock and all wild animals! You will crawl on your belly and you will eat dust all the days of your life.
+        </div>
+        <div class="verse">
+            <span class="verse-number">15.</span> And I will put enmity between you and the woman, and between your offspring and hers; he will crush your head, and you will strike his heel."
+        </div>
+        <div class="verse">
+            <span class="verse-number">16.</span> To the woman he said, "I will make your pains in childbearing very severe; with painful labor you will give birth to children. Your desire will be for your husband, and he will rule over you."
+        </div>
+        <div class="verse">
+            <span class="verse-number">17.</span> To Adam he said, "Because you listened to your wife and ate fruit from the tree about which I commanded you, 'You must not eat from it,' "Cursed is the ground because of you; through painful toil you will eat food from it all the days of your life.
+        </div>
+        <div class="verse">
+            <span class="verse-number">18.</span> It will produce thorns and thistles for you, and you will eat the plants of the field.
+        </div>
+        <div class="verse">
+            <span class="verse-number">19.</span> By the sweat of your brow you will eat your food until you return to the ground, since from it you were taken; for dust you are and to dust you will return."
+        </div>
+        <div class="verse">
+            <span class="verse-number">20.</span> Adam named his wife Eve, because she would become the mother of all the living.
+        </div>
+        <div class="verse">
+            <span class="verse-number">21.</span> The Lord God made garments of skin for Adam and his wife and clothed them.
+        </div>
+        <div class="verse">
+            <span class="verse-number">22.</span> And the Lord God said, "The man has now become like one of us, knowing good and evil. He must not be allowed to reach out his hand and take also from the tree of life and eat, and live forever."
+        </div>
+        <div class="verse">
+            <span class="verse-number">23.</span> So the Lord God banished him from the Garden of Eden to work the ground from which he had been taken.
+        </div>
+        <div class="verse">
+            <span class="verse-number">24.</span> After he drove the man out, he placed on the east side of the Garden of Eden cherubim and a flaming sword flashing back and forth to guard the way to the tree of life.
+        </div>
+    </div>
+    <footer>
+        © 2025 - Genesis Chapter 3 Display
+    </footer>
+</body>
+</html>

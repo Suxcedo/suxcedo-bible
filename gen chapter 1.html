@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Chapter 1</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+    
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+        }
+    
+        header a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+    
+        header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+    
+        header .title {
+            flex-grow: 1;
+            text-align: center;
+        }
+    
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+    
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .verse {
+            margin-bottom: 15px;
+        }
+    
+        .verse-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+    
+    <body>
+        <header>
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
+                <img src="Suxcedo.png" alt="Suxcedo Logo">
+            </a>
+            <div class="title">Genesis Chapter 1</div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 1')">
+                <button class="search-button">Search</button>
+            </div>
+
+            <script>
+                // Example search index mapping chapters and URLs
+                const searchIndex = {
+                "genesis 1": "gen chapter 1.html",
+                "genesis 2": "gen chapter 2.html",
+                "genesis 3": "gen chapter 3.html",
+                "genesis 4": "gen chapter 4.html",
+                "genesis 5": "gen chapter 5.html",
+                "genesis 6": "gen chapter 6.html",
+                "genesis 7": "gen chapter 7.html",
+                "genesis 8": "gen chapter 8.html",
+                "genesis 9": "gen chapter 9.html",
+                "genesis 10": "gen chapter 10.html",
+                "genesis 11": "gen chapter 11.html",
+                "genesis 12": "gen chapter 12.html",
+                "genesis 13": "gen chapter 13.html",
+                "genesis 14": "gen chapter 14.html",
+                "genesis 15": "gen chapter 15.html",
+                "genesis 16": "gen chapter 16.html",
+                "genesis 17": "gen chapter 17.html",
+                "genesis 18": "gen chapter 18.html",
+                "genesis 19": "gen chapter 19.html",
+                "genesis 20": "gen chapter 20.html",
+                "genesis 21": "gen chapter 21.html",
+                "genesis 22": "gen chapter 22.html",
+                "genesis 23": "gen chapter 23.html",
+                "genesis 24": "gen chapter 24.html",
+                "genesis 25": "gen chapter 25.html",
+                "genesis 26": "gen chapter 26.html",
+                "genesis 27": "gen chapter 27.html",
+                "genesis 28": "gen chapter 28.html",
+                "genesis 29": "gen chapter 29.html",
+                "genesis 30": "gen chapter 30.html",
+                "genesis 31": "gen chapter 31.html",
+                "genesis 32": "gen chapter 32.html",
+                "genesis 33": "gen chapter 33.html",
+                "genesis 35": "gen chapter 35.html",
+                "genesis 36": "gen chapter 36.html",
+                "genesis 37": "gen chapter 37.html",
+                "genesis 38": "gen chapter 38.html",
+                "genesis 39": "gen chapter 39.html",
+                "genesis 40": "gen chapter 40.html",
+                "genesis 41": "gen chapter 41.html",
+                "genesis 42": "gen chapter 42.html",
+                "genesis 43": "gen chapter 43.html",
+                "genesis 44": "gen chapter 44.html",
+                "genesis 45": "gen chapter 45.html",
+                "genesis 46": "gen chapter 46.html",
+                "genesis 47": "gen chapter 47.html",
+                "genesis 48": "gen chapter 48.html",
+                "genesis 49": "gen chapter 49.html",
+                "genesis 50": "gen chapter 50.html"
+            };
+            
+                // Function to handle search
+                function searchBible() {
+                    const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+                    if (searchIndex[query]) {
+                        window.location.href = searchIndex[query];
+                    } else {
+                        alert("Chapter not found. Please try again (e.g., 'Genesis 2').");
+                    }
+                }
+            
+                document.querySelector(".search-button").addEventListener("click", searchBible);
+                document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        searchBible();
+                    }
+                });
+            </script>
+
+        </header>
+    </body>
+    
+      
+<div style="display: flex;justify-content: space-between; width: 100%;">
+
+<div style="background-color: green;padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/GEN%20CHAPTER%202.html">Next Chapter</a></div>
+</div>
+
+
+    <div class="container">
+        <div class="verse">
+            <span class="verse-number">1.</span> In the beginning, God created the heavens and the earth.
+        </div>
+        <div class="verse">
+            <span class="verse-number">2.</span> Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.
+        </div>
+        <div class="verse">
+            <span class="verse-number">3.</span> And God said, "Let there be light," and there was light.
+        </div>
+        <div class="verse">
+            <span class="verse-number">4.</span> God saw that the light was good, and he separated the light from the darkness.
+        </div>
+        <div class="verse">
+            <span class="verse-number">5.</span> God called the light "day," and the darkness he called "night." And there was evening, and there was morning—the first day.
+        </div>
+        <div class="verse">
+            <span class="verse-number">6.</span> And God said, "Let there be a vault between the waters to separate water from water."
+        </div>
+        <div class="verse">
+            <span class="verse-number">7.</span> So God made the vault and separated the water under the vault from the water above it. And it was so.
+        </div>
+        <div class="verse">
+            <span class="verse-number">8.</span> God called the vault "sky." And there was evening, and there was morning—the second day.
+        </div>
+        <div class="verse">
+            <span class="verse-number">9.</span> And God said, "Let the water under the sky be gathered to one place, and let dry ground appear." And it was so.
+        </div>
+        <div class="verse">
+            <span class="verse-number">10.</span> God called the dry ground "land," and the gathered waters he called "seas." And God saw that it was good.
+        </div>
+        <div class="verse">
+            <span class="verse-number">11.</span> Then God said, "Let the land produce vegetation: seed-bearing plants and trees on the land that bear fruit with seed in it, according to their various kinds." And it was so.
+        </div>
+        <div class="verse">
+            <span class="verse-number">12.</span> The land produced vegetation: plants bearing seed according to their kinds and trees bearing fruit with seed in it according to their kinds. And God saw that it was good.
+        </div>
+        <div class="verse">
+            <span class="verse-number">13.</span> And there was evening, and there was morning—the third day.
+        </div>
+        <div class="verse">
+            <span class="verse-number">14.</span> And God said, "Let there be lights in the vault of the sky to separate the day from the night, and let them serve as signs to mark sacred times, and days and years,
+        </div>
+        <div class="verse">
+            <span class="verse-number">15.</span> and let them be lights in the vault of the sky to give light on the earth." And it was so.
+        </div>
+        <div class="verse">
+            <span class="verse-number">16.</span> God made two great lights—the greater light to govern the day and the lesser light to govern the night. He also made the stars.
+        </div>
+        <div class="verse">
+            <span class="verse-number">17.</span> God set them in the vault of the sky to give light on the earth,
+        </div>
+        <div class="verse">
+            <span class="verse-number">18.</span> to govern the day and the night, and to separate light from darkness. And God saw that it was good.
+        </div>
+        <div class="verse">
+            <span class="verse-number">19.</span> And there was evening, and there was morning—the fourth day.
+        </div>
+        <div class="verse">
+            <span class="verse-number">20.</span> And God said, "Let the water teem with living creatures, and let birds fly above the earth across the vault of the sky."
+        </div>
+        <div class="verse">
+            <span class="verse-number">21.</span> So God created the great creatures of the sea and every living thing with which the water teems and that moves about in it, according to their kinds, and every winged bird according to its kind. And God saw that it was good.
+        </div>
+        <div class="verse">
+            <span class="verse-number">22.</span> God blessed them and said, "Be fruitful and increase in number and fill the water in the seas, and let the birds increase on the earth."
+        </div>
+        <div class="verse">
+            <span class="verse-number">23.</span> And there was evening, and there was morning—the fifth day.
+        </div>
+        <div class="verse">
+            <span class="verse-number">24.</span> And God said, "Let the land produce living creatures according to their kinds: the livestock, the creatures that move along the ground, and the wild animals, each according to its kind." And it was so.
+        </div>
+        <div class="verse">
+            <span class="verse-number">25.</span> God made the wild animals according to their kinds, the livestock according to their kinds, and all the creatures that move along the ground according to their kinds. And God saw that it was good.
+        </div>
+        <div class="verse">
+            <span class="verse-number">26.</span> Then God said, "Let us make mankind in our image, in our likeness, so that they may rule over the fish in the sea and the birds in the sky, over the livestock and all the wild animals, and over all the creatures that move along the ground."
+        </div>
+        <div class="verse">
+            <span class="verse-number">27.</span> So God created mankind in his own image, in the image of God he created them; male and female he created them.
+        </div>
+        <div class="verse">
+            <span class="verse-number">28.</span> God blessed them and said to them, "Be fruitful and increase in number; fill the earth and subdue it. Rule over the fish in the sea and the birds in the sky and over every living creature that moves on the ground."
+        </div>
+        <div class="verse">
+            <span class="verse-number">29.</span> Then God said, "I give you every seed-bearing plant on the face of the whole earth and every tree that has fruit with seed in it. They will be yours for food.
+        </div>
+        <div class="verse">
+            <span class="verse-number">30.</span> And to all the beasts of the earth and all the birds in the sky and all the creatures that move along the ground—everything that has the breath of life in it—I give every green plant for food." And it was so.
+        </div>
+        <div class="verse">
+            <span class="verse-number">31.</span> God saw all that he had made, and it was very good. And there was evening, and there was morning—the sixth day.
+        </div>
+    </div>
+    <br>
+        <p><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/GEN%20CHAPTER%202.html" style="color: #f9f9f9;">Next chapter >>></a></p>
+    <footer>
+        &copy; 2025 Suxcedo Bible. All rights reserved.
+    </footer>
+</body>
+</html>

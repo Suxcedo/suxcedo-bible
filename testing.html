@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suxcedo Bible App</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            margin: 0;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+        }
+        header img {
+            width: 80px;
+            height: 80px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+            position: relative;
+        }
+        nav a {
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+        }
+        .dropdown {
+            position: absolute;
+            display: none;
+            top: 100%;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            padding: 10px;
+            list-style: none;
+            min-width: 150px;
+            z-index: 100;
+        }
+        .dropdown li {
+            margin: 5px 0;
+        }
+        .dropdown li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+        }
+        nav a:hover + .dropdown, .dropdown:hover {
+            display: block;
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px black;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .search-container input {
+            width: 60%;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            outline: none;
+        }
+        .search-container button {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            background-color: #555;
+            color: white;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#"><img src="Suxcedo.png" alt="Suxcedo Logo"></a>
+        <nav>
+            <a href="#">Chapters
+                <ul class="dropdown">
+                    <li><a href="Genesis.html">Genesis</a></li>
+                    <!-- Add more chapters here -->
+                </ul>
+            </a>
+            <a href="#">Topics</a>
+            <a href="#">Quotes</a>
+        </nav>
+    </header>
+    
+    <h1>Welcome to Suxcedo Bible Website</h1>
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search for a chapter and verse (e.g., 'Genesis chapter 1')...">
+        <button class="search-button">Search</button>
+    </div>
+    
+    <script>
+        // Example search index mapping chapters and URLs
+        const searchIndex = {
+            "genesis chapter 1": "gen chapter 1.html",
+            "genesis chapter 2": "gen chapter 2.html",
+            "genesis chapter 3": "gen chapter 3.html"
+            // Add more chapters and their corresponding links
+        };
+
+        // Function to handle search
+        function searchBible() {
+            const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+            if (searchIndex[query]) {
+                window.location.href = searchIndex[query];
+            } else {
+                alert("Chapter not found. Please try again (e.g., 'Genesis chapter 1').");
+            }
+        }
+
+        document.querySelector(".search-button").addEventListener("click", searchBible);
+        document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                searchBible();
+            }
+        });
+    </script>
+    
+    <footer>
+        &copy; 2025 Suxcedo. All rights reserved.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Chapter 46</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+        }
+        header a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+        header .title {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .verse {
+            margin-bottom: 15px;
+        }
+        .verse-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
+            <img src="Suxcedo.png" alt="Suxcedo Logo">
+        </a>
+        <div class="title">Genesis Chapter 46</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 46')">
+            <button class="search-button">Search</button>
+        </div>
+
+        <script>
+            const searchIndex = {
+                "genesis 1": "gen chapter 1.html",
+                "genesis 2": "gen chapter 2.html",
+                "genesis 3": "gen chapter 3.html",
+                "genesis 4": "gen chapter 4.html",
+                "genesis 5": "gen chapter 5.html",
+                "genesis 6": "gen chapter 6.html",
+                "genesis 7": "gen chapter 7.html",
+                "genesis 8": "gen chapter 8.html",
+                "genesis 9": "gen chapter 9.html",
+                "genesis 10": "gen chapter 10.html",
+                "genesis 11": "gen chapter 11.html",
+                "genesis 12": "gen chapter 12.html",
+                "genesis 13": "gen chapter 13.html",
+                "genesis 14": "gen chapter 14.html",
+                "genesis 15": "gen chapter 15.html",
+                "genesis 16": "gen chapter 16.html",
+                "genesis 17": "gen chapter 17.html",
+                "genesis 18": "gen chapter 18.html",
+                "genesis 19": "gen chapter 19.html",
+                "genesis 20": "gen chapter 20.html",
+                "genesis 21": "gen chapter 21.html",
+                "genesis 22": "gen chapter 22.html",
+                "genesis 23": "gen chapter 23.html",
+                "genesis 24": "gen chapter 24.html",
+                "genesis 25": "gen chapter 25.html",
+                "genesis 26": "gen chapter 26.html",
+                "genesis 27": "gen chapter 27.html",
+                "genesis 28": "gen chapter 28.html",
+                "genesis 29": "gen chapter 29.html",
+                "genesis 30": "gen chapter 30.html",
+                "genesis 31": "gen chapter 31.html",
+                "genesis 32": "gen chapter 32.html",
+                "genesis 33": "gen chapter 33.html",
+                "genesis 35": "gen chapter 35.html",
+                "genesis 36": "gen chapter 36.html",
+                "genesis 37": "gen chapter 37.html",
+                "genesis 38": "gen chapter 38.html",
+                "genesis 39": "gen chapter 39.html",
+                "genesis 40": "gen chapter 40.html",
+                "genesis 41": "gen chapter 41.html",
+                "genesis 42": "gen chapter 42.html",
+                "genesis 43": "gen chapter 43.html",
+                "genesis 44": "gen chapter 44.html",
+                "genesis 45": "gen chapter 45.html",
+                "genesis 46": "gen chapter 46.html"
+            };
+
+            function searchBible() {
+                const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+                if (searchIndex[query]) {
+                    window.location.href = searchIndex[query];
+                } else {
+                    alert("Chapter not found. Please try again (e.g., 'Genesis 47').");
+                }
+            }
+
+            document.querySelector(".search-button").addEventListener("click", searchBible);
+            document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    searchBible();
+                }
+            });
+        </script>
+    </header>
+
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+        <div style="background-color: lightblue; padding: 10px;">
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2045.html">Previous Chapter</a>
+        </div>
+        <div style="background-color: lightcoral; padding: 10px;">
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2047.html">Next Chapter</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Genesis 46 (KJV)</h1>
+        <div class="verse"><span class="verse-number">1.</span> And Israel took his journey with all that he had, and came to Beersheba, and offered sacrifices unto the God of his father Isaac.</div>
+        <div class="verse"><span class="verse-number">2.</span> And God spake unto Israel in the visions of the night, and said, Jacob, Jacob. And he said, Here am I.</div>
+        <div class="verse"><span class="verse-number">3.</span> And he said, I am God, the God of thy father: fear not to go down into Egypt; for I will there make of thee a great nation:</div>
+        <div class="verse"><span class="verse-number">4.</span> I will go down with thee into Egypt; and I will also surely bring thee up again: and Joseph shall put his hand upon thine eyes.</div>
+        <div class="verse"><span class="verse-number">5.</span> And Jacob rose up from Beersheba: and the sons of Israel carried Jacob their father, and their little ones, and their wives, in the wagons which Pharaoh had sent to carry him.</div>
+        <div class="verse"><span class="verse-number">6.</span> And they took their cattle, and their goods, which they had gotten in the land of Canaan, and came into Egypt, Jacob, and all his seed with him:</div>
+        <div class="verse"><span class="verse-number">7.</span> His sons, and his sons' sons with him, his daughters, and his sons' daughters, and all his seed brought he with him into Egypt.</div>
+        <div class="verse"><span class="verse-number">8.</span> And these are the names of the children of Israel, which came into Egypt, Jacob and his sons: Reuben, Jacob's firstborn.</div>
+        <div class="verse"><span class="verse-number">9.</span> And the sons of Reuben; Hanoch, and Phallu, and Hezron, and Carmi.</div>
+        <div class="verse"><span class="verse-number">10.</span> And the sons of Simeon; Jemuel, and Jamin, and Ohad, and Jachin, and Zohar, and Shaul the son of a Canaanitish woman.</div>
+        <div class="verse"><span class="verse-number">11.</span> And the sons of Levi; Gershon, Kohath, and Merari.</div>
+        <div class="verse"><span class="verse-number">12.</span> And the sons of Judah; Er, and Onan, and Shelah, and Pharez, and Zarah: but Er and Onan died in the land of Canaan. And the sons of Pharez were Hezron and Hamul.</div>
+        <div class="verse"><span class="verse-number">13.</span> And the sons of Issachar; Tola, and Phuvah, and Job, and Shimron.</div>
+        <div class="verse"><span class="verse-number">14.</span> And the sons of Zebulun; Sered, and Elon, and Jahleel.</div>
+        <div class="verse"><span class="verse-number">15.</span> These be the sons of Leah, which she bare unto Jacob in Padan-aram, with his daughter Dinah: all the souls of his sons and his daughters were thirty and three.</div>
+        <div class="verse"><span class="verse-number">16.</span> And the sons of Gad; Ziphion, and Haggi, Shuni, and Ezbon, Eri, and Arodi, and Areli.</div>
+        <div class="verse"><span class="verse-number">17.</span> And the sons of Asher; Imnah, and Ishvah, and Ishvi, and Beriah, and Serah their sister: and the sons of Beriah; Heber, and Malchiel.</div>
+        <div class="verse"><span class="verse-number">18.</span> These are the sons of Zilpah, whom Laban gave to Leah his daughter, and these she bare unto Jacob, even sixteen souls.</div>
+        <div class="verse"><span class="verse-number">19.</span> The sons of Rachel Jacob's wife; Joseph, and Benjamin.</div>
+        <div class="verse"><span class="verse-number">20.</span> And unto Joseph in the land of Egypt were born Manasseh and Ephraim, which Asenath the daughter of Potipherah priest of On bare unto him.</div>
+        <div class="verse"><span class="verse-number">21.</span> And the sons of Benjamin were Bela, and Becher, and Ashbel, Gera, and Naaman, Ehi, and Rosh, Muppim, and Huppim, and Ard.</div>
+        <div class="verse"><span class="verse-number">22.</span> These are the sons of Rachel, which were born to Jacob: all the souls were fourteen.</div>
+        <div class="verse"><span class="verse-number">23.</span> And the son of Dan; Hushim.</div>
+        <div class="verse"><span class="verse-number">24.</span> And the sons of Naphtali; Jahzeel, and Guni, and Jezer, and Shillem.</div>
+        <div class="verse"><span class="verse-number">25.</span> These are the sons of Bilhah, which Laban gave unto Rachel his daughter, and she bare these unto Jacob: all the souls were seven.</div>
+        <div class="verse"><span class="verse-number">26.</span> All the souls that came with Jacob into Egypt, which came out of his loins, besides Jacob's sons' wives, all the souls were threescore and six;</div>
+        <div class="verse"><span class="verse-number">27.</span> And the sons of Joseph, which were born him in Egypt, were two souls: all the souls of the house of Jacob, which came into Egypt, were threescore and ten.</div>
+        <div class="verse"><span class="verse-number">28.</span> And he sent Judah before him unto Joseph, to direct his face unto Goshen; and they came into the land of Goshen.</div>
+        <div class="verse"><span class="verse-number">29.</span> And Joseph made ready his chariot, and went up to meet Israel his father, to Goshen, and presented himself unto him; and he fell on his neck, and wept on his neck a good while.</div>
+        <div class="verse"><span class="verse-number">30.</span> And Israel said unto Joseph, Now let me die, since I have seen thy face, because thou art yet alive.</div>
+        <div class="verse"><span class="verse-number">31.</span> And Joseph said unto his brethren, and unto his father's house, I will go up and show Pharaoh, and say unto him, My brethren, and my father's house, which were in the land of Canaan, are come unto me;</div>
+        <div class="verse"><span class="verse-number">32.</span> And the men are shepherds, for their trade hath been to feed cattle; and they have brought their flocks, and their herds, and all that they have.</div>
+        <div class="verse"><span class="verse-number">33.</span> And it shall come to pass, when Pharaoh shall call you, and shall say, What is your occupation?</div>
+        <div class="verse"><span class="verse-number">34.</span> That ye shall say, Thy servants' trade hath been about cattle from our youth even until now, both we and also our fathers: that ye may dwell in the land of Goshen; for every shepherd is an abomination unto the Egyptians.</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Bible Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

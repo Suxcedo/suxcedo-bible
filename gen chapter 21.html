@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Chapter 21</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+        }
+        header a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+        header .title {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .verse {
+            margin-bottom: 15px;
+        }
+        .verse-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
+            <img src="Suxcedo.png" alt="Suxcedo Logo">
+        </a>
+        <div class="title">Genesis Chapter 21</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 1')">
+            <button class="search-button">Search</button>
+        </div>
+
+        <script>
+            const searchIndex = {
+                "genesis 1": "gen chapter 1.html",
+                "genesis 2": "gen chapter 2.html",
+                "genesis 3": "gen chapter 3.html",
+                "genesis 4": "gen chapter 4.html",
+                "genesis 5": "gen chapter 5.html",
+                "genesis 6": "gen chapter 6.html",
+                "genesis 7": "gen chapter 7.html",
+                "genesis 8": "gen chapter 8.html",
+                "genesis 9": "gen chapter 9.html",
+                "genesis 10": "gen chapter 10.html",
+                "genesis 11": "gen chapter 11.html",
+                "genesis 12": "gen chapter 12.html",
+                "genesis 13": "gen chapter 13.html",
+                "genesis 14": "gen chapter 14.html",
+                "genesis 15": "gen chapter 15.html",
+                "genesis 16": "gen chapter 16.html",
+                "genesis 17": "gen chapter 17.html",
+                "genesis 18": "gen chapter 18.html",
+                "genesis 19": "gen chapter 19.html",
+                "genesis 20": "gen chapter 20.html",
+                "genesis 21": "gen chapter 21.html"
+            };
+
+            function searchBible() {
+                const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+                if (searchIndex[query]) {
+                    window.location.href = searchIndex[query];
+                } else {
+                    alert("Chapter not found. Please try again (e.g., 'Genesis 20').");
+                }
+            }
+
+            document.querySelector(".search-button").addEventListener("click", searchBible);
+            document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    searchBible();
+                }
+            });
+        </script>
+    </header>
+
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+        <div style="background-color: lightblue; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2020.html">Previous Chapter</a></div>
+        <div style="background-color: lightcoral; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2022.html">Next Chapter</a></div>
+    </div>
+
+    <div class="container">
+        <div class="verse">
+            <span class="verse-number">1.</span> And the Lord visited Sarah as he had said, and the Lord did unto Sarah as he had spoken.
+        </div>
+        <div class="verse">
+            <span class="verse-number">2.</span> For Sarah conceived, and bare Abraham a son in his old age, at the set time of which God had spoken to him.
+        </div>
+        <div class="verse">
+            <span class="verse-number">3.</span> And Abraham called the name of his son that was born unto him, whom Sarah bare to him, Isaac.
+        </div>
+        <div class="verse">
+            <span class="verse-number">4.</span> And Abraham circumcised his son Isaac being eight days old, as God had commanded him.
+        </div>
+        <div class="verse">
+            <span class="verse-number">5.</span> And Abraham was an hundred years old, when his son Isaac was born unto him.
+        </div>
+        <div class="verse">
+            <span class="verse-number">6.</span> And Sarah said, God hath made me to laugh, so that all that hear will laugh with me.
+        </div>
+        <div class="verse">
+            <span class="verse-number">7.</span> And she said, Who would have said unto Abraham, that Sarah should have given children suck? for I have borne him a son in his old age.
+        </div>
+        <div class="verse">
+            <span class="verse-number">8.</span> And the child grew, and was weaned: and Abraham made a great feast the same day that Isaac was weaned.
+        </div>
+        <div class="verse">
+            <span class="verse-number">9.</span> And Sarah saw the son of Hagar the Egyptian, which she had borne unto Abraham, mocking.
+        </div>
+        <div class="verse">
+            <span class="verse-number">10.</span> Wherefore she said unto Abraham, Cast out this bondwoman and her son: for the son of this bondwoman shall not be heir with my son, even with Isaac.
+        </div>
+        <div class="verse">
+            <span class="verse-number">11.</span> And the thing was very grievous in Abraham's sight because of his son.
+        </div>
+        <div class="verse">
+            <span class="verse-number">12.</span> And God said unto Abraham, Let it not be grievous in thy sight because of the lad, and because of thy bondwoman; in all that Sarah hath said unto thee, hearken unto her voice; for in Isaac shall thy seed be called.
+        </div>
+        <div class="verse">
+            <span class="verse-number">13.</span> And also of the son of the bondwoman will I make a nation, because he is thy seed.
+        </div>
+        <div class="verse">
+            <span class="verse-number">14.</span> And Abraham rose up early in the morning, and took bread, and a bottle of water, and gave it unto Hagar, putting it on her shoulder, and the child, and sent her away: and she departed, and wandered in the wilderness of Beersheba.
+        </div>
+        <div class="verse">
+            <span class="verse-number">15.</span> And the water was spent in the bottle, and she cast the child under one of the shrubs.
+        </div>
+        <div class="verse">
+            <span class="verse-number">16.</span> And she went, and sat her down over against him a good way off, as it were a bowshot: for she said, Let me not see the death of the child. And she sat over against him, and lifted up her voice, and wept.
+        </div>
+        <div class="verse">
+            <span class="verse-number">17.</span> And God heard the voice of the lad; and the angel of God called to Hagar out of heaven, and said unto her, What aileth thee, Hagar? fear not; for God hath heard the voice of the lad where he is.
+        </div>
+        <div class="verse">
+            <span class="verse-number">18.</span> Arise, lift up the lad, and hold him in thine hand; for I will make him a great nation.
+        </div>
+        <div class="verse">
+            <span class="verse-number">19.</span> And God opened her eyes, and she saw a well of water; and she went, and filled the bottle with water, and gave the lad drink.
+        </div>
+        <div class="verse">
+            <span class="verse-number">20.</span> And God was with the lad; and he grew, and dwelt in the wilderness, and became an archer.
+        </div>
+        <div class="verse">
+            <span class="verse-number">21.</span> And he dwelt in the wilderness of Paran: and his mother took him a wife out of the land of Egypt.
+        </div>
+        <div class="verse">
+            <span class="verse-number">22.</span> And it came to pass at that time, that Abimelech and Phichol the chief captain of his host spake unto Abraham, saying, God is with thee in all that thou doest:
+        </div>
+        <div class="verse">
+            <span class="verse-number">23.</span> Now therefore swear unto me here by God that thou wilt not deal falsely with me, nor with my son, nor with my son's son: but according to the kindness that I have done unto thee, thou shalt do unto me, and to the land wherein thou hast sojourned.
+        </div>
+        <div class="verse">
+            <span class="verse-number">24.</span> And Abraham said, I will swear.
+        </div>
+        <div class="verse">
+            <span class="verse-number">25.</span> And Abraham reproved Abimelech because of a well of water, which Abimelech's servants had violently taken away.
+        </div>
+        <div class="verse">
+            <span class="verse-number">26.</span> And Abimelech said, I wot not who hath done this thing: neither didst thou tell me, neither yet heard I of it, but to day.
+        </div>
+        <div class="verse">
+            <span class="verse-number">27.</span> And Abraham took sheep and oxen, and gave them unto Abimelech; and both of them made a covenant.
+        </div>
+        <div class="verse">
+            <span class="verse-number">28.</span> And Abraham set seven ewe lambs of the flock by themselves.
+        </div>
+        <div class="verse">
+            <span class="verse-number">29.</span> And Abimelech said unto Abraham, What mean these seven ewe lambs which thou hast set by themselves?
+        </div>
+        <div class="verse">
+            <span class="verse-number">30.</span> And he said, For these seven ewe lambs shalt thou take of my hand, that they may be a witness unto me, that I have digged this well.
+        </div>
+        <div class="verse">
+            <span class="verse-number">31.</span> Wherefore he called that place Beersheba; because there they sware both of them.
+        </div>
+        <div class="verse">
+            <span class="verse-number">32.</span> Thus they made a covenant at Beersheba: then Abimelech rose up, and Phichol the chief captain of his host, and they returned into the land of the Philistines.
+        </div>
+        <div class="verse">
+            <span class="verse-number">33.</span> And Abraham planted a grove in Beersheba, and called there on the name of the Lord, the everlasting God.
+        </div>
+        <div class="verse">
+            <span class="verse-number">34.</span> And Abraham sojourned in the Philistines' land many days.
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Your Bible Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Chapter 2</title>
+    <style>
+        body {
+            background-image: url('bible concept.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+    
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+        }
+    
+        header a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+    
+        header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+    
+        header .title {
+            flex-grow: 1;
+            text-align: center;
+        }
+    
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+    
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .verse {
+            margin-bottom: 15px;
+        }
+    
+        .verse-number {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+    
+    <body>
+        <header>
+            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
+                <img src="Suxcedo.png" alt="Suxcedo Logo">
+            </a>
+            <div class="title" align="center">Genesis Chapter 2</div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 1')">
+                <button class="search-button">Search</button>
+            </div>
+
+            <script>
+                // Example search index mapping chapters and URLs
+                const searchIndex = {
+                "genesis 1": "gen chapter 1.html",
+                "genesis 2": "gen chapter 2.html",
+                "genesis 3": "gen chapter 3.html",
+                "genesis 4": "gen chapter 4.html",
+                "genesis 5": "gen chapter 5.html",
+                "genesis 6": "gen chapter 6.html",
+                "genesis 7": "gen chapter 7.html",
+                "genesis 8": "gen chapter 8.html",
+                "genesis 9": "gen chapter 9.html",
+                "genesis 10": "gen chapter 10.html",
+                "genesis 11": "gen chapter 11.html",
+                "genesis 12": "gen chapter 12.html",
+                "genesis 13": "gen chapter 13.html",
+                "genesis 14": "gen chapter 14.html",
+                "genesis 15": "gen chapter 15.html",
+                "genesis 16": "gen chapter 16.html",
+                "genesis 17": "gen chapter 17.html",
+                "genesis 18": "gen chapter 18.html",
+                "genesis 19": "gen chapter 19.html",
+                "genesis 20": "gen chapter 20.html",
+                "genesis 21": "gen chapter 21.html",
+                "genesis 22": "gen chapter 22.html",
+                "genesis 23": "gen chapter 23.html",
+                "genesis 24": "gen chapter 24.html",
+                "genesis 25": "gen chapter 25.html",
+                "genesis 26": "gen chapter 26.html",
+                "genesis 27": "gen chapter 27.html",
+                "genesis 28": "gen chapter 28.html",
+                "genesis 29": "gen chapter 29.html",
+                "genesis 30": "gen chapter 30.html",
+                "genesis 31": "gen chapter 31.html",
+                "genesis 32": "gen chapter 32.html",
+                "genesis 33": "gen chapter 33.html",
+                "genesis 35": "gen chapter 35.html",
+                "genesis 36": "gen chapter 36.html",
+                "genesis 37": "gen chapter 37.html",
+                "genesis 38": "gen chapter 38.html",
+                "genesis 39": "gen chapter 39.html",
+                "genesis 40": "gen chapter 40.html",
+                "genesis 41": "gen chapter 41.html",
+                "genesis 42": "gen chapter 42.html",
+                "genesis 43": "gen chapter 43.html",
+                "genesis 44": "gen chapter 44.html",
+                "genesis 45": "gen chapter 45.html",
+                "genesis 46": "gen chapter 46.html",
+                "genesis 47": "gen chapter 47.html",
+                "genesis 48": "gen chapter 48.html",
+                "genesis 49": "gen chapter 49.html",
+                "genesis 50": "gen chapter 50.html"
+            };
+            
+                // Function to handle search
+                function searchBible() {
+                    const query = document.querySelector(".search-bar").value.toLowerCase().trim();
+                    if (searchIndex[query]) {
+                        window.location.href = searchIndex[query];
+                    } else {
+                        alert("Chapter not found. Please try again (e.g., 'Genesis 3').");
+                    }
+                }
+            
+                document.querySelector(".search-button").addEventListener("click", searchBible);
+                document.querySelector(".search-bar").addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        searchBible();
+                    }
+                });
+            </script>
+        </header>
+    </body>
+    
+
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div style="background-color: lightblue; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%201.html">Previous Chapter</a></div>
+            <div style="background-color: lightcoral; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/Gen%20Chapter%203.html">Next Chapter</a></div>
+          </div>
+
+
+       
+    <div class="container">
+        <div class="verse">
+            <span class="verse-number">1.</span> Thus the heavens and the earth were completed in all their vast array.
+        </div>
+        <div class="verse">
+            <span class="verse-number">2.</span> By the seventh day God had finished the work he had been doing; so on the seventh day he rested from all his work.
+        </div>
+        <div class="verse">
+            <span class="verse-number">3.</span> Then God blessed the seventh day and made it holy, because on it he rested from all the work of creating that he had done.
+        </div>
+        <div class="verse">
+            <span class="verse-number">4.</span> This is the account of the heavens and the earth when they were created, when the Lord God made the earth and the heavens.
+        </div>
+        <div class="verse">
+            <span class="verse-number">5.</span> Now no shrub had yet appeared on the earth and no plant had yet sprung up, for the Lord God had not sent rain on the earth and there was no one to work the ground,
+        </div>
+        <div class="verse">
+            <span class="verse-number">6.</span> but streams came up from the earth and watered the whole surface of the ground.
+        </div>
+        <div class="verse">
+            <span class="verse-number">7.</span> Then the Lord God formed a man from the dust of the ground and breathed into his nostrils the breath of life, and the man became a living being.
+        </div>
+        <div class="verse">
+            <span class="verse-number">8.</span> Now the Lord God had planted a garden in the east, in Eden; and there he put the man he had formed.
+        </div>
+        <div class="verse">
+            <span class="verse-number">9.</span> The Lord God made all kinds of trees grow out of the ground—trees that were pleasing to the eye and good for food. In the middle of the garden were the tree of life and the tree of the knowledge of good and evil.
+        </div>
+        <div class="verse">
+            <span class="verse-number">10.</span> A river watering the garden flowed from Eden; from there it was separated into four headwaters.
+        </div>
+        <div class="verse">
+            <span class="verse-number">11.</span> The name of the first is the Pishon; it winds through the entire land of Havilah, where there is gold.
+        </div>
+        <div class="verse">
+            <span class="verse-number">12.</span> (The gold of that land is good; aromatic resin and onyx are also there.)
+        </div>
+        <div class="verse">
+            <span class="verse-number">13.</span> The name of the second river is the Gihon; it winds through the entire land of Cush.
+        </div>
+        <div class="verse">
+            <span class="verse-number">14.</span> The name of the third river is the Tigris; it runs along the east side of Ashur. And the fourth river is the Euphrates.
+        </div>
+        <div class="verse">
+            <span class="verse-number">15.</span> The Lord God took the man and put him in the Garden of Eden to work it and take care of it.
+        </div>
+        <div class="verse">
+            <span class="verse-number">16.</span> And the Lord God commanded the man, “You are free to eat from any tree in the garden;
+        </div>
+        <div class="verse">
+            <span class="verse-number">17.</span> but you must not eat from the tree of the knowledge of good and evil, for when you eat from it you will certainly die.”
+        </div>
+        <div class="verse">
+            <span class="verse-number">18.</span> The Lord God said, “It is not good for the man to be alone. I will make a helper suitable for him.”
+        </div>
+        <div class="verse">
+            <span class="verse-number">19.</span> Now the Lord God had formed out of the ground all the wild animals and all the birds in the sky. He brought them to the man to see what he would name them; and whatever the man called each living creature, that was its name.
+        </div>
+        <div class="verse">
+            <span class="verse-number">20.</span> So the man gave names to all the livestock, the birds in the sky and all the wild animals. But for Adam no suitable helper was found.
+        </div>
+        <div class="verse">
+            <span class="verse-number">21.</span> So the Lord God caused the man to fall into a deep sleep; and while he was sleeping, he took one of the man’s ribs and then closed up the place with flesh.
+        </div>
+        <div class="verse">
+            <span class="verse-number">22.</span> Then the Lord God made a woman from the rib he had taken out of the man, and he brought her to the man.
+        </div>
+        <div class="verse">
+            <span class="verse-number">23.</span> The man said,
+            <br><em>“This is now bone of my bones
+            and flesh of my flesh;
+            she shall be called ‘woman,’
+            for she was taken out of man.”</em>
+        </div>
+        <div class="verse">
+            <span class="verse-number">24.</span> That is why a man leaves his father and mother and is united to his wife, and they become one flesh.
+        </div>
+        <div class="verse">
+            <span class="verse-number">25.</span> Adam and his wife were both naked, and they felt no shame.
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Suxcedo Bible. All rights reserved.
+    </footer>
+</body>
+</html>
