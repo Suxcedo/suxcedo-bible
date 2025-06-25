@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload | SUXCEDO</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: #000;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #00ffcc;
+    }
+
+    .upload-container {
+      background: #1e1e1e;
+      margin-top: 40px;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.1);
+    }
+
+    .upload-container h2 {
+      margin-top: 0;
+      color: #00ffcc;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input[type="file"] {
+      background: #fff;
+      color: #000;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00e0aa;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SUXCEDO Video Upload</h1>
+  </header>
+
+  <div class="upload-container">
+    <h2>Upload Your Video Testimony 🎥</h2>
+    <form id="uploadForm">
+      <input type="text" placeholder="Video Title" required /><br/>
+      <textarea rows="4" placeholder="Write a short description..." required></textarea><br/>
+      <input type="file" accept="video/*" required /><br/>
+      <button type="submit">Upload</button>
+    </form>
+    <p style="margin-top: 20px; font-size: 14px; color: #bbb;">* Videos will be reviewed before going live.</p>
+  </div>
+
+  <footer>&copy; 2025 SUXCEDO | All Rights Reserved</footer>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Thanks for uploading! Your video will be reviewed shortly.");
+      // Here you can later add: send to server, firebase, or cloud
+    });
+  </script>
+
+</body>
+</html>
