@@ -384,12 +384,27 @@
       }
     });
   </script>
-  <div id="popup-overlay">
+  <!-- Popup HTML -->
+<div id="popup-overlay">
   <div id="popup-box">
     <p><strong>Notice:</strong> Only the Book of Genesis is available.</p>
     <button onclick="closePopup()">OK</button>
   </div>
 </div>
+
+<!-- Popup Script -->
+<script>
+  function closePopup() {
+    document.getElementById("popup-overlay").style.display = "none";
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    // Optional delay for smoother feel
+    setTimeout(() => {
+      document.getElementById("popup-overlay").style.display = "flex";
+    }, 300); // delay in ms
+  });
+</script>
 
 </body>
 </html>
