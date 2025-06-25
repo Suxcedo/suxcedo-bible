@@ -31,17 +31,17 @@
       background-repeat: no-repeat;
       color: white;
       font-family: Arial, sans-serif;
-      padding: 30px;
       margin: 0;
+      padding: 0;
     }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 15px;
+      padding: 15px 30px;
       background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
+      border-bottom: 2px solid #ccc;
       flex-wrap: wrap;
     }
 
@@ -62,7 +62,7 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px;
+      padding: 10px 0;
       position: relative;
       cursor: pointer;
     }
@@ -109,14 +109,35 @@
     h1 {
       text-align: center;
       font-size: 36px;
-      margin-top: 50px;
+      margin: 40px 20px 10px;
       text-shadow: 2px 2px 5px black;
+    }
+
+    .creative-banner {
+      text-align: center;
+      padding: 20px 30px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      color: #f0f0f0;
+      max-width: 700px;
+      font-size: 18px;
+    }
+
+    .creative-banner strong {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 10px;
+      color: #fff;
     }
 
     .search-container {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      padding: 0 20px;
     }
 
     .search-container input {
@@ -144,23 +165,26 @@
       text-align: center;
       margin-top: 50px;
       font-size: 14px;
-      opacity: 0.8;
+      color: #ddd;
+      padding-bottom: 30px;
     }
 
     @media (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-
       header {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        padding: 15px;
       }
 
       nav {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 10px;
+      }
+
+      nav a {
+        padding: 8px 0;
+        font-size: 16px;
       }
 
       .search-container {
@@ -171,16 +195,16 @@
       .search-container input,
       .search-container button {
         width: 90%;
-        margin-bottom: 10px;
+        margin: 5px 0;
       }
 
       h1 {
         font-size: 28px;
       }
 
-      .dropdown {
-        width: 200px;
-        max-height: 250px;
+      .creative-banner {
+        font-size: 16px;
+        padding: 15px;
       }
     }
   </style>
@@ -195,9 +219,9 @@
         <li><a href="Genesis.html">Genesis</a></li>
         <li><a href="exodus.html">Exodus</a></li>
         <li><a href="leviticus.html">Leviticus</a></li>
-             <li><a href="numbers.html">Numbers</a></li>
-      <li><a href="deuteronomy.html">Deuteronomy</a></li>
-      <li><a href="#">Joshua</a></li>
+        <li><a href="numbers.html">Numbers</a></li>
+        <li><a href="deuteronomy.html">Deuteronomy</a></li>
+        <li><a href="#">Joshua</a></li>
       <li><a href="#">Judges</a></li>
       <li><a href="#">Ruth</a></li>
       <li><a href="#">1 Samuel</a></li>
@@ -258,7 +282,7 @@
       <li><a href="#">3 John</a></li>
       <li><a href="#">Jude</a></li>
       <li><a href="#">Revelation</a></li>
-        <!-- Add more here as needed -->
+        <!-- Add more here -->
       </ul>
 
       <a href="#" tabindex="0">Topics</a>
@@ -275,9 +299,10 @@
 
   <h1>Welcome to Suxcedo Bible Website</h1>
 
-  <center>
-    <a href="index.html"><img src="Suxcedo.png" alt="Suxcedo Logo" width="160" height="80" /></a>
-  </center>
+  <div class="creative-banner">
+    <strong>📖 Empower Your Journey with Scripture</strong>
+    Use this Bible app to discover books, find inspiration, and grow in your walk with Christ.
+  </div>
 
   <div class="search-container">
     <input type="search" placeholder="Search..." aria-label="Search the Bible" />
