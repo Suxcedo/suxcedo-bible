@@ -1,167 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Suxcedo Bible App</title>
 
-<title>Suxcedo Bible App</title>
-<link rel="icon" href="favicon.png" type="image/png" />
+  <!-- Favicon for browser tab -->
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="shortcut icon" href="favicon.png" type="image/png" />
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "SUXCEDO",
-  "url": "https://suxcedo.com",
-  "logo": "https://suxcedo.com/favicon.png"
-}
-</script>
+  <!-- Schema for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SUXCEDO",
+    "url": "https://suxcedo.com",
+    "logo": "https://suxcedo.com/favicon.png"
+  }
+  </script>
 
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    background-image: url('bible concept.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    font-family: Arial, sans-serif;
-    padding: 30px;
-    margin: 0;
-  }
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-  }
-  header img {
-    width: 80px;
-    height: 80px;
-  }
-  nav {
-    display: flex;
-    gap: 20px;
-    position: relative;
-  }
-  nav a {
-    font-size: 18px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px;
-    position: relative;
-    cursor: pointer;
-  }
-  .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 5px;
-    padding: 10px;
-    list-style: none;
-    min-width: 150px;
-    z-index: 100;
-  }
-  .dropdown li {
-    margin: 5px 0;
-  }
-  .dropdown li a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    display: block;
-  }
-  nav a:hover + .dropdown,
-  nav a:focus + .dropdown,
-  .dropdown:hover {
-    display: block;
-  }
-  /* Accessibility focus styles */
-  a:focus,
-  button:focus,
-  input:focus {
-    outline: 3px solid #1e90ff;
-    outline-offset: 2px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 36px;
-    margin-top: 50px;
-    text-shadow: 2px 2px 5px black;
-  }
-  .search-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  .search-container input {
-    width: 60%;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    outline: none;
-  }
-  .search-container button {
-    padding: 15px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 25px;
-    background-color: #555;
-    color: white;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  footer {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 14px;
-    opacity: 0.8;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 10px;
+  <style>
+    html {
+      scroll-behavior: smooth;
     }
+
+    body {
+      background-image: url('bible concept.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      margin: 0;
+      position: relative;
+      z-index: 0;
+    }
+
+    body::before {
+      content: '';
+      background: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+
     header img {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 5px;
+      padding: 10px;
+      list-style: none;
+      min-width: 150px;
+      z-index: 100;
+    }
+
+    .dropdown li {
+      margin: 5px 0;
+    }
+
+    .dropdown li a {
+      color: white;
+      text-decoration: none;
+      padding: 5px 10px;
+      display: block;
+    }
+
+    nav a:hover + .dropdown,
+    nav a:focus + .dropdown,
+    .dropdown:hover {
+      display: block;
+    }
+
+    a:focus,
+    button:focus,
+    input:focus {
+      outline: 3px solid #1e90ff;
+      outline-offset: 2px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 50px;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 2px 2px 10px black;
+    }
+
+    .welcome h2 {
+      font-size: 28px;
       margin-bottom: 10px;
     }
-    nav {
-      flex-wrap: wrap;
-      gap: 10px;
+
+    .welcome p {
+      font-size: 18px;
+      color: #ddd;
     }
-    nav a {
-      font-size: 16px;
-      padding: 8px;
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
     }
+
     .search-container input {
-      width: 100%;
+      width: 60%;
+      padding: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      outline: none;
     }
-  }
-</style>
+
+    .search-container button {
+      padding: 15px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      background-color: #555;
+      color: white;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .search-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-container input,
+      .search-container button {
+        width: 90%;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <a href="index.html"><img src="Suxcedo.png" alt="Suxcedo Logo" width="80" height="80" /></a>
-  <nav>
-    <a href="#" tabindex="0">Books of the Bible</a>
-    <ul class="dropdown" aria-label="Books of the Bible dropdown">
-      <li><a href="Genesis.html">Genesis</a></li>
-      <li><a href="exodus.html">Exodus</a></li>
-      <li><a href="leviticus.html">Leviticus</a></li>
+  <header>
+    <a href="index.html">
+      <img src="Suxcedo.png" alt="Suxcedo Logo" />
+    </a>
+    <nav>
+      <a href="#" tabindex="0">Books of the Bible</a>
+      <ul class="dropdown" aria-label="Books of the Bible dropdown">
+        <li><a href="Genesis.html">Genesis</a></li>
+        <li><a href="exodus.html">Exodus</a></li>
+        <li><a href="leviticus.html">Leviticus</a></li>
+        <li><a href="leviticus.html">Leviticus</a></li>
       <li><a href="numbers.html">Numbers</a></li>
       <li><a href="deuteronomy.html">Deuteronomy</a></li>
       <li><a href="#">Joshua</a></li>
@@ -225,63 +286,63 @@
       <li><a href="#">3 John</a></li>
       <li><a href="#">Jude</a></li>
       <li><a href="#">Revelation</a></li>
-    </ul>
+      </ul>
 
-    <a href="#" tabindex="0">Topics</a>
-    <ul class="dropdown" aria-label="Topics dropdown">
-      <li><a href="#">Faith</a></li>
-      <li><a href="#">Hope</a></li>
-      <li><a href="#">Success</a></li>
-      <li><a href="#">Grace</a></li>
-    </ul>
+      <a href="#" tabindex="0">Topics</a>
+      <ul class="dropdown" aria-label="Topics dropdown">
+        <li><a href="#">Faith</a></li>
+        <li><a href="#">Hope</a></li>
+        <li><a href="#">Success</a></li>
+        <li><a href="#">Grace</a></li>
+      </ul>
 
-    <a href="#">Quotes</a>
-  </nav>
-</header>
+      <a href="#">Quotes</a>
+    </nav>
+  </header>
 
-<h1>Welcome to Suxcedo Bible Website</h1><br />
+  <h1>Welcome to Suxcedo Bible Website</h1>
 
-<center>
-  <a href="index.html"><img src="Suxcedo.png" alt="Suxcedo Logo" width="160" height="80" /></a>
-</center>
+  <section class="welcome">
+    <h2>Explore God's Word with Ease</h2>
+    <p>Dive into scripture, find answers, and grow your faith with the Suxcedo Bible App.</p>
+  </section>
 
-<div class="search-container">
-  <input type="search" placeholder="Search..." aria-label="Search the Bible" />
-  <button type="submit" aria-label="Submit search">Search</button>
-</div>
+  <div class="search-container">
+    <input type="search" placeholder="Search..." aria-label="Search the Bible" />
+    <button type="submit" aria-label="Submit search">Search</button>
+  </div>
 
-<footer>
-  &copy; 2025 SUXCEDO - All Rights Reserved
-</footer>
+  <footer>
+    &copy; 2025 SUXCEDO - All Rights Reserved
+  </footer>
 
-<script>
-  // Dropdown toggle on click for mobile-friendly
-  document.querySelectorAll('nav > a').forEach(link => {
-    link.addEventListener('click', e => {
-      const dropdown = link.nextElementSibling;
-      if (dropdown && dropdown.classList.contains('dropdown')) {
-        e.preventDefault();
-        if (dropdown.style.display === 'block') {
-          dropdown.style.display = 'none';
-        } else {
-          // Close other dropdowns before opening
-          document.querySelectorAll('.dropdown').forEach(dd => {
-            dd.style.display = 'none';
-          });
-          dropdown.style.display = 'block';
+  <script>
+    // Dropdown toggle on click for mobile-friendly
+    document.querySelectorAll('nav > a').forEach(link => {
+      link.addEventListener('click', e => {
+        const dropdown = link.nextElementSibling;
+        if (dropdown && dropdown.classList.contains('dropdown')) {
+          e.preventDefault();
+          if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+          } else {
+            document.querySelectorAll('.dropdown').forEach(dd => {
+              dd.style.display = 'none';
+            });
+            dropdown.style.display = 'block';
+          }
         }
+      });
+    });
+
+    // Close dropdowns if clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav')) {
+        document.querySelectorAll('.dropdown').forEach(dd => {
+          dd.style.display = 'none';
+        });
       }
     });
-  });
-
-  // Close dropdowns if clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('nav')) {
-      document.querySelectorAll('.dropdown').forEach(dd => {
-        dd.style.display = 'none';
-      });
-    }
-  });
-</script>
+  </script>
 </body>
 </html>
