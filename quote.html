@@ -3,56 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Suxcedo Quotes | Pro Landing Vibes</title>
+  <title>Suxcedo Quotes | Warm Brown Edition</title>
   <link rel="icon" href="favicon.png" type="image/png" />
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
-    /* Reset & base */
     * {
       margin: 0; padding: 0; box-sizing: border-box;
       scroll-behavior: smooth;
     }
     body, html {
       height: 100%;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      overflow-x: hidden;
+      font-family: 'Merriweather', serif;
+      background: linear-gradient(135deg, #6f4e37, #d7b49e);
+      color: #4b3b2b;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Abstract background shapes */
+    /* Glowing abstract shapes */
     body::before, body::after {
       content: '';
       position: fixed;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.6;
-      animation: float 20s ease-in-out infinite alternate;
+      filter: blur(150px);
+      opacity: 0.25;
+      animation: float 25s ease-in-out infinite alternate;
       z-index: 0;
     }
     body::before {
-      width: 400px;
-      height: 400px;
-      background: #ff6a00;
-      top: -100px;
-      left: -100px;
+      width: 450px;
+      height: 450px;
+      background: #f3d9b1;
+      top: -120px;
+      left: -120px;
     }
     body::after {
-      width: 600px;
-      height: 600px;
-      background: #4a90e2;
-      bottom: -150px;
-      right: -150px;
-      animation-delay: 10s;
+      width: 550px;
+      height: 550px;
+      background: #4a2c16;
+      bottom: -180px;
+      right: -180px;
+      animation-delay: 12s;
     }
     @keyframes float {
       0% { transform: translateY(0) translateX(0); }
-      100% { transform: translateY(30px) translateX(20px); }
+      100% { transform: translateY(25px) translateX(15px); }
     }
 
     header {
@@ -60,25 +59,27 @@
       padding: 3rem 1rem 1.5rem;
       text-align: center;
       position: relative;
+      color: #3b2f24;
+      text-shadow: 1px 1px 3px rgba(255 255 255 / 0.5);
     }
 
     header h1 {
       font-size: 3rem;
-      background: linear-gradient(90deg, #f6d365, #fda085);
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(90deg, #e3c9a4, #b88759);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 10px rgba(246, 211, 101, 0.7);
     }
 
     header p {
-      font-size: 1.25rem;
-      color: rgba(255 255 255 / 0.8);
-      max-width: 500px;
+      font-size: 1.2rem;
+      max-width: 600px;
       margin: 0 auto;
       font-weight: 500;
+      font-style: italic;
+      color: #5c4a3e;
       letter-spacing: 0.05em;
     }
 
@@ -91,53 +92,55 @@
       width: 100%;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      gap: 2.5rem;
+      box-sizing: border-box;
     }
 
     .quote-card {
-      background: rgba(255 255 255 / 0.15);
+      background: rgba(243, 217, 177, 0.85);
       border-radius: 20px;
-      padding: 2rem 2.5rem;
-      box-shadow: 0 8px 30px rgba(0 0 0 / 0.15);
-      color: white;
-      font-size: 1.15rem;
+      padding: 2.2rem 2.5rem;
+      font-size: 1.18rem;
       font-weight: 600;
-      line-height: 1.5;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
+      line-height: 1.6;
+      color: #5c422a;
+      box-shadow: 0 12px 30px rgba(74, 44, 22, 0.15);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
       opacity: 0;
       transform: translateY(40px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      cursor: default;
     }
     .quote-card::before {
       content: '“';
       position: absolute;
-      top: 10px;
-      left: 15px;
-      font-size: 6rem;
-      color: rgba(255 255 255 / 0.12);
+      top: 8px;
+      left: 20px;
+      font-size: 5.5rem;
+      color: rgba(92, 66, 42, 0.15);
       font-weight: 900;
       user-select: none;
       pointer-events: none;
       font-family: serif;
+      text-shadow: 1px 1px 3px rgba(255 255 255 / 0.4);
     }
     .quote-card:hover {
       transform: translateY(0) scale(1.05);
-      box-shadow: 0 15px 40px rgba(0 0 0 / 0.3);
+      box-shadow: 0 16px 40px rgba(74, 44, 22, 0.3);
     }
 
     footer {
       z-index: 1;
       text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 25px 10px;
       font-size: 0.9rem;
-      color: rgba(255 255 255 / 0.6);
+      color: #7a5a37;
       background: transparent;
       user-select: none;
+      font-style: italic;
+      letter-spacing: 0.05em;
     }
 
-    /* Fade in animation */
     .quote-card.show {
       opacity: 1;
       transform: translateY(0);
@@ -156,11 +159,11 @@
       main {
         grid-template-columns: 1fr;
         padding: 1rem;
-        gap: 1.5rem;
+        gap: 1.8rem;
       }
       .quote-card {
         font-size: 1rem;
-        padding: 1.5rem 2rem;
+        padding: 1.8rem 2rem;
       }
     }
   </style>
@@ -178,10 +181,11 @@
   <div class="quote-card">God is moved when you move (take action with your faith)</div>
   <div class="quote-card">ONLY THOSE WHO MAKE THEMSELVES OF NO REPUTATION TO GOD, THAT GOD MAKES OF REPUTATION FOR HIM.</div>
   <div class="quote-card">IF YOU DODGE RESPONSIBILITY, THE CONSEQUENCES OF IRRESPONSIBILITY WILL CATCH UP WITH YOU.</div>
+  <div class="quote-card">“Faith is taking the first step even when you don't see the whole staircase.” — Martin Luther King Jr.</div>
 </main>
 
 <footer>
-  &copy; 2025 SUXCEDO — Quotes that Inspire
+  &copy; 2025 SUXCEDO — Quotes that Inspire and Empower
 </footer>
 
 <script>
