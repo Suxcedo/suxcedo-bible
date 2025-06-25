@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Suxcedo Quotes | Pro Landing Vibes</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Abstract background shapes */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.6;
+      animation: float 20s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    body::before {
+      width: 400px;
+      height: 400px;
+      background: #ff6a00;
+      top: -100px;
+      left: -100px;
+    }
+    body::after {
+      width: 600px;
+      height: 600px;
+      background: #4a90e2;
+      bottom: -150px;
+      right: -150px;
+      animation-delay: 10s;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(30px) translateX(20px); }
+    }
+
+    header {
+      z-index: 1;
+      padding: 3rem 1rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      background: linear-gradient(90deg, #f6d365, #fda085);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px rgba(246, 211, 101, 0.7);
+    }
+
+    header p {
+      font-size: 1.25rem;
+      color: rgba(255 255 255 / 0.8);
+      max-width: 500px;
+      margin: 0 auto;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    main {
+      z-index: 1;
+      flex-grow: 1;
+      padding: 2rem 1rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .quote-card {
+      background: rgba(255 255 255 / 0.15);
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 8px 30px rgba(0 0 0 / 0.15);
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.5;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .quote-card::before {
+      content: '“';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 6rem;
+      color: rgba(255 255 255 / 0.12);
+      font-weight: 900;
+      user-select: none;
+      pointer-events: none;
+      font-family: serif;
+    }
+    .quote-card:hover {
+      transform: translateY(0) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0 0 0 / 0.3);
+    }
+
+    footer {
+      z-index: 1;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+      color: rgba(255 255 255 / 0.6);
+      background: transparent;
+      user-select: none;
+    }
+
+    /* Fade in animation */
+    .quote-card.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      header p {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+      main {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
+      }
+      .quote-card {
+        font-size: 1rem;
+        padding: 1.5rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SUXCEDO Quotes</h1>
+  <p>Powerful words to inspire your faith and fuel your journey. Let these quotes light your path.</p>
+</header>
+
+<main>
+  <div class="quote-card">DON'T KILL YOURSELF, BE YOURSELF</div>
+  <div class="quote-card">GUESS WORK HARDLY WORKS</div>
+  <div class="quote-card">God is moved when you move (take action with your faith)</div>
+  <div class="quote-card">ONLY THOSE WHO MAKE THEMSELVES OF NO REPUTATION TO GOD, THAT GOD MAKES OF REPUTATION FOR HIM.</div>
+  <div class="quote-card">IF YOU DODGE RESPONSIBILITY, THE CONSEQUENCES OF IRRESPONSIBILITY WILL CATCH UP WITH YOU.</div>
+</main>
+
+<footer>
+  &copy; 2025 SUXCEDO — Quotes that Inspire
+</footer>
+
+<script>
+  // Fade in quotes with delay
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.quote-card');
+    cards.forEach((card, i) => {
+      setTimeout(() => {
+        card.classList.add('show');
+      }, i * 250);
+    });
+  });
+</script>
+
+</body>
+</html>
