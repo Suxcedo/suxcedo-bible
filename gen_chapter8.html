@@ -204,6 +204,160 @@
     &copy; 2025 Suxcedo Bible. All rights reserved.
   </footer>
 
-  <!-- 🔍 Include your script for search functionality below this line -->
+  <script>
+  const searchIndex = {
+    "genesis 1": "gen_chapter1.html",
+    "genesis 2": "gen_chapter2.html",
+    "genesis 3": "gen_chapter3.html",
+    "genesis 4": "gen_chapter4.html",
+    "genesis 5": "gen_chapter5.html",
+    "genesis 6": "gen_chapter6.html",
+    "genesis 7": "gen_chapter7.html",
+    "genesis 8": "gen_chapter8.html",
+    "genesis 9": "gen_chapter9.html",
+    "genesis 10": "gen_chapter10.html",
+    "genesis 11": "gen_chapter11.html",
+    "genesis 12": "gen_chapter12.html",
+    "genesis 13": "gen_chapter13.html",
+    "genesis 14": "gen_chapter14.html",
+    "genesis 15": "gen_chapter15.html",
+    "genesis 16": "gen_chapter16.html",
+    "genesis 17": "gen_chapter17.html",
+    "genesis 18": "gen_chapter18.html",
+    "genesis 19": "gen_chapter19.html",
+    "genesis 20": "gen_chapter20.html",
+    "genesis 21": "gen_chapter21.html",
+    "genesis 22": "gen_chapter22.html",
+    "genesis 23": "gen_chapter23.html",
+    "genesis 24": "gen_chapter24.html",
+    "genesis 25": "gen_chapter25.html",
+    "genesis 26": "gen_chapter26.html",
+    "genesis 27": "gen_chapter27.html",
+    "genesis 28": "gen_chapter28.html",
+    "genesis 29": "gen_chapter29.html",
+    "genesis 30": "gen_chapter30.html",
+    "genesis 31": "gen_chapter31.html",
+    "genesis 32": "gen_chapter32.html",
+    "genesis 33": "gen_chapter33.html",
+    "genesis 34": "gen_chapter34.html",
+    "genesis 35": "gen_chapter35.html",
+    "genesis 36": "gen_chapter36.html",
+    "genesis 37": "gen_chapter37.html",
+    "genesis 38": "gen_chapter38.html",
+    "genesis 39": "gen_chapter39.html",
+    "genesis 40": "gen_chapter40.html",
+    "genesis 41": "gen_chapter41.html",
+    "genesis 42": "gen_chapter42.html",
+    "genesis 43": "gen_chapter43.html",
+    "genesis 44": "gen_chapter44.html",
+    "genesis 45": "gen_chapter45.html",
+    "genesis 46": "gen_chapter46.html",
+    "genesis 47": "gen_chapter47.html",
+    "genesis 48": "gen_chapter48.html",
+    "genesis 49": "gen_chapter49.html",
+    "genesis 50": "gen_chapter50.html"
+  };
+
+  const input = document.querySelector(".search-bar");
+  const button = document.querySelector(".search-button");
+
+  // Create suggestion box
+  const suggestionBox = document.createElement("div");
+  suggestionBox.style.position = "absolute";
+  suggestionBox.style.zIndex = "1000";
+  suggestionBox.style.width = input.offsetWidth + "px";
+  suggestionBox.style.maxHeight = "200px";
+  suggestionBox.style.overflowY = "auto";
+  suggestionBox.style.background = "#e0f2ff"; // light sky blue
+  suggestionBox.style.border = "1px solid #4a90e2";
+  suggestionBox.style.color = "#003f8a";
+  suggestionBox.style.borderRadius = "5px";
+  suggestionBox.style.marginTop = "5px";
+  suggestionBox.style.display = "none";
+  document.body.appendChild(suggestionBox);
+
+  // Position box under input
+  function updateBoxPosition() {
+    const rect = input.getBoundingClientRect();
+    suggestionBox.style.top = rect.bottom + window.scrollY + "px";
+    suggestionBox.style.left = rect.left + window.scrollX + "px";
+    suggestionBox.style.width = rect.width + "px";
+  }
+
+  window.addEventListener("resize", updateBoxPosition);
+  window.addEventListener("scroll", updateBoxPosition);
+
+  function normalize(text) {
+    return text.replace(/\s+/g, "").toLowerCase();
+  }
+
+  function searchBible() {
+    const rawQuery = input.value.toLowerCase().trim().replace(/\s+/g, "");
+    let match = Object.keys(searchIndex).find(chap => normalize(chap) === rawQuery);
+
+    if (match) {
+      window.location.href = searchIndex[match];
+    } else {
+      alert("Chapter not found. Try e.g. Genesis 3 or gen3");
+    }
+  }
+
+  function showSuggestions() {
+    const value = normalize(input.value.trim());
+    suggestionBox.innerHTML = "";
+
+    if (!value) {
+      suggestionBox.style.display = "none";
+      return;
+    }
+
+    const suggestions = Object.keys(searchIndex).filter(chap => normalize(chap).startsWith(value)).slice(0, 50);
+
+    if (suggestions.length === 0) {
+      suggestionBox.style.display = "none";
+      return;
+    }
+
+    suggestions.forEach(chap => {
+      const div = document.createElement("div");
+      div.textContent = chap;
+      div.style.padding = "8px 12px";
+      div.style.cursor = "pointer";
+
+      div.addEventListener("mouseover", () => {
+        div.style.background = "#cce4ff";
+      });
+
+      div.addEventListener("mouseout", () => {
+        div.style.background = "#e0f2ff";
+      });
+
+      div.addEventListener("click", () => {
+        input.value = chap;
+        searchBible();
+      });
+
+      suggestionBox.appendChild(div);
+    });
+
+    updateBoxPosition();
+    suggestionBox.style.display = "block";
+  }
+
+  input.addEventListener("input", showSuggestions);
+  input.addEventListener("focus", showSuggestions);
+  document.addEventListener("click", e => {
+    if (!suggestionBox.contains(e.target) && e.target !== input) {
+      suggestionBox.style.display = "none";
+    }
+  });
+
+  button.addEventListener("click", searchBible);
+  input.addEventListener("keypress", e => {
+    if (e.key === "Enter") {
+      searchBible();
+    }
+  });
+</script>
 </body>
 </html>
