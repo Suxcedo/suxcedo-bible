@@ -1,296 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis Chapter 5</title>
-    <style>
-        body {
-            background-image: url('bible concept.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-    
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-    
-        header {
-            background-color: #4a90e2;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 22px;
-            font-weight: bold;
-            position: relative;
-        }
-    
-        header a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-        }
-    
-        header img {
-            width: 60px;
-            height: 60px;
-            margin-right: 15px;
-        }
-    
-        header .title {
-            flex-grow: 1;
-            text-align: center;
-        }
-    
-        .search-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-    
-        .search-bar {
-            width: 300px;
-            padding: 8px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-    
-        .search-button {
-            padding: 5px 10px;
-            margin-left: 10px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-    
-        .search-button:hover {
-            background-color: #0056b3;
-        }
-    
-        .container {
-            padding: 20px;
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    
-        .verse {
-            margin-bottom: 15px;
-        }
-    
-        .verse-number {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-    
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesis Chapter 5</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      background: url('bible concept.webp') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .title {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .search-bar {
+      padding: 8px;
+      font-size: 14px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    .search-button {
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #0056b3;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-button:hover {
+      background-color: #003f8a;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .verse {
+      margin-bottom: 15px;
+    }
+
+    .verse-number {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .chapter-nav {
+      display: flex;
+      justify-content: space-between;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .chapter-nav a {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .chapter-nav a:last-child {
+      background-color: green;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: white;
+      background-color: #00000080;
+    }
+
+    @media (max-width: 600px) {
+      header img {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+      }
+
+      .search-container {
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      .chapter-nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
-            <img src="Suxcedo.png" alt="Suxcedo Logo">
-        </a>
-        <div class="title">Genesis Chapter 5</div>
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 1')">
-            <button class="search-button">Search</button>
-        </div>
+<header>
+  <a href="index.html">
+    <img src="Suxcedo.png" alt="Suxcedo Logo" />
+  </a>
+  <div class="title">Genesis Chapter 5</div>
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="Search for a chapter" />
+    <button class="search-button">Search</button>
+  </div>
+</header>
 
-        <script>
-                const searchIndex = {
-                "genesis 1": "gen chapter 1.html",
-                "genesis 2": "gen chapter 2.html",
-                "genesis 3": "gen chapter 3.html",
-                "genesis 4": "gen chapter 4.html",
-                "genesis 5": "gen chapter 5.html",
-                "genesis 6": "gen chapter 6.html",
-                "genesis 7": "gen chapter 7.html",
-                "genesis 8": "gen chapter 8.html",
-                "genesis 9": "gen chapter 9.html",
-                "genesis 10": "gen chapter 10.html",
-                "genesis 11": "gen chapter 11.html",
-                "genesis 12": "gen chapter 12.html",
-                "genesis 13": "gen chapter 13.html",
-                "genesis 14": "gen chapter 14.html",
-                "genesis 15": "gen chapter 15.html",
-                "genesis 16": "gen chapter 16.html",
-                "genesis 17": "gen chapter 17.html",
-                "genesis 18": "gen chapter 18.html",
-                "genesis 19": "gen chapter 19.html",
-                "genesis 20": "gen chapter 20.html",
-                "genesis 21": "gen chapter 21.html",
-                "genesis 22": "gen chapter 22.html",
-                "genesis 23": "gen chapter 23.html",
-                "genesis 24": "gen chapter 24.html",
-                "genesis 25": "gen chapter 25.html",
-                "genesis 26": "gen chapter 26.html",
-                "genesis 27": "gen chapter 27.html",
-                "genesis 28": "gen chapter 28.html",
-                "genesis 29": "gen chapter 29.html",
-                "genesis 30": "gen chapter 30.html",
-                "genesis 31": "gen chapter 31.html",
-                "genesis 32": "gen chapter 32.html",
-                "genesis 33": "gen chapter 33.html",
-                "genesis 35": "gen chapter 35.html",
-                "genesis 36": "gen chapter 36.html",
-                "genesis 37": "gen chapter 37.html",
-                "genesis 38": "gen chapter 38.html",
-                "genesis 39": "gen chapter 39.html",
-                "genesis 40": "gen chapter 40.html",
-                "genesis 41": "gen chapter 41.html",
-                "genesis 42": "gen chapter 42.html",
-                "genesis 43": "gen chapter 43.html",
-                "genesis 44": "gen chapter 44.html",
-                "genesis 45": "gen chapter 45.html",
-                "genesis 46": "gen chapter 46.html",
-                "genesis 47": "gen chapter 47.html",
-                "genesis 48": "gen chapter 48.html",
-                "genesis 49": "gen chapter 49.html",
-                "genesis 50": "gen chapter 50.html"
-            };
-        
-            function searchBible() {
-                const query = document.querySelector(".search-bar").value.toLowerCase().trim();
-                if (searchIndex[query]) {
-                    window.location.href = searchIndex[query];
-                } else {
-                    alert("Chapter not found. Please try again (e.g., 'Genesis 5').");
-                }
-            }
-        
-            document.querySelector(".search-button").addEventListener("click", searchBible);
-            document.querySelector(".search-bar").addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    searchBible();
-                }
-            });
-        </script>
-    </header>
+<div class="chapter-nav">
+  <a href="gen_chapter4.html">&larr; Previous Chapter</a>
+  <a href="gen_chapter6.html">Next Chapter &rarr;</a>
+</div>
 
-    <div style="display: flex; justify-content: space-between; width: 100%;">
-        <div style="background-color: lightblue; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/GEN%20CHAPTER%204.html">Previous Chapter</a></div>
-        <div style="background-color: lightcoral; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%206.html"> Next Chapter</a></div>
-    </div>
+<div class="container">
+  <div class="verse"><span class="verse-number">1.</span> This is the written account of Adam’s family line. When God created mankind, he made them in the likeness of God.</div>
+  <div class="verse"><span class="verse-number">2.</span> He created them male and female and blessed them. And he named them "Mankind" when they were created.</div>
+  <div class="verse"><span class="verse-number">3.</span> When Adam had lived 130 years, he had a son in his own likeness, in his own image; and he named him Seth.</div>
+  <div class="verse"><span class="verse-number">4.</span> After Seth was born, Adam lived 800 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">5.</span> Altogether, Adam lived a total of 930 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">6.</span> When Seth had lived 105 years, he became the father of Enosh.</div>
+  <div class="verse"><span class="verse-number">7.</span> After he became the father of Enosh, Seth lived 807 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">8.</span> Altogether, Seth lived a total of 912 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">9.</span> When Enosh had lived 90 years, he became the father of Kenan.</div>
+  <div class="verse"><span class="verse-number">10.</span> After he became the father of Kenan, Enosh lived 815 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">11.</span> Altogether, Enosh lived a total of 905 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">12.</span> When Kenan had lived 70 years, he became the father of Mahalalel.</div>
+  <div class="verse"><span class="verse-number">13.</span> After he became the father of Mahalalel, Kenan lived 840 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">14.</span> Altogether, Kenan lived a total of 910 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">15.</span> When Mahalalel had lived 65 years, he became the father of Jared.</div>
+  <div class="verse"><span class="verse-number">16.</span> After he became the father of Jared, Mahalalel lived 830 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">17.</span> Altogether, Mahalalel lived a total of 895 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">18.</span> When Jared had lived 162 years, he became the father of Enoch.</div>
+  <div class="verse"><span class="verse-number">19.</span> After he became the father of Enoch, Jared lived 800 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">20.</span> Altogether, Jared lived a total of 962 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">21.</span> When Enoch had lived 65 years, he became the father of Methuselah.</div>
+  <div class="verse"><span class="verse-number">22.</span> After he became the father of Methuselah, Enoch walked faithfully with God 300 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">23.</span> Altogether, Enoch lived a total of 365 years.</div>
+  <div class="verse"><span class="verse-number">24.</span> Enoch walked faithfully with God; then he was no more, because God took him away.</div>
+  <div class="verse"><span class="verse-number">25.</span> When Methuselah had lived 187 years, he became the father of Lamech.</div>
+  <div class="verse"><span class="verse-number">26.</span> After he became the father of Lamech, Methuselah lived 782 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">27.</span> Altogether, Methuselah lived a total of 969 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">28.</span> When Lamech had lived 182 years, he had a son.</div>
+  <div class="verse"><span class="verse-number">29.</span> He named him Noah and said, "He will comfort us in the labor and painful toil of our hands caused by the ground the Lord has cursed."
+  </div>
+  <div class="verse"><span class="verse-number">30.</span> After Noah was born, Lamech lived 595 years and had other sons and daughters.</div>
+  <div class="verse"><span class="verse-number">31.</span> Altogether, Lamech lived a total of 777 years, and then he died.</div>
+  <div class="verse"><span class="verse-number">32.</span> After Noah was 500 years old, he became the father of Shem, Ham and Japheth.</div>
+</div>
 
-    <div class="container">
-        <div class="verse">
-            <span class="verse-number">1.</span> This is the book of the generations of Adam. In the day that God created man, in the likeness of God made he him;
-        </div>
-        <div class="verse">
-            <span class="verse-number">2.</span> Male and female created he them; and blessed them, and called their name Adam, in the day when they were created.
-        </div>
-        <div class="verse">
-            <span class="verse-number">3.</span> And Adam lived an hundred and thirty years, and begat a son in his own likeness, and after his image; and called his name Seth:
-        </div>
-        <div class="verse">
-            <span class="verse-number">4.</span> And the days of Adam after he had begotten Seth were eight hundred years: and he begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">5.</span> And all the days that Adam lived were nine hundred and thirty years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">6.</span> And Seth lived an hundred and five years, and begat Enos:
-        </div>
-        <div class="verse">
-            <span class="verse-number">7.</span> And Seth lived after he begat Enos eight hundred and seven years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">8.</span> And all the days of Seth were nine hundred and twelve years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">9.</span> And Enos lived ninety years, and begat Cainan:
-        </div>
-        <div class="verse">
-            <span class="verse-number">10.</span> And Enos lived after he begat Cainan eight hundred and fifteen years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">11.</span> And all the days of Enos were nine hundred and five years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">12.</span> And Cainan lived seventy years, and begat Mahalaleel:
-        </div>
-        <div class="verse">
-            <span class="verse-number">13.</span> And Cainan lived after he begat Mahalaleel eight hundred and forty years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">14.</span> And all the days of Cainan were nine hundred and ten years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">15.</span> And Mahalaleel lived sixty and five years, and begat Jared:
-        </div>
-        <div class="verse">
-            <span class="verse-number">16.</span> And Mahalaleel lived after he begat Jared eight hundred and thirty years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">17.</span> And all the days of Mahalaleel were eight hundred ninety and five years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">18.</span> And Jared lived an hundred sixty and two years, and he begat Enoch:
-        </div>
-        <div class="verse">
-            <span class="verse-number">19.</span> And Jared lived after he begat Enoch eight hundred years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">20.</span> And all the days of Jared were nine hundred sixty and two years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">21.</span> And Enoch lived sixty and five years, and begat Methuselah:
-        </div>
-        <div class="verse">
-            <span class="verse-number">22.</span> And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">23.</span> And all the days of Enoch were three hundred sixty and five years:
-        </div>
-        <div class="verse">
-            <span class="verse-number">24.</span> And Enoch walked with God: and he was not; for God took him.
-        </div>
-        <div class="verse">
-            <span class="verse-number">25.</span> And Methuselah lived an hundred eighty and seven years, and begat Lamech:
-        </div>
-        <div class="verse">
-            <span class="verse-number">26.</span> And Methuselah lived after he begat Lamech seven hundred eighty and two years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">27.</span> And all the days of Methuselah were nine hundred sixty and nine years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">28.</span> And Lamech lived an hundred eighty and two years, and begat a son:
-        </div>
-        <div class="verse">
-            <span class="verse-number">29.</span> And he called his name Noah, saying, This same shall comfort us concerning our work and toil of our hands, because of the ground which the Lord hath cursed.
-        </div>
-        <div class="verse">
-            <span class="verse-number">30.</span> And Lamech lived after he begat Noah five hundred ninety and five years, and begat sons and daughters:
-        </div>
-        <div class="verse">
-            <span class="verse-number">31.</span> And all the days of Lamech were seven hundred seventy and seven years: and he died.
-        </div>
-        <div class="verse">
-            <span class="verse-number">32.</span> And Noah was five hundred years old: and Noah begat Shem, Ham, and Japheth.
-        </div>
-    </div>
-
-    <footer>
-        © 2025 - Genesis Chapter 5 Display
-    </footer>
+<footer>
+  &copy; 2025 Suxcedo Bible. All rights reserved.
+</footer>
 </body>
 </html>
