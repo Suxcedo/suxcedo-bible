@@ -1,256 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis Chapter 13</title>
-    <style>
-        body {
-            background-image: url('bible concept.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-    
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-    
-        header {
-            background-color: #4a90e2;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 22px;
-            font-weight: bold;
-            position: relative;
-        }
-    
-        header a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-        }
-    
-        header img {
-            width: 60px;
-            height: 60px;
-            margin-right: 15px;
-        }
-    
-        header .title {
-            flex-grow: 1;
-            text-align: center;
-        }
-    
-        .search-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-    
-        .search-bar {
-            width: 300px;
-            padding: 8px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-    
-        .search-button {
-            padding: 5px 10px;
-            margin-left: 10px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-    
-        .search-button:hover {
-            background-color: #0056b3;
-        }
-    
-        .container {
-            padding: 20px;
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    
-        .verse {
-            margin-bottom: 15px;
-        }
-    
-        .verse-number {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-    
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesis Chapter 13</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      background: url('bible concept.webp') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .title {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .search-bar {
+      padding: 8px;
+      font-size: 14px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    .search-button {
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #0056b3;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-button:hover {
+      background-color: #003f8a;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .verse {
+      margin-bottom: 15px;
+    }
+
+    .verse-number {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .chapter-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+    }
+
+    .chapter-nav a {
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+    }
+
+    .chapter-nav .prev {
+      background-color: red;
+    }
+
+    .chapter-nav .next {
+      background-color: green;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: white;
+      background-color: #00000080;
+    }
+
+    @media (max-width: 600px) {
+      header img {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+      }
+
+      .search-container {
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      .chapter-nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 10px;
+      }
+
+      .chapter-nav a {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
-            <img src="Suxcedo.png" alt="Suxcedo Logo">
-        </a>
-        <div class="title">Genesis Chapter 13</div>
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 1')">
-            <button class="search-button">Search</button>
-        </div>
-
-        <script>
-            const searchIndex = {
-  "genesis 1": "gen_chapter1.html",
-  "genesis 2": "gen_chapter2.html",
-  "genesis 3": "gen_chapter3.html",
-  "genesis 4": "gen_chapter4.html",
-  "genesis 5": "gen_chapter5.html",
-  "genesis 6": "gen_chapter6.html",
-  "genesis 7": "gen_chapter7.html",
-  "genesis 8": "gen_chapter8.html",
-  "genesis 9": "gen_chapter9.html",
-  "genesis 10": "gen_chapter10.html",
-  "genesis 11": "gen_chapter11.html",
-  "genesis 12": "gen_chapter12.html",
-  "genesis 13": "gen_chapter13.html",
-  "genesis 14": "gen_chapter14.html",
-  "genesis 15": "gen_chapter15.html",
-  "genesis 16": "gen_chapter16.html",
-  "genesis 17": "gen_chapter17.html",
-  "genesis 18": "gen_chapter18.html",
-  "genesis 19": "gen_chapter19.html",
-  "genesis 20": "gen_chapter20.html",
-  "genesis 21": "gen_chapter21.html",
-  "genesis 22": "gen_chapter22.html",
-  "genesis 23": "gen_chapter23.html",
-  "genesis 24": "gen_chapter24.html",
-  "genesis 25": "gen_chapter25.html",
-  "genesis 26": "gen_chapter26.html",
-  "genesis 27": "gen_chapter27.html",
-  "genesis 28": "gen_chapter28.html",
-  "genesis 29": "gen_chapter29.html",
-  "genesis 30": "gen_chapter30.html",
-  "genesis 31": "gen_chapter31.html",
-  "genesis 32": "gen_chapter32.html",
-  "genesis 33": "gen_chapter33.html",
-  "genesis 34": "gen_chapter34.html",
-  "genesis 35": "gen_chapter35.html",
-  "genesis 36": "gen_chapter36.html",
-  "genesis 37": "gen_chapter37.html",
-  "genesis 38": "gen_chapter38.html",
-  "genesis 39": "gen_chapter39.html",
-  "genesis 40": "gen_chapter40.html",
-  "genesis 41": "gen_chapter41.html",
-  "genesis 42": "gen_chapter42.html",
-  "genesis 43": "gen_chapter43.html",
-  "genesis 44": "gen_chapter44.html",
-  "genesis 45": "gen_chapter45.html",
-  "genesis 46": "gen_chapter46.html",
-  "genesis 47": "gen_chapter47.html",
-  "genesis 48": "gen_chapter48.html",
-  "genesis 49": "gen_chapter49.html",
-  "genesis 50": "gen_chapter50.html"
-};
-
-        
-            function searchBible() {
-                const query = document.querySelector(".search-bar").value.toLowerCase().trim();
-                if (searchIndex[query]) {
-                    window.location.href = searchIndex[query];
-                } else {
-                    alert("Chapter not found. Please try again (e.g., 'Genesis 14').");
-                }
-            }
-        
-            document.querySelector(".search-button").addEventListener("click", searchBible);
-            document.querySelector(".search-bar").addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    searchBible();
-                }
-            });
-        </script>
-    </header>
-
-    <div style="display: flex; justify-content: space-between; width: 100%;">
-        <div style="background-color: lightblue; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/GEN%20CHAPTER%2012.html">Previous Chapter</a></div>
-        <div style="background-color: lightcoral; padding: 10px;"><a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2014.html">Next Chapter</a> </div>
+  <header>
+    <a href="index.html">
+      <img src="Suxcedo.png" alt="Suxcedo Logo" />
+    </a>
+    <div class="title">Genesis Chapter 13</div>
+    <div class="search-container">
+      <input type="text" class="search-bar" placeholder="Search for a chapter" />
+      <button class="search-button">Search</button>
     </div>
+  </header>
 
-    <div class="container">
-        <div class="verse">
-            <span class="verse-number">1.</span> And Abram went up out of Egypt, he, and his wife, and all that he had, and Lot with him, into the south.
-        </div>
-        <div class="verse">
-            <span class="verse-number">2.</span> And Abram was very rich in cattle, in silver, and in gold.
-        </div>
-        <div class="verse">
-            <span class="verse-number">3.</span> And he went on his journeys from the south even to Bethel, unto the place where his tent had been at the beginning, between Bethel and Hai;
-        </div>
-        <div class="verse">
-            <span class="verse-number">4.</span> Unto the place of the altar, which he had made there at the first: and there Abram called on the name of the Lord.
-        </div>
-        <div class="verse">
-            <span class="verse-number">5.</span> And Lot also, which went with Abram, had flocks, and herds, and tents.
-        </div>
-        <div class="verse">
-            <span class="verse-number">6.</span> And the land was not able to bear them, that they might dwell together: for their substance was great, so that they could not dwell together.
-        </div>
-        <div class="verse">
-            <span class="verse-number">7.</span> And there was a strife between the herdmen of Abram's cattle and the herdmen of Lot's cattle: and the Canaanite and the Perizzite dwelled then in the land.
-        </div>
-        <div class="verse">
-            <span class="verse-number">8.</span> And Abram said unto Lot, Let there be no strife, I pray thee, between me and thee, and between my herdmen and thy herdmen; for we be brethren.
-        </div>
-        <div class="verse">
-            <span class="verse-number">9.</span> Is not the whole land before thee? separate thyself, I pray thee, from me: if thou wilt take the left hand, then I will go to the right; or if thou depart to the right hand, then I will go to the left.
-        </div>
-        <div class="verse">
-            <span class="verse-number">10.</span> And Lot lifted up his eyes, and beheld all the plain of Jordan, that it was well watered everywhere, before the Lord destroyed Sodom and Gomorrah, even as the garden of the Lord, like the land of Egypt, as thou comest unto Zoar.
-        </div>
-        <div class="verse">
-            <span class="verse-number">11.</span> Then Lot chose him all the plain of Jordan; and Lot journeyed east: and they separated themselves the one from the other.
-        </div>
-        <div class="verse">
-            <span class="verse-number">12.</span> Abram dwelled in the land of Canaan, and Lot dwelled in the cities of the plain, and pitched his tent toward Sodom.
-        </div>
-        <div class="verse">
-            <span class="verse-number">13.</span> But the men of Sodom were wicked and sinners before the Lord exceedingly.
-        </div>
-        <div class="verse">
-            <span class="verse-number">14.</span> And the Lord said unto Abram, after that Lot was separated from him, Lift up now thine eyes, and look from the place where thou art northward, and southward, and eastward, and westward:
-        </div>
-        <div class="verse">
-            <span class="verse-number">15.</span> For all the land which thou seest, to thee will I give it, and to thy seed for ever.
-        </div>
-        <div class="verse">
-            <span class="verse-number">16.</span> And I will make thy seed as the dust of the earth: so that if a man can number the dust of the earth, then shall thy seed also be numbered.
-        </div>
-        <div class="verse">
-            <span class="verse-number">17.</span> Arise, walk through the land in the length of it and in the breadth of it; for I will give it unto thee.
-        </div>
-        <div class="verse">
-            <span class="verse-number">18.</span> Then Abram removed his tent, and came and dwelt in the plain of Mamre, which is in Hebron, and built there an altar unto the Lord.
-        </div>
-    </div>
+  <div class="chapter-nav">
+    <a href="gen_chapter12.html" class="prev">← Previous Chapter</a>
+    <a href="gen_chapter14.html" class="next">Next Chapter →</a>
+  </div>
 
-    <footer>
-        <p>&copy; 2025 Bible Website. All Rights Reserved.</p>
-    </footer>
+  <div class="container">
+      <h3>KJV</h3>
+    <div class="verse"><span class="verse-number">1.</span> So Abram went up from Egypt, he and his wife and all that he had, and Lot with him, into the Negev.</div>
+    <div class="verse"><span class="verse-number">2.</span> Abram had become very wealthy in livestock and silver and gold.</div>
+    <div class="verse"><span class="verse-number">3.</span> From the Negev he went from place to place until he came to Bethel, to the place between Bethel and Ai where his tent had been earlier</div>
+    <div class="verse"><span class="verse-number">4.</span> and where he had first built an altar to the LORD. There Abram called on the name of the LORD.</div>
+    <div class="verse"><span class="verse-number">5.</span> Now Lot, who was moving about with Abram, also had flocks and herds and tents,</div>
+    <div class="verse"><span class="verse-number">6.</span> but the land could not support them while they stayed together, for their possessions were so great that they were not able to stay together.</div>
+    <div class="verse"><span class="verse-number">7.</span> And there was strife between the herders of Abram’s livestock and the herders of Lot’s livestock, and the Canaanites and Perizzites were also living in the land at that time.</div>
+    <div class="verse"><span class="verse-number">8.</span> So Abram said to Lot, “Let there be no strife between you and me, or between your herders and mine, for we are close relatives.</div>
+    <div class="verse"><span class="verse-number">9.</span> Is not the whole land before you? Let’s part company. If you go to the left, I’ll go to the right; if you go to the right, I’ll go to the left.”</div>
+    <div class="verse"><span class="verse-number">10.</span> Lot looked around and saw that the whole plain of the Jordan toward Zoar was well watered, like the garden of the LORD, like the land of Egypt. (This was before the LORD destroyed Sodom and Gomorrah.)</div>
+    <div class="verse"><span class="verse-number">11.</span> So Lot chose for himself the whole plain of the Jordan and set out toward the east. The two men parted company:</div>
+    <div class="verse"><span class="verse-number">12.</span> Abram lived in the land of Canaan, while Lot lived among the cities of the plain and pitched his tents near Sodom.</div>
+    <div class="verse"><span class="verse-number">13.</span> Now the men of Sodom were wicked and were sinning greatly against the LORD.</div>
+    <div class="verse"><span class="verse-number">14.</span> The LORD said to Abram after Lot had parted from him, “Look around from where you are, to the north and south, to the east and west.</div>
+    <div class="verse"><span class="verse-number">15.</span> All the land that you see I will give to you and your offspring forever.</div>
+    <div class="verse"><span class="verse-number">16.</span> I will make your offspring like the dust of the earth, so that if anyone could count the dust, then your offspring could be counted.</div>
+    <div class="verse"><span class="verse-number">17.</span> Go, walk through the length and breadth of the land, for I am giving it to you.”</div>
+    <div class="verse"><span class="verse-number">18.</span> So Abram moved his tents and went to live near the great trees of Mamre at Hebron, where he built an altar to the LORD.</div>
+  </div>
+
+  <footer>
+    &copy; 2025 Suxcedo Bible. All rights reserved.
+  </footer>
+
+  <script>
+    const searchIndex = {
+      "genesis 1": "gen_chapter1.html",
+      "genesis 2": "gen_chapter2.html",
+      "genesis 3": "gen_chapter3.html",
+      "genesis 4": "gen_chapter4.html",
+      "genesis 5": "gen_chapter5.html",
+      "genesis 6": "gen_chapter6.html",
+      "genesis 7": "gen_chapter7.html",
+      "genesis 8": "gen_chapter8.html",
+      "genesis 9": "gen_chapter9.html",
+      "genesis 10": "gen_chapter10.html",
+      "genesis 11": "gen_chapter11.html",
+      "genesis 12": "gen_chapter12.html",
+      "genesis 13": "gen_chapter13.html",
+      "genesis 14": "gen_chapter14.html",
+      "genesis 15": "gen_chapter15.html",
+      "genesis 16": "gen_chapter16.html",
+      "genesis 17": "gen_chapter17.html",
+      "genesis 18": "gen_chapter18.html",
+      "genesis 19": "gen_chapter19.html",
+      "genesis 20": "gen_chapter20.html",
+      "genesis 21": "gen_chapter21.html",
+      "genesis 22": "gen_chapter22.html",
+      "genesis 23": "gen_chapter23.html",
+      "genesis 24": "gen_chapter24.html",
+      "genesis 25": "gen_chapter25.html",
+      "genesis 26": "gen_chapter26.html",
+      "genesis 27": "gen_chapter27.html",
+      "genesis 28": "gen_chapter28.html",
+      "genesis 29": "gen_chapter29.html",
+      "genesis 30": "gen_chapter30.html",
+      "genesis 31": "gen_chapter31.html",
+      "genesis 32": "gen_chapter32.html",
+      "genesis 33": "gen_chapter33.html",
+      "genesis 34": "gen_chapter34.html",
+      "genesis 35": "gen_chapter35.html",
+      "genesis 36": "gen_chapter36.html",
+      "genesis 37": "gen_chapter37.html",
+      "genesis 38": "gen_chapter38.html",
+      "genesis 39": "gen_chapter39.html",
+      "genesis 40": "gen_chapter40.html",
+      "genesis 41": "gen_chapter41.html",
+      "genesis 42": "gen_chapter42.html",
+      "genesis 43": "gen_chapter43.html",
+      "genesis 44": "gen_chapter44.html",
+      "genesis 45": "gen_chapter45.html",
+      "genesis 46": "gen_chapter46.html",
+      "genesis 47": "gen_chapter47.html",
+      "genesis 48": "gen_chapter48.html",
+      "genesis 49": "gen_chapter49.html",
+      "genesis 50": "gen_chapter50.html"
+    };
+
+    const input = document.querySelector(".search-bar");
+    const button = document.querySelector(".search-button");
+
+    // Suggestion box setup (same as before)
+    const suggestionBox = document.createElement("div");
+    suggestionBox.style.position = "absolute";
+    suggestionBox.style.zIndex = "1000";
+    suggestionBox.style.width = input.offsetWidth + "px";
+    suggestionBox.style.maxHeight = "200px";
+    suggestionBox.style.overflowY = "auto";
+    suggestionBox.style.background = "#e0f2ff";
+    suggestionBox.style.border = "1px solid #4a90e2";
+    suggestionBox.style.color = "#003f8a";
+    suggestionBox.style.borderRadius = "5px";
+    suggestionBox.style.marginTop = "5px";
+    suggestionBox.style.display = "none";
+    document.body.appendChild(suggestionBox);
+
+    function updateBoxPosition() {
+      const rect = input.getBoundingClientRect();
+      suggestionBox.style.top = rect.bottom + window.scrollY + "px";
+      suggestionBox.style.left = rect.left + window.scrollX + "px";
+      suggestionBox.style.width = rect.width + "px";
+    }
+
+    window.addEventListener("resize", updateBoxPosition);
+    window.addEventListener("scroll", updateBoxPosition);
+
+    function normalize(text) {
+      return text.replace(/\s+/g, "").toLowerCase();
+    }
+
+    function searchBible() {
+      const rawQuery = input.value.toLowerCase().trim().replace(/\s+/g, "");
+      let match = Object.keys(searchIndex).find(chap => normalize(chap) === rawQuery);
+
+      if (match) {
+        window.location.href = searchIndex[match];
+      } else {
+        alert("Chapter not found. Try e.g. Genesis 3 or gen3");
+      }
+    }
+
+    function showSuggestions() {
+      const value = normalize(input.value.trim());
+      suggestionBox.innerHTML = "";
+
+      if (!value) {
+        suggestionBox.style.display = "none";
+        return;
+      }
+
+      const suggestions = Object.keys(searchIndex).filter(chap => normalize(chap).startsWith(value)).slice(0, 50);
+
+      if (suggestions.length === 0) {
+        suggestionBox.style.display = "none";
+        return;
+      }
+
+      suggestions.forEach(chap => {
+        const div = document.createElement("div");
+        div.textContent = chap;
+        div.style.padding = "8px 12px";
+        div.style.cursor = "pointer";
+
+        div.addEventListener("mouseover", () => {
+          div.style.background = "#cce4ff";
+        });
+
+        div.addEventListener("mouseout", () => {
+          div.style.background = "#e0f2ff";
+        });
+
+        div.addEventListener("click", () => {
+          input.value = chap;
+          searchBible();
+        });
+
+        suggestionBox.appendChild(div);
+      });
+
+      updateBoxPosition();
+      suggestionBox.style.display = "block";
+    }
+
+    input.addEventListener("input", showSuggestions);
+    input.addEventListener("focus", showSuggestions);
+    document.addEventListener("click", e => {
+      if (!suggestionBox.contains(e.target) && e.target !== input) {
+        suggestionBox.style.display = "none";
+      }
+    });
+
+    button.addEventListener("click", searchBible);
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        searchBible();
+      }
+    });
+  </script>
 </body>
 </html>
