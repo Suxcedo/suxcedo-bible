@@ -1,215 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis Chapter 30</title>
-    <style>
-        body {
-            background-image: url('bible concept.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #4a90e2;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 22px;
-            font-weight: bold;
-            position: relative;
-        }
-        header a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-        }
-        header img {
-            width: 60px;
-            height: 60px;
-            margin-right: 15px;
-        }
-        header .title {
-            flex-grow: 1;
-            text-align: center;
-        }
-        .search-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-        .search-bar {
-            width: 300px;
-            padding: 8px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .search-button {
-            padding: 5px 10px;
-            margin-left: 10px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .search-button:hover {
-            background-color: #0056b3;
-        }
-        .container {
-            padding: 20px;
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .verse {
-            margin-bottom: 15px;
-        }
-        .verse-number {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesis Chapter 30</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      background: url('bible concept.webp') no-repeat center center fixed;
+      background-size: cover;
+    }
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+    header img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    .title {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .search-bar {
+      padding: 8px;
+      font-size: 14px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+    }
+    .search-button {
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #0056b3;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .search-button:hover {
+      background-color: #003f8a;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .verse {
+      margin-bottom: 15px;
+    }
+    .verse-number {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    .chapter-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px auto;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+    .chapter-nav a {
+      background-color: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .chapter-nav a:last-child {
+      background-color: #28a745;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: white;
+      background-color: #00000080;
+    }
+    @media (max-width: 600px) {
+      header img {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+      }
+      .search-container {
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .search-bar {
+        width: 100%;
+      }
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+      .chapter-nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 10px;
+      }
+      .chapter-nav a {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/homepage.html#">
-            <img src="Suxcedo.png" alt="Suxcedo Logo">
-        </a>
-        <div class="title">Genesis Chapter 30</div>
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search for a chapter (e.g., 'Genesis 31')">
-            <button class="search-button">Search</button>
-        </div>
-
-        <script>
-            const searchIndex = {
-                "genesis 1": "gen chapter 1.html",
-                "genesis 2": "gen chapter 2.html",
-                "genesis 3": "gen chapter 3.html",
-                "genesis 4": "gen chapter 4.html",
-                "genesis 5": "gen chapter 5.html",
-                "genesis 6": "gen chapter 6.html",
-                "genesis 7": "gen chapter 7.html",
-                "genesis 8": "gen chapter 8.html",
-                "genesis 9": "gen chapter 9.html",
-                "genesis 10": "gen chapter 10.html",
-                "genesis 11": "gen chapter 11.html",
-                "genesis 12": "gen chapter 12.html",
-                "genesis 13": "gen chapter 13.html",
-                "genesis 14": "gen chapter 14.html",
-                "genesis 15": "gen chapter 15.html",
-                "genesis 16": "gen chapter 16.html",
-                "genesis 17": "gen chapter 17.html",
-                "genesis 18": "gen chapter 18.html",
-                "genesis 19": "gen chapter 19.html",
-                "genesis 20": "gen chapter 20.html",
-                "genesis 21": "gen chapter 21.html",
-                "genesis 22": "gen chapter 22.html",
-                "genesis 23": "gen chapter 23.html",
-                "genesis 24": "gen chapter 24.html",
-                "genesis 25": "gen chapter 25.html",
-                "genesis 26": "gen chapter 26.html",
-                "genesis 27": "gen chapter 27.html",
-                "genesis 28": "gen chapter 28.html",
-                "genesis 29": "gen chapter 29.html",
-                "genesis 30": "gen chapter 30.html"
-            };
-
-            function searchBible() {
-                const query = document.querySelector(".search-bar").value.toLowerCase().trim();
-                if (searchIndex[query]) {
-                    window.location.href = searchIndex[query];
-                } else {
-                    alert("Chapter not found. Please try again (e.g., 'Genesis 31').");
-                }
-            }
-
-            document.querySelector(".search-button").addEventListener("click", searchBible);
-            document.querySelector(".search-bar").addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    searchBible();
-                }
-            });
-        </script>
-    </header>
-
-    <div style="display: flex; justify-content: space-between; width: 100%;">
-        <div style="background-color: lightblue; padding: 10px;">
-            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2029.html">Previous Chapter</a>
-        </div>
-        <div style="background-color: lightcoral; padding: 10px;">
-            <a href="file:///C:/Users/Dell/Desktop/create%20bible%20website/gen%20chapter%2031.html">Next Chapter</a>
-        </div>
+  <header>
+    <a href="index.html">
+      <img src="Suxcedo.png" alt="Suxcedo Logo" />
+    </a>
+    <div class="title">Genesis Chapter 30 (KJV)</div>
+    <div class="search-container">
+      <input type="text" class="search-bar" placeholder="Search for a chapter" />
+      <button class="search-button">Search</button>
     </div>
+  </header>
 
-    <div class="container">
-        <h1>Genesis 30 (KJV)</h1>
-        <div class="verse"><span class="verse-number">1.</span> And when Rachel saw that she bare Jacob no children, Rachel envied her sister; and said unto Jacob, Give me children, or else I die.</div>
-        <div class="verse"><span class="verse-number">2.</span> And Jacob's anger was kindled against Rachel: and he said, Am I in God's stead, who hath withheld from thee the fruit of the womb?</div>
-        <div class="verse"><span class="verse-number">3.</span> And she said, Behold my maid Bilhah, go in unto her; and she shall bear upon my knees, that I may also have children by her.</div>
-        <div class="verse"><span class="verse-number">4.</span> And she gave him Bilhah her handmaid to wife: and Jacob went in unto her.</div>
-        <div class="verse"><span class="verse-number">5.</span> And Bilhah conceived, and bare Jacob a son.</div>
-        <div class="verse"><span class="verse-number">6.</span> And Rachel said, God hath judged me, and hath also heard my voice, and hath given me a son: therefore called she his name Dan.</div>
-        <div class="verse"><span class="verse-number">7.</span> And Bilhah Rachel's maid conceived again, and bare Jacob a second son.</div>
-        <div class="verse"><span class="verse-number">8.</span> And Rachel said, With great wrestlings have I wrestled with my sister, and I have prevailed: and she called his name Naphtali.</div>
-        <div class="verse"><span class="verse-number">9.</span> When Leah saw that she had left bearing, she took Zilpah her maid, and gave her Jacob to wife.</div>
-        <div class="verse"><span class="verse-number">10.</span> And Zilpah Leah's maid bare Jacob a son.</div>
-        <div class="verse"><span class="verse-number">11.</span> And Leah said, A troop cometh: and she called his name Gad.</div>
-        <div class="verse"><span class="verse-number">12.</span> And Zilpah Leah's maid bare Jacob a second son.</div>
-        <div class="verse"><span class="verse-number">13.</span> And Leah said, Happy am I, for the daughters will call me blessed: and she called his name Asher.</div>
-        <div class="verse"><span class="verse-number">14.</span> And Reuben went in the days of wheat harvest, and found mandrakes in the field, and brought them unto his mother Leah. Then Rachel said to Leah, Give me, I pray thee, of thy son's mandrakes.</div>
-        <div class="verse"><span class="verse-number">15.</span> And she said unto her, Is it a small matter that thou hast taken my husband? and wouldest thou take away my son's mandrakes also? And Rachel said, Therefore he shall lie with thee to night for thy son's mandrakes.</div>
-        <div class="verse"><span class="verse-number">16.</span> And Jacob came out of the field in the evening, and Leah went out to meet him, and said, Thou must come in unto me; for surely I have hired thee with my son's mandrakes. And he lay with her that night.</div>
-        <div class="verse"><span class="verse-number">17.</span> And God hearkened unto Leah, and she conceived, and bare Jacob the fifth son.</div>
-        <div class="verse"><span class="verse-number">18.</span> And Leah said, God hath given me my hire, because I have given my maiden to my husband: and she called his name Issachar.</div>
-        <div class="verse"><span class="verse-number">19.</span> And Leah conceived again, and bare Jacob the sixth son.</div>
-        <div class="verse"><span class="verse-number">20.</span> And Leah said, God hath endued me with a good dowry; now will my husband dwell with me, because I have born him six sons: and she called his name Zebulun.</div>
-        <div class="verse"><span class="verse-number">21.</span> And afterwards she bare a daughter, and called her name Dinah.</div>
-        <div class="verse"><span class="verse-number">22.</span> And God remembered Rachel, and God hearkened to her, and opened her womb.</div>
-        <div class="verse"><span class="verse-number">23.</span> And she conceived, and bare a son; and said, God hath taken away my reproach:</div>
-        <div class="verse"><span class="verse-number">24.</span> And she called his name Joseph; and said, The Lord shall add to me another son.</div>
-        <div class="verse"><span class="verse-number">25.</span> And it came to pass, when Rachel had born Joseph, that Jacob said unto Laban, Send me away, that I may go unto mine own place, and to my country.</div>
-        <div class="verse"><span class="verse-number">26.</span> Give me my wives and my children, for whom I have served thee, and let me go: for thou knowest my service which I have done thee.</div>
-        <div class="verse"><span class="verse-number">27.</span> And Laban said unto him, I pray thee, if I have found favour in thine eyes, tarry: for I have learned by experience that the Lord hath blessed me for thy sake.</div>
-        <div class="verse"><span class="verse-number">28.</span> And he said, Appoint me thy wages, and I will give it.</div>
-        <div class="verse"><span class="verse-number">29.</span> And he said unto him, Thou knowest how I have served thee, and how thy cattle was with me.</div>
-        <div class="verse"><span class="verse-number">30.</span> For it was little which thou hadst before I came, and it is now increased unto a multitude; and the Lord hath blessed thee since my coming: and now when shall I provide for mine own house also?</div>
-        <div class="verse"><span class="verse-number">31.</span> And he said, What shall I give thee? And Jacob said, Thou shalt not give me anything: if thou wilt do this thing for me, I will again feed and keep thy flock.</div>
-        <div class="verse"><span class="verse-number">32.</span> I will pass through all thy flock today, removing from thence all the speckled and spotted cattle, and all the brown cattle among the sheep, and the spotted and speckled among the goats: and of such shall be my hire.</div>
-        <div class="verse"><span class="verse-number">33.</span> So shall my righteousness answer for me in time to come, when it shall come for my hire before thy face: everyone that is not speckled and spotted among the goats, and brown among the sheep, that shall be counted stolen with me.</div>
-        <div class="verse"><span class="verse-number">34.</span> And Laban said, Behold, I would it might be according to thy word.</div>
-        <div class="verse"><span class="verse-number">35.</span> And he removed that day the he goats that were ringstraked and spotted, and all the she goats that were speckled and spotted, and every one that had some white in it, and all the brown among the sheep, and gave them into the hand of his sons.</div>
-        <div class="verse"><span class="verse-number">36.</span> And he set three days' journey between himself and Jacob: and Jacob fed the rest of Laban's flocks.</div>
-        <div class="verse"><span class="verse-number">37.</span>And Jacob took him rods of green poplar, and of the hazel and chesnut tree; and pilled white strakes in them, and made the white appear which was in the rods.</div>
-        <div class="verse"><span class="verse-number">38.</span>And he set the rods which he had pilled before the flocks in the gutters in the watering troughs when the flocks came to drink, that they should conceive when they came to drink.</div>
-        <div class="verse"><span class="verse-number">39.</span>And the flocks conceived before the rods, and brought forth cattle ringstraked, speckled, and spotted.</div>
-        <div class="verse"><span class="verse-number">40.</span>And Jacob did separate the lambs, and set the faces of the flocks toward the ringstraked, and all the brown in the flock of Laban; and he put his own flocks by themselves, and put them not unto Laban's cattle.</div>
-        <div class="verse"><span class="verse-number">41.</span>And it came to pass, whensoever the stronger cattle did conceive, that Jacob laid the rods before the eyes of the cattle in the gutters, that they might conceive among the rods.</div>
-        <div class="verse"><span class="verse-number">42.</span>But when the cattle were feeble, he put them not in: so the feebler were Laban's, and the stronger Jacob's.</div>
-        <div class="verse"><span class="verse-number">43.</span>And the man increased exceedingly, and had much cattle, and maidservants, and menservants, and camels, and asses.</div>
-<div class="container">
-    <footer>
-        <p>© 2025 Suxcedo Bible. All rights reserved.</p>
-    </footer>
+  <div class="chapter-nav">
+    <a href="gen_chapter29.html">&#8592; Previous Chapter</a>
+    <a href="gen_chapter31.html">Next Chapter &#8594;</a>
+  </div>
+
+  <div class="container">
+      <h3>KJV</h3>
+    <div class="verse"><span class="verse-number">1.</span> And when Rachel saw that she bare Jacob no children, Rachel envied her sister; and said unto Jacob, Give me children, or else I die.</div>
+<div class="verse"><span class="verse-number">2.</span> And Jacob's anger was kindled against Rachel: and he said, Am I in God's stead, who hath withheld from thee the fruit of the womb?</div>
+<div class="verse"><span class="verse-number">3.</span> And she said, Behold my maid Bilhah, go in unto her; and she shall bear upon my knees, that I may also have children by her.</div>
+<div class="verse"><span class="verse-number">4.</span> And she gave him Bilhah her handmaid to wife: and Jacob went in unto her.</div>
+<div class="verse"><span class="verse-number">5.</span> And Bilhah conceived, and bare Jacob a son.</div>
+<div class="verse"><span class="verse-number">6.</span> And Rachel said, God hath judged me, and hath also heard my voice, and hath given me a son: therefore called she his name Dan.</div>
+<div class="verse"><span class="verse-number">7.</span> And Bilhah Rachel's maid conceived again, and bare Jacob a second son.</div>
+<div class="verse"><span class="verse-number">8.</span> And Rachel said, With great wrestlings have I wrestled with my sister, and I have prevailed: and she called his name Naphtali.</div>
+<div class="verse"><span class="verse-number">9.</span> When Leah saw that she had left bearing, she took Zilpah her maid, and gave her Jacob to wife.</div>
+<div class="verse"><span class="verse-number">10.</span> And Zilpah Leah's maid bare Jacob a son.</div>
+<div class="verse"><span class="verse-number">11.</span> And Leah said, A troop cometh: and she called his name Gad.</div>
+<div class="verse"><span class="verse-number">12.</span> And Zilpah Leah's maid bare Jacob a second son.</div>
+<div class="verse"><span class="verse-number">13.</span> And Leah said, Happy am I, for the daughters will call me blessed: and she called his name Asher.</div>
+<div class="verse"><span class="verse-number">14.</span> And Reuben went in the days of wheat harvest, and found mandrakes in the field, and brought them unto his mother Leah. Then Rachel said to Leah, Give me, I pray thee, of thy son's mandrakes.</div>
+<div class="verse"><span class="verse-number">15.</span> And she said unto her, Is it a small matter that thou hast taken my husband? and wouldest thou take away my son's mandrakes also? And Rachel said, Therefore he shall lie with thee to night for thy son's mandrakes.</div>
+<div class="verse"><span class="verse-number">16.</span> And Jacob came out of the field in the evening, and Leah went out to meet him, and said, Thou must come in unto me; for surely I have hired thee with my son's mandrakes. And he lay with her that night.</div>
+<div class="verse"><span class="verse-number">17.</span> And God hearkened unto Leah, and she conceived, and bare Jacob the fifth son.</div>
+<div class="verse"><span class="verse-number">18.</span> And Leah said, God hath given me my hire, because I have given my maiden to my husband: and she called his name Issachar.</div>
+<div class="verse"><span class="verse-number">19.</span> And Leah conceived again, and bare Jacob the sixth son.</div>
+<div class="verse"><span class="verse-number">20.</span> And Leah said, God hath endued me with a good dowry; now will my husband dwell with me, because I have borne him six sons: and she called his name Zebulun.</div>
+<div class="verse"><span class="verse-number">21.</span> And afterwards she bare a daughter, and called her name Dinah.</div>
+<div class="verse"><span class="verse-number">22.</span> And God remembered Rachel, and God hearkened to her, and opened her womb.</div>
+<div class="verse"><span class="verse-number">23.</span> And she conceived, and bare a son; and said, God hath taken away my reproach:</div>
+<div class="verse"><span class="verse-number">24.</span> And she called his name Joseph; and said, The LORD shall add to me another son.</div>
+<div class="verse"><span class="verse-number">25.</span> And it came to pass, when Rachel had born Joseph, that Jacob said unto Laban, Send me away, that I may go unto mine own place, and to my country.</div>
+<div class="verse"><span class="verse-number">26.</span> Give me my wives and my children, for whom I have served thee, and let me go: for thou knowest my service which I have done thee.</div>
+<div class="verse"><span class="verse-number">27.</span> And Laban said unto him, I pray thee, if I have found favour in thine eyes, tarry: for I have learned by experience that the LORD hath blessed me for thy sake.</div>
+<div class="verse"><span class="verse-number">28.</span> And he said, Appoint me thy wages, and I will give it.</div>
+<div class="verse"><span class="verse-number">29.</span> And he said unto him, Thou knowest how I have served thee, and how thy cattle was with me.</div>
+<div class="verse"><span class="verse-number">30.</span> For it was little which thou hadst before I came, and it is now increased unto a multitude; and the LORD hath blessed thee since my coming: and now when shall I provide for mine own house also?</div>
+<div class="verse"><span class="verse-number">31.</span> And he said, What shall I give thee? And Jacob said, Thou shalt not give me any thing: if thou wilt do this thing for me, I will again feed and keep thy flock:</div>
+<div class="verse"><span class="verse-number">32.</span> I will pass through all thy flock to day, removing from thence all the speckled and spotted cattle, and all the brown cattle among the sheep, and the spotted and speckled among the goats: and of such shall be my hire.</div>
+<div class="verse"><span class="verse-number">33.</span> So shall my righteousness answer for me in time to come, when it shall come for my hire before thy face: every one that is not speckled and spotted among the goats, and brown among the sheep, that shall be counted stolen with me.</div>
+<div class="verse"><span class="verse-number">34.</span> And Laban said, Behold, I would it might be according to thy word.</div>
+<div class="verse"><span class="verse-number">35.</span> And he removed that day the he goats that were ring-streaked and spotted, and all the she goats that were speckled and spotted, and every one that had some white in it, and all the brown among the sheep, and gave them into the hand of his sons.</div>
+<div class="verse"><span class="verse-number">36.</span> And he set three days' journey betwixt himself and Jacob: and Jacob fed the rest of Laban's flocks.</div>
+<div class="verse"><span class="verse-number">37.</span> And Jacob took him rods of green poplar, and of the hazel and chesnut tree; and pilled white streaks in them, and made the white appear which was in the rods.</div>
+<div class="verse"><span class="verse-number">38.</span> And he set the rods which he had pilled before the flocks in the gutters in the watering troughs when the flocks came to drink, that they should conceive when they came to drink.</div>
+<div class="verse"><span class="verse-number">39.</span> And the flocks conceived before the rods, and brought forth cattle ring-streaked, speckled, and spotted.</div>
+<div class="verse"><span class="verse-number">40.</span> And Jacob did separate the lambs, and set the faces of the flocks toward the ring-streaked, and all the brown in the flock of Laban; and he put his own flocks by themselves, and put them not unto Laban’s cattle.</div>
+<div class="verse"><span class="verse-number">41.</span> And it came to pass, whensoever the stronger cattle did conceive, that Jacob laid the rods before the eyes of the cattle in the gutters, that they might conceive among the rods.</div>
+<div class="verse"><span class="verse-number">42.</span> But when the cattle were feeble, he put them not in: so the feebler were Laban’s, and the stronger Jacob’s.</div>
+<div class="verse"><span class="verse-number">43.</span> And the man increased exceedingly, and had much cattle, and maidservants, and menservants, and camels, and asses.</div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Suxcedo Bible. All rights reserved.
+  </footer>
+    <script>
+  const searchIndex = {
+    "genesis 1": "gen_chapter1.html",
+    "genesis 2": "gen_chapter2.html",
+    "genesis 3": "gen_chapter3.html",
+    "genesis 4": "gen_chapter4.html",
+    "genesis 5": "gen_chapter5.html",
+    "genesis 6": "gen_chapter6.html",
+    "genesis 7": "gen_chapter7.html",
+    "genesis 8": "gen_chapter8.html",
+    "genesis 9": "gen_chapter9.html",
+    "genesis 10": "gen_chapter10.html",
+    "genesis 11": "gen_chapter11.html",
+    "genesis 12": "gen_chapter12.html",
+    "genesis 13": "gen_chapter13.html",
+    "genesis 14": "gen_chapter14.html",
+    "genesis 15": "gen_chapter15.html",
+    "genesis 16": "gen_chapter16.html",
+    "genesis 17": "gen_chapter17.html",
+    "genesis 18": "gen_chapter18.html",
+    "genesis 19": "gen_chapter19.html",
+    "genesis 20": "gen_chapter20.html",
+    "genesis 21": "gen_chapter21.html",
+    "genesis 22": "gen_chapter22.html",
+    "genesis 23": "gen_chapter23.html",
+    "genesis 24": "gen_chapter24.html",
+    "genesis 25": "gen_chapter25.html",
+    "genesis 26": "gen_chapter26.html",
+    "genesis 27": "gen_chapter27.html",
+    "genesis 28": "gen_chapter28.html",
+    "genesis 29": "gen_chapter29.html",
+    "genesis 30": "gen_chapter30.html",
+    "genesis 31": "gen_chapter31.html",
+    "genesis 32": "gen_chapter32.html",
+    "genesis 33": "gen_chapter33.html",
+    "genesis 34": "gen_chapter34.html",
+    "genesis 35": "gen_chapter35.html",
+    "genesis 36": "gen_chapter36.html",
+    "genesis 37": "gen_chapter37.html",
+    "genesis 38": "gen_chapter38.html",
+    "genesis 39": "gen_chapter39.html",
+    "genesis 40": "gen_chapter40.html",
+    "genesis 41": "gen_chapter41.html",
+    "genesis 42": "gen_chapter42.html",
+    "genesis 43": "gen_chapter43.html",
+    "genesis 44": "gen_chapter44.html",
+    "genesis 45": "gen_chapter45.html",
+    "genesis 46": "gen_chapter46.html",
+    "genesis 47": "gen_chapter47.html",
+    "genesis 48": "gen_chapter48.html",
+    "genesis 49": "gen_chapter49.html",
+    "genesis 50": "gen_chapter50.html"
+  };
+
+  const input = document.querySelector(".search-bar");
+  const button = document.querySelector(".search-button");
+
+  // Create suggestion box
+  const suggestionBox = document.createElement("div");
+  suggestionBox.style.position = "absolute";
+  suggestionBox.style.zIndex = "1000";
+  suggestionBox.style.width = input.offsetWidth + "px";
+  suggestionBox.style.maxHeight = "200px";
+  suggestionBox.style.overflowY = "auto";
+  suggestionBox.style.background = "#e0f2ff"; // light sky blue
+  suggestionBox.style.border = "1px solid #4a90e2";
+  suggestionBox.style.color = "#003f8a";
+  suggestionBox.style.borderRadius = "5px";
+  suggestionBox.style.marginTop = "5px";
+  suggestionBox.style.display = "none";
+  document.body.appendChild(suggestionBox);
+
+  // Position box under input
+  function updateBoxPosition() {
+    const rect = input.getBoundingClientRect();
+    suggestionBox.style.top = rect.bottom + window.scrollY + "px";
+    suggestionBox.style.left = rect.left + window.scrollX + "px";
+    suggestionBox.style.width = rect.width + "px";
+  }
+
+  window.addEventListener("resize", updateBoxPosition);
+  window.addEventListener("scroll", updateBoxPosition);
+
+  function normalize(text) {
+    return text.replace(/\s+/g, "").toLowerCase();
+  }
+
+  function searchBible() {
+    const rawQuery = input.value.toLowerCase().trim().replace(/\s+/g, "");
+    let match = Object.keys(searchIndex).find(chap => normalize(chap) === rawQuery);
+
+    if (match) {
+      window.location.href = searchIndex[match];
+    } else {
+      alert("Chapter not found. Try e.g. Genesis 3 or gen3");
+    }
+  }
+
+  function showSuggestions() {
+    const value = normalize(input.value.trim());
+    suggestionBox.innerHTML = "";
+
+    if (!value) {
+      suggestionBox.style.display = "none";
+      return;
+    }
+
+    const suggestions = Object.keys(searchIndex).filter(chap => normalize(chap).startsWith(value)).slice(0, 50);
+
+    if (suggestions.length === 0) {
+      suggestionBox.style.display = "none";
+      return;
+    }
+
+    suggestions.forEach(chap => {
+      const div = document.createElement("div");
+      div.textContent = chap;
+      div.style.padding = "8px 12px";
+      div.style.cursor = "pointer";
+
+      div.addEventListener("mouseover", () => {
+        div.style.background = "#cce4ff";
+      });
+
+      div.addEventListener("mouseout", () => {
+        div.style.background = "#e0f2ff";
+      });
+
+      div.addEventListener("click", () => {
+        input.value = chap;
+        searchBible();
+      });
+
+      suggestionBox.appendChild(div);
+    });
+
+    updateBoxPosition();
+    suggestionBox.style.display = "block";
+  }
+
+  input.addEventListener("input", showSuggestions);
+  input.addEventListener("focus", showSuggestions);
+  document.addEventListener("click", e => {
+    if (!suggestionBox.contains(e.target) && e.target !== input) {
+      suggestionBox.style.display = "none";
+    }
+  });
+
+  button.addEventListener("click", searchBible);
+  input.addEventListener("keypress", e => {
+    if (e.key === "Enter") {
+      searchBible();
+    }
+  });
+</script>
 </body>
 </html>
