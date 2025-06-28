@@ -46,23 +46,25 @@
     }
 
     header img {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
     }
 
     nav {
       display: flex;
+      gap: 20px;
+      position: relative;
       flex-wrap: wrap;
-      gap: 15px;
     }
 
     nav a {
-      font-size: 16px;
+      font-size: 18px;
       color: white;
       text-decoration: none;
       font-weight: bold;
+      padding: 10px 0;
       position: relative;
-      padding: 8px 0;
+      cursor: pointer;
     }
 
     .dropdown {
@@ -97,22 +99,29 @@
       display: block;
     }
 
+    a:focus,
+    button:focus,
+    input:focus {
+      outline: 3px solid #1e90ff;
+      outline-offset: 2px;
+    }
+
     h1 {
       text-align: center;
-      font-size: 32px;
+      font-size: 36px;
       margin: 40px 20px 10px;
       text-shadow: 2px 2px 5px black;
     }
 
     .creative-banner {
       text-align: center;
-      padding: 20px;
+      padding: 20px 30px;
       margin: 0 auto;
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(5px);
       border-radius: 15px;
       color: #f0f0f0;
-      max-width: 90%;
+      max-width: 700px;
       font-size: 18px;
     }
 
@@ -126,27 +135,29 @@
     .search-container {
       display: flex;
       justify-content: center;
+      margin-top: 30px;
       flex-wrap: wrap;
-      margin: 30px 0;
-      gap: 10px;
+      padding: 0 20px;
     }
 
     .search-container input {
-      width: 300px;
-      padding: 12px;
+      width: 60%;
+      padding: 15px;
       font-size: 16px;
       border: none;
       border-radius: 25px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
       outline: none;
     }
 
     .search-container button {
-      padding: 12px 20px;
+      padding: 15px 20px;
       font-size: 16px;
       border: none;
       border-radius: 25px;
       background-color: #555;
       color: white;
+      margin-left: 10px;
       cursor: pointer;
     }
 
@@ -155,13 +166,14 @@
       margin-top: 50px;
       font-size: 14px;
       color: #ddd;
-      padding: 20px;
+      padding-bottom: 30px;
     }
 
     @media (max-width: 600px) {
       header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 15px;
       }
 
       nav {
@@ -170,12 +182,29 @@
         gap: 10px;
       }
 
-      .creative-banner {
+      nav a {
+        padding: 8px 0;
         font-size: 16px;
       }
 
-      .search-container input {
+      .search-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-container input,
+      .search-container button {
         width: 90%;
+        margin: 5px 0;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .creative-banner {
+        font-size: 16px;
+        padding: 15px;
       }
     }
 
@@ -218,16 +247,17 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <a href="index.html"><img src="Suxcedo.png" alt="Suxcedo Logo" /></a>
     <nav>
-      <a href="#">Books of the Bible</a>
+      <a href="#" tabindex="0">Books of the Bible</a>
       <ul class="dropdown">
         <li><a href="Genesis.html">Genesis</a></li>
         <li><a href="#">Others Coming Soon</a></li>
       </ul>
-      <a href="#">Topics</a>
+      <a href="#" tabindex="0">Topics</a>
       <ul class="dropdown">
         <li><a href="#">Faith</a></li>
         <li><a href="#">Hope</a></li>
@@ -235,17 +265,21 @@
       </ul>
       <a href="quote.html">Quotes</a>
       <a href="SuxcedoReels.html">SuxcedoReels</a>
+
     </nav>
   </header>
 
   <h1>Welcome to Suxcedo Bible Website</h1>
+<BR><BR><BR>
+<h3>
   <div class="creative-banner">
     <strong>📖 Empower Your Journey with Scripture</strong>
-    <span style="color:brown">Use this Bible app to discover books, find inspiration, and grow in your walk with Christ.</span>
+    <font color="brown">Use this Bible app to discover books, find inspiration, and grow in your walk with Christ.</font>
   </div>
-
+</h3>
+<BR>
   <div class="search-container">
-    <input type="search" class="search-bar" placeholder="Search e.g. Genesis 1" />
+    <input type="search" class="search-bar" placeholder="Search e.g. Gen 1" />
     <button type="button" class="search-button">Search</button>
   </div>
 
@@ -253,62 +287,70 @@
     &copy; 2025 SUXCEDO - All Rights Reserved
   </footer>
 
+  <!-- Popup -->
   <div id="popup-overlay">
     <div id="popup-box">
-      <p><strong>Notice:</strong> Only the Book of Genesis is available at the moment.<br> STAY TUNED.......</p>
+      <p><strong>Notice:</strong> Only the Book of Genesis is available  at the moment<br> STAY TUNED.......</p>
       <button onclick="document.getElementById('popup-overlay').style.display='none'">OK</button>
     </div>
   </div>
 
-  <script>
+  <!-- Scripts -->
+ <script>
     const books = {
-      gen: "genesis",
-      genesis: "genesis",
-      exo: "exodus",
-      exodus: "exodus",
-      lev: "leviticus",
-      leviticus: "leviticus",
-      num: "numbers",
-      numbers: "numbers",
-      deu: "deuteronomy",
-      deuteronomy: "deuteronomy"
+        gen: "genesis",
+      Genesis: "genesis",
+        exo: "exodus",
+        lev: "leviticus",
+        num: "numbers",
+        deu: "deuteronomy"
+        // Add more abbreviations and books as needed
     };
 
     const maxChapters = {
-      genesis: 50
+        genesis: 50,
+        exodus: 40,
+        leviticus: 27,
+        numbers: 36,
+        deuteronomy: 34
+        // Add chapter counts for other books here
     };
 
     function searchBible() {
-      let input = document.querySelector(".search-bar").value.toLowerCase().replace(/\s+/g, '');
-      const match = input.match(/^([a-z]+)(\d+)$/);
+        let input = document.querySelector(".search-bar").value.toLowerCase().replace(/\s+/g, '');
+        const match = input.match(/^([a-z]+)(\d+)$/); // e.g., gen1, exo20
 
-      if (!match) {
-        alert("Please enter a valid search like 'Genesis 1' or 'gen1'");
-        return;
-      }
+        if (!match) {
+            alert("Please enter a valid format like 'gen 1' or 'exo20'");
+            return;
+        }
 
-      const [, abbrev, chapter] = match;
-      const book = books[abbrev];
+        const [_, abbrev, chapter] = match;
+        const book = books[abbrev];
 
-      if (book !== "genesis") {
-        alert("Only the Book of Genesis is available at the moment.");
-        return;
-      }
+        if (!book) {
+            alert("Book abbreviation not recognized.");
+            return;
+        }
 
-      const chapterNum = parseInt(chapter, 10);
-      if (chapterNum < 1 || chapterNum > maxChapters[book]) {
-        alert("Chapter number out of range for Genesis.");
-        return;
-      }
+        const chapterNum = parseInt(chapter, 10);
 
-      const fileName = `gen_chapter${chapterNum}.html`;
-      window.location.href = fileName;
+        if (isNaN(chapterNum) || chapterNum < 1 || chapterNum > (maxChapters[book] || 0)) {
+            alert("Chapter number out of range.");
+            return;
+        }
+
+        const fileName = ${abbrev}_chapter${chapterNum}.html;
+        window.location.href = fileName;
     }
 
     document.querySelector(".search-button").addEventListener("click", searchBible);
-    document.querySelector(".search-bar").addEventListener("keypress", function (e) {
-      if (e.key === "Enter") searchBible();
+    document.querySelector(".search-bar").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            searchBible();
+        }
     });
-  </script>
+</script>
+
 </body>
 </html>
