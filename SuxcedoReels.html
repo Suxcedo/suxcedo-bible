@@ -168,7 +168,73 @@
   </div>
 
   <script>
-    // existing JavaScript unchanged
+    const supabaseUrl = 'https://zoignhmsghszucfemfum.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvaWduaG1zZ2hzenVjZmVtZnVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjU0MTAsImV4cCI6MjA2Njk0MTQxMH0.6tg9XMOTWeMNSSNnytG5N0A3xUwSnlvhqt1YwVwK6fs';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    const form = document.getElementById("uploadForm");
+    const feed = document.getElementById("feed");
+
+    let username = localStorage.getItem("username") || prompt("Enter your username:");
+    localStorage.setItem("username", username);
+
+    async function loadPosts() {
+      const { data, error } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
+      feed.innerHTML = "";
+      data.forEach(post => {
+        const isVideo = post.media_url.endsWith(".mp4") || post.media_url.includes("video");
+        const media = isVideo ? `<video controls src="${post.media_url}"></video>` : `<img src="${post.media_url}" alt="${post.title}" />`;
+        const delBtn = post.username === username ? `<button class='delete-btn' onclick='deletePost(${post.id})'>Delete</button>` : "";
+        feed.innerHTML += `
+          <div class="feed-item">
+            <h4>${post.title}</h4>
+            <p>${post.description}</p>
+            ${media}
+            <div class="actions">
+              <span>❤️</span>
+              <span>💬</span>
+            </div>
+            ${delBtn}
+          </div>
+        `;
+      });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = document.getElementById("title").value;
+      const desc = document.getElementById("desc").value;
+      const file = document.getElementById("mediaInput").files[0];
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "Suxcedo_uploads");
+      formData.append("folder", "suxcedo_reels");
+
+      const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
+        method: "POST",
+        body: formData
+      });
+      const cloudData = await cloudRes.json();
+      const media_url = cloudData.secure_url;
+
+      const { error } = await supabase.from("posts").insert({
+        title,
+        description: desc,
+        media_url,
+        username
+      });
+
+      form.reset();
+      loadPosts();
+    });
+
+    async function deletePost(id) {
+      await supabase.from("posts").delete().eq("id", id);
+      loadPosts();
+    }
+
+    loadPosts();
   </script>
 </body>
 </html>
