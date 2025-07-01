@@ -8,34 +8,37 @@
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <style>
     body {
-      background: #121212;
+      background: #3e2f1c;
       color: #fff;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
     }
     header {
-      background: #000;
-      padding: 20px;
-      text-align: center;
+      background: #2c1e0f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+    header img {
+      height: 40px;
     }
     header h1 {
       margin: 0;
-      color: #00ffcc;
+      text-align: center;
+      flex-grow: 1;
+      color: #f4c97a;
     }
     .main-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      flex-direction: row;
     }
-    .upload-form {
-      width: 100%;
-      max-width: 400px;
-      background: #1e1e1e;
+    .upload-side {
+      width: 250px;
+      background: #4e3b25;
       padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      display: block;
     }
     .upload-form input,
     .upload-form textarea {
@@ -46,7 +49,7 @@
       border: none;
     }
     .upload-form button {
-      background: #00ffcc;
+      background: #f4c97a;
       color: #000;
       padding: 10px;
       border: none;
@@ -54,18 +57,23 @@
       cursor: pointer;
     }
     #feed {
-      width: 100%;
-      max-width: 600px;
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .feed-item {
       background: #1e1e1e;
       margin-bottom: 20px;
       padding: 15px;
       border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
     }
     .feed-item h4 {
       margin: 0 0 5px;
-      color: #00ffcc;
+      color: #f4c97a;
     }
     .feed-item p {
       margin: 5px 0 10px;
@@ -78,6 +86,10 @@
       margin-top: 10px;
       font-size: 18px;
       color: #ccc;
+      cursor: pointer;
+    }
+    .actions span:hover {
+      color: #f4c97a;
     }
     img, video {
       width: 100%;
@@ -94,23 +106,52 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      .upload-side {
+        display: none;
+        width: 100%;
+      }
+      .upload-side.open {
+        display: block;
+      }
+      .menu-toggle {
+        display: block;
+        margin-left: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
+    <a href="https://suxcedo.com"><img src="favicon.png" alt="SUXCEDO Logo" /></a>
     <h1>SUXCEDO Reels</h1>
+    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
   </header>
   <div class="main-container">
-    <form class="upload-form" id="uploadForm">
-      <input type="text" id="title" placeholder="Title" required />
-      <textarea id="desc" rows="3" placeholder="Description..." required></textarea>
-      <input type="file" id="mediaInput" accept="image/*,video/*" required />
-      <button type="submit">Post</button>
-    </form>
+    <div class="upload-side" id="uploadMenu">
+      <form class="upload-form" id="uploadForm">
+        <input type="text" id="title" placeholder="Title" required />
+        <textarea id="desc" rows="3" placeholder="Description..." required></textarea>
+        <input type="file" id="mediaInput" accept="image/*,video/*" required />
+        <button type="submit">Post</button>
+      </form>
+    </div>
     <div id="feed"></div>
   </div>
 
   <script>
+    function toggleMenu() {
+      document.getElementById("uploadMenu").classList.toggle("open");
+    }
+
     const supabaseUrl = 'https://zoignhmsghszucfemfum.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvaWduaG1zZ2hzenVjZmVtZnVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjU0MTAsImV4cCI6MjA2Njk0MTQxMH0.6tg9XMOTWeMNSSNnytG5N0A3xUwSnlvhqt1YwVwK6fs';
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -134,8 +175,8 @@
             <p>${post.description}</p>
             ${media}
             <div class="actions">
-              <span>❤️</span>
-              <span>💬</span>
+              <span onclick="likePost(${post.id})">❤️</span>
+              <span onclick="commentPost(${post.id})">💬</span>
             </div>
             <button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>
           </div>
@@ -181,6 +222,15 @@
     async function deletePost(id) {
       await supabase.from("posts").delete().eq("id", id);
       loadPosts();
+    }
+
+    function likePost(id) {
+      alert("❤️ You liked post " + id);
+    }
+
+    function commentPost(id) {
+      const comment = prompt("💬 Enter your comment for post " + id);
+      if (comment) alert("Comment saved: " + comment);
     }
 
     loadPosts();
