@@ -264,7 +264,7 @@
         <li><a href="#">Grace</a></li>
       </ul>
       <a href="quote.html">Quotes</a>
-      <a href="suxcedo_sign_up.html">SuxcedoReels</a>
+      <a href="suxcedoReels.html">SuxcedoReels</a>
 
     </nav>
   </header>
@@ -296,60 +296,64 @@
   </div>
 
   <!-- Scripts -->
- <script>
-    const books = {
-        gen: "genesis",
-      Genesis: "genesis",
-        exo: "exodus",
-        lev: "leviticus",
-        num: "numbers",
-        deu: "deuteronomy"
-        // Add more abbreviations and books as needed
-    };
+<script>
+  const books = {
+    gen: "genesis",
+    genesis: "genesis",
+    exo: "exodus",
+    exodus: "exodus",
+    lev: "leviticus",
+    leviticus: "leviticus",
+    num: "numbers",
+    numbers: "numbers",
+    deu: "deuteronomy",
+    deuteronomy: "deuteronomy"
+    // Add more if needed
+  };
 
-    const maxChapters = {
-        genesis: 50,
-        exodus: 40,
-        leviticus: 27,
-        numbers: 36,
-        deuteronomy: 34
-        // Add chapter counts for other books here
-    };
+  const maxChapters = {
+    genesis: 50,
+    exodus: 40,
+    leviticus: 27,
+    numbers: 36,
+    deuteronomy: 34
+    // Add more if needed
+  };
 
-    function searchBible() {
-        let input = document.querySelector(".search-bar").value.toLowerCase().replace(/\s+/g, '');
-        const match = input.match(/^([a-z]+)(\d+)$/); // e.g., gen1, exo20
+  function searchBible() {
+    let input = document.querySelector(".search-bar").value.toLowerCase().replace(/\s+/g, '');
+    const match = input.match(/^([a-z]+)(\d+)$/); // e.g., gen1, genesis1
 
-        if (!match) {
-            alert("Please enter a valid format like 'gen 1' or 'exo20'");
-            return;
-        }
-
-        const [_, abbrev, chapter] = match;
-        const book = books[abbrev];
-
-        if (!book) {
-            alert("Book abbreviation not recognized.");
-            return;
-        }
-
-        const chapterNum = parseInt(chapter, 10);
-
-        if (isNaN(chapterNum) || chapterNum < 1 || chapterNum > (maxChapters[book] || 0)) {
-            alert("Chapter number out of range.");
-            return;
-        }
-
-        const fileName = ${abbrev}_chapter${chapterNum}.html;
-        window.location.href = fileName;
+    if (!match) {
+      alert("Please enter a valid format like 'Gen 1' or 'exo20'");
+      return;
     }
 
-    document.querySelector(".search-button").addEventListener("click", searchBible);
-    document.querySelector(".search-bar").addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            searchBible();
-        }
-    });
+    const abbrev = match[1];
+    const chapterNum = parseInt(match[2], 10);
+
+    const book = books[abbrev];
+
+    if (!book) {
+      alert("Book abbreviation not recognized.");
+      return;
+    }
+
+    if (chapterNum < 1 || chapterNum > (maxChapters[book] || 0)) {
+      alert("Chapter number out of range.");
+      return;
+    }
+
+    const fileName = `${book}_chapter${chapterNum}.html`; // ✅ fixed this line
+    window.location.href = fileName;
+  }
+
+  document.querySelector(".search-button").addEventListener("click", searchBible);
+  document.querySelector(".search-bar").addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      searchBible();
+    }
+  });
 </script>
 
 </body>
