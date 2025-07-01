@@ -180,11 +180,15 @@
 
     async function loadPosts() {
       const { data, error } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
+      if (error) {
+        console.error("Error loading posts:", error);
+        return;
+      }
       feed.innerHTML = "";
       data.forEach(post => {
         const isVideo = post.media_url.endsWith(".mp4") || post.media_url.includes("video");
         const media = isVideo ? `<video controls src="${post.media_url}"></video>` : `<img src="${post.media_url}" alt="${post.title}" />`;
-        const delBtn = post.username === username ? `<button class='delete-btn' onclick='deletePost(${post.id})'>Delete</button>` : "";
+        const delBtn = (post.username === username || username === "admin") ? `<button class='delete-btn' onclick='deletePost(${post.id})'>Delete</button>` : "";
         feed.innerHTML += `
           <div class="feed-item">
             <h4>${post.title}</h4>
@@ -206,27 +210,38 @@
       const desc = document.getElementById("desc").value;
       const file = document.getElementById("mediaInput").files[0];
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "Suxcedo_uploads");
-      formData.append("folder", "suxcedo_reels");
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "Suxcedo_uploads");
+        formData.append("folder", "suxcedo_reels");
 
-      const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
-        method: "POST",
-        body: formData
-      });
-      const cloudData = await cloudRes.json();
-      const media_url = cloudData.secure_url;
+        const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
+          method: "POST",
+          body: formData
+        });
 
-      const { error } = await supabase.from("posts").insert({
-        title,
-        description: desc,
-        media_url,
-        username
-      });
+        const cloudData = await cloudRes.json();
+        if (!cloudData.secure_url) throw new Error("Cloudinary upload failed");
 
-      form.reset();
-      loadPosts();
+        const media_url = cloudData.secure_url;
+
+        const { error } = await supabase.from("posts").insert({
+          title,
+          description: desc,
+          media_url,
+          username
+        });
+
+        if (error) throw error;
+
+        form.reset();
+        await loadPosts();
+
+      } catch (err) {
+        console.error("Upload error:", err);
+        alert("Failed to upload post. Check console for details.");
+      }
     });
 
     async function deletePost(id) {
