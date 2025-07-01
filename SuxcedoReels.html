@@ -213,7 +213,8 @@
       try {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", "Suxcedo_uploads");
+        formData.append("upload_preset", "suxcedo_uploads");
+
         formData.append("folder", "suxcedo_reels");
 
         const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
