@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUXCEDO Reels</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <style>
+    body {
+      background: #3e2f1c;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2c1e0f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+    header img {
+      height: 40px;
+    }
+    header h1 {
+      margin: 0;
+      text-align: center;
+      flex-grow: 1;
+      color: #f4c97a;
+    }
+    .main-container {
+      display: flex;
+      flex-direction: row;
+    }
+    .upload-side {
+      width: 250px;
+      background: #4e3b25;
+      padding: 20px;
+      display: block;
+    }
+    .upload-form input,
+    .upload-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    .upload-form button {
+      background: #f4c97a;
+      color: #000;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #feed {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .feed-item {
+      background: #1e1e1e;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+    }
+    .feed-item h4 {
+      margin: 0 0 5px;
+      color: #f4c97a;
+    }
+    .feed-item p {
+      margin: 5px 0 10px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+      font-size: 18px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .actions span:hover {
+      color: #f4c97a;
+    }
+    img, video {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .delete-btn {
+      margin-top: 10px;
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      .upload-side {
+        display: none;
+        width: 100%;
+      }
+      .upload-side.open {
+        display: block;
+      }
+      .menu-toggle {
+        display: block;
+        margin-left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="https://suxcedo.com"><img src="favicon.png" alt="SUXCEDO Logo" /></a>
+    <h1>SUXCEDO Reels</h1>
+    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+  </header>
+  <div class="main-container">
+    <div class="upload-side" id="uploadMenu">
+      <form class="upload-form" id="uploadForm">
+        <input type="text" id="title" placeholder="Title" required />
+        <textarea id="desc" rows="3" placeholder="Description..." required></textarea>
+        <input type="file" id="mediaInput" accept="image/*,video/*" required />
+        <button type="submit">Post</button>
+      </form>
+    </div>
+    <div id="feed"></div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("uploadMenu").classList.toggle("open");
+    }
+
+    const supabaseUrl = 'https://zoignhmsghszucfemfum.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvaWduaG1zZ2hzenVjZmVtZnVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjU0MTAsImV4cCI6MjA2Njk0MTQxMH0.6tg9XMOTWeMNSSNnytG5N0A3xUwSnlvhqt1YwVwK6fs';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    const form = document.getElementById("uploadForm");
+    const feed = document.getElementById("feed");
+
+    async function loadPosts() {
+      const { data, error } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
+      if (error) {
+        console.error("Error loading posts:", error);
+        return;
+      }
+      feed.innerHTML = "";
+      data.forEach(post => {
+        const isVideo = post.media_url.includes(".mp4") || post.media_url.includes("video");
+        const media = isVideo ? `<video controls src="${post.media_url}"></video>` : `<img src="${post.media_url}" />`;
+        feed.innerHTML += `
+          <div class="feed-item">
+            <h4>${post.title}</h4>
+            <p>${post.description}</p>
+            ${media}
+            <div class="actions">
+              <span onclick="likePost(${post.id})">❤️</span>
+              <span onclick="commentPost(${post.id})">💬</span>
+            </div>
+            <button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>
+          </div>
+        `;
+      });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = document.getElementById("title").value;
+      const desc = document.getElementById("desc").value;
+      const file = document.getElementById("mediaInput").files[0];
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "Suxcedo_uploads");
+        formData.append("folder", "suxcedo_reels");
+
+        const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        const cloudData = await cloudRes.json();
+        if (!cloudData.secure_url) throw new Error("Upload failed");
+
+        const { error } = await supabase.from("posts").insert({
+          title,
+          description: desc,
+          media_url: cloudData.secure_url
+        });
+
+        if (error) throw error;
+        form.reset();
+        loadPosts();
+      } catch (err) {
+        console.error("Upload error:", err);
+        alert("Post upload failed. Check console.");
+      }
+    });
+
+    async function deletePost(id) {
+      await supabase.from("posts").delete().eq("id", id);
+      loadPosts();
+    }
+
+    function likePost(id) {
+      alert("❤️ You liked post " + id);
+    }
+
+    function commentPost(id) {
+      const comment = prompt("💬 Enter your comment for post " + id);
+      if (comment) alert("Comment saved: " + comment);
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
