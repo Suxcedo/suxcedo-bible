@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SUXCEDO Reels</title>
-  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="icon" href="favicon.png" type="image/png">
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <style>
     body {
@@ -38,7 +38,6 @@
       width: 250px;
       background: #4e3b25;
       padding: 20px;
-      display: block;
     }
     .upload-form input,
     .upload-form textarea {
@@ -111,13 +110,30 @@
       font-size: 24px;
       cursor: pointer;
     }
+    .comment-section {
+      margin-top: 10px;
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .comment-section input {
+      width: 80%;
+      padding: 5px;
+      margin-right: 5px;
+    }
+    .comment-section button {
+      padding: 5px 10px;
+      background: #f4c97a;
+      color: #000;
+      border: none;
+      border-radius: 3px;
+    }
     @media (max-width: 768px) {
       .main-container {
         flex-direction: column;
       }
       .upload-side {
         display: none;
-        width: 100%;
       }
       .upload-side.open {
         display: block;
@@ -146,15 +162,15 @@
     </div>
     <div id="feed"></div>
   </div>
-
   <script>
+    const supabase = window.supabase.createClient(
+      'https://zoignhmsghszucfemfum.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvaWduaG1zZ2hzenVjZmVtZnVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjU0MTAsImV4cCI6MjA2Njk0MTQxMH0.6tg9XMOTWeMNSSNnytG5N0A3xUwSnlvhqt1YwVwK6fs'
+    );
+
     function toggleMenu() {
       document.getElementById("uploadMenu").classList.toggle("open");
     }
-
-    const supabaseUrl = 'https://zoignhmsghszucfemfum.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvaWduaG1zZ2hzenVjZmVtZnVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjU0MTAsImV4cCI6MjA2Njk0MTQxMH0.6tg9XMOTWeMNSSNnytG5N0A3xUwSnlvhqt1YwVwK6fs';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     const form = document.getElementById("uploadForm");
     const feed = document.getElementById("feed");
@@ -175,8 +191,15 @@
             <p>${post.description}</p>
             ${media}
             <div class="actions">
-              <span onclick="likePost(${post.id})">❤️</span>
-              <span onclick="commentPost(${post.id})">💬</span>
+              <span onclick="likePost(${post.id})">❤️ <span id="like-count-${post.id}">${post.likes || 0}</span></span>
+              <span onclick="toggleComments(${post.id})">💬 <span id="comment-count-${post.id}">${post.comments ? post.comments.length : 0}</span></span>
+            </div>
+            <div id="comment-section-${post.id}" class="comment-section" style="display: none;">
+              <div id="comments-${post.id}">
+                ${(post.comments || []).map(comment => `<p><strong>${comment.user || 'User'}:</strong> ${comment.text}</p>`).join('')}
+              </div>
+              <input type="text" id="new-comment-${post.id}" placeholder="Write a comment..." />
+              <button onclick="submitComment(${post.id})">Post</button>
             </div>
             <button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>
           </div>
@@ -207,7 +230,9 @@
         const { error } = await supabase.from("posts").insert({
           title,
           description: desc,
-          media_url: cloudData.secure_url
+          media_url: cloudData.secure_url,
+          likes: 0,
+          comments: []
         });
 
         if (error) throw error;
@@ -219,18 +244,33 @@
       }
     });
 
-    async function deletePost(id) {
-      await supabase.from("posts").delete().eq("id", id);
+    async function likePost(id) {
+      const { data: post } = await supabase.from("posts").select("likes").eq("id", id).single();
+      const newLikes = (post.likes || 0) + 1;
+      await supabase.from("posts").update({ likes: newLikes }).eq("id", id);
+      document.getElementById(`like-count-${id}`).innerText = newLikes;
+    }
+
+    function toggleComments(id) {
+      const section = document.getElementById(`comment-section-${id}`);
+      section.style.display = section.style.display === "none" ? "block" : "none";
+    }
+
+    async function submitComment(id) {
+      const input = document.getElementById(`new-comment-${id}`);
+      const newText = input.value.trim();
+      if (!newText) return;
+
+      const { data: post } = await supabase.from("posts").select("comments").eq("id", id).single();
+      const newComments = [...(post.comments || []), { user: "User", text: newText }];
+
+      await supabase.from("posts").update({ comments: newComments }).eq("id", id);
       loadPosts();
     }
 
-    function likePost(id) {
-      alert("❤️ You liked post " + id);
-    }
-
-    function commentPost(id) {
-      const comment = prompt("💬 Enter your comment for post " + id);
-      if (comment) alert("Comment saved: " + comment);
+    async function deletePost(id) {
+      await supabase.from("posts").delete().eq("id", id);
+      loadPosts();
     }
 
     loadPosts();
