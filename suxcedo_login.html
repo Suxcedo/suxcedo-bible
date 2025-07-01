@@ -8,9 +8,9 @@
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <style>
     body {
-      background: #3e2f1c;
+      background: linear-gradient(135deg, #4e342e, #3e2723);
       color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,38 +19,49 @@
     }
     .auth-box {
       background: #2c1e0f;
-      padding: 30px;
-      border-radius: 10px;
+      padding: 40px;
+      border-radius: 12px;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
     }
     .auth-box h2 {
       text-align: center;
       color: #f4c97a;
+      margin-bottom: 20px;
     }
     input {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+      padding: 12px;
+      margin-top: 12px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      font-size: 15px;
     }
     button {
       background: #f4c97a;
       color: #000;
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border: none;
-      border-radius: 5px;
-      margin-top: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
       cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    button:hover {
+      background: #ffe9b3;
     }
     .toggle-btn {
       background: transparent;
       color: #f4c97a;
       border: none;
-      margin-top: 10px;
+      margin-top: 14px;
       cursor: pointer;
+      display: block;
+      text-align: center;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -58,9 +69,8 @@
   <div class="auth-box">
     <h2 id="form-title">Sign Up</h2>
     <input type="text" id="username" placeholder="Username" required />
-    <input type="email" id="email" placeholder="Email" required />
+    <input type="email" id="email" placeholder="Email (optional)" />
     <input type="password" id="password" placeholder="Password" required />
-    <input type="file" id="profilePic" accept="image/*" />
     <button onclick="handleAuth()">Sign Up</button>
     <button class="toggle-btn" onclick="toggleForm()">Already have an account? Log in</button>
   </div>
@@ -78,53 +88,36 @@
       document.getElementById("form-title").innerText = isLogin ? "Log In" : "Sign Up";
       document.querySelector("button[onclick='handleAuth()']").innerText = isLogin ? "Log In" : "Sign Up";
       document.querySelector(".toggle-btn").innerText = isLogin ? "Don't have an account? Sign up" : "Already have an account? Log in";
-      document.getElementById("profilePic").style.display = isLogin ? "none" : "block";
     }
 
     async function handleAuth() {
       const username = document.getElementById("username").value;
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
-      const profilePic = document.getElementById("profilePic").files[0];
 
-      if (!username || !email || !password) return alert("All fields are required");
+      if (!username || !password) return alert("Username and password are required");
 
       if (isLogin) {
-        // LOGIN
-        const { error, user } = await supabase.auth.signInWithPassword({ email, password });
+        if (!email) return alert("Login requires an email.");
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) return alert("Login failed: " + error.message);
         window.location.href = "SuxcedoReels.html";
       } else {
-        // SIGNUP
-        let avatar_url = "";
-
-        if (profilePic) {
-          const formData = new FormData();
-          formData.append("file", profilePic);
-          formData.append("upload_preset", "Suxcedo_uploads");
-          formData.append("folder", "suxcedo_reels/profiles");
-
-          const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload", {
-            method: "POST",
-            body: formData
-          });
-          const cloudData = await cloudRes.json();
-          avatar_url = cloudData.secure_url;
-        }
-
-        const { data, error } = await supabase.auth.signUp({
+        if (!email) return alert("Email is required to sign up. Please enter a valid email.");
+        const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             data: {
               username,
-              avatar: avatar_url
+              avatar: ""
             }
           }
         });
 
         if (error) return alert("Signup failed: " + error.message);
-        alert("Signup successful. You can now log in.");
+
+        alert("Signup successful. Please check your email to confirm before logging in.");
         toggleForm();
       }
     }
