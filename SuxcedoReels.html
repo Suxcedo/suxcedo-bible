@@ -6,6 +6,7 @@
   <title>SUXCEDO Reels</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
   <style>
     body {
       margin: 0;
@@ -33,6 +34,9 @@
     .container {
       display: flex;
       flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .sidebar {
@@ -93,6 +97,14 @@
       margin-top: 10px;
     }
 
+    #userAvatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      object-fit: cover;
+    }
+
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -119,7 +131,7 @@
       <hr style="margin: 20px 0;">
       <div>
         <h4>Profile</h4>
-        <img id="userAvatar" src="" alt="Profile" style="width:60px;height:60px;border-radius:50%;">
+        <img id="userAvatar" src="" alt="Profile">
         <p id="usernameDisplay"></p>
       </div>
     </div>
@@ -141,6 +153,38 @@
 
     let currentUser = null;
 
+    avatarEl.addEventListener('click', () => {
+      const action = prompt("View profile or Update avatar? Type 'view' or 'update'");
+      if (action === 'update') {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = async (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', 'Suxcedo_uploads');
+          formData.append('folder', 'suxcedo_reels/avatars');
+
+          const res = await fetch('https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload', {
+            method: 'POST',
+            body: formData
+          });
+
+          const data = await res.json();
+          if (data.secure_url) {
+            await supabase.auth.updateUser({
+              data: { avatar: data.secure_url }
+            });
+            avatarEl.src = data.secure_url;
+            alert("Avatar updated!");
+          }
+        };
+        input.click();
+      }
+    });
+
     async function loadUser() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return alert("You must be logged in");
@@ -157,7 +201,9 @@
       data.forEach(post => {
         const isImage = post.media_url.includes(".jpg") || post.media_url.includes(".png") || post.media_url.includes(".jpeg");
         const mediaTag = isImage ? `<img src="${post.media_url}" alt="media">` : `<video src="${post.media_url}" controls></video>`;
-        const canDelete = currentUser.user_metadata.username === post.username;
+        const isAdmin = currentUser.user_metadata.username === 'SUXCEDO';
+        const isOwner = currentUser.user_metadata.username === post.username;
+        const canDelete = isAdmin || isOwner;
         const postHTML = `
           <div class="post">
             <div class="post-header">
@@ -181,7 +227,18 @@
       e.preventDefault();
       const file = mediaInput.files[0];
       if (!file) return alert("Please select a media file");
-      const fileURL = URL.createObjectURL(file); // Simulated upload (replace with Cloudinary later)
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'Suxcedo_uploads');
+      formData.append('folder', 'suxcedo_reels');
+
+      const res = await fetch('https://api.cloudinary.com/v1_1/dzorvvwp8/upload', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      const fileURL = data.secure_url;
 
       const { error } = await supabase.from("posts").insert({
         username: currentUser.user_metadata.username,
