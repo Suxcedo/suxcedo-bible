@@ -209,125 +209,59 @@
   </div>
 
  <script>
-  const supabaseClient = window.supabase.createClient(
+  const supabase = window.supabase.createClient(
     'https://zoignhmsghszucfemfum.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvaWduaG1zZ2hzenVjZmVtZnVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNjU0MTAsImV4cCI6MjA2Njk0MTQxMH0.6tg9XMOTWeMNSSNnytG5N0A3xUwSnlvhqt1YwVwK6fs'
+    'YOUR_PUBLIC_ANON_KEY_HERE' // Replace with your real key if not already done
   );
 
-  function toggleMenu() {
-    document.getElementById("uploadMenu").classList.toggle("open");
-  }
+  let currentUserId = null;
+  let currentUsername = null;
 
-  async function signup() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const username = document.getElementById("username").value.trim();
+  async function getCurrentUser() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      alert("Please log in first.");
+      window.location.href = "login.html";
+      return;
+    }
+    currentUserId = user.id;
 
-    if (!username) return alert("Username is required.");
-    if (username.toLowerCase() === "suxcedo" && email !== "suxcedo@gmail.com") {
-      return alert("Only suxcedo@gmail.com can use the 'SUXCEDO' username.");
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("id", user.id)
+      .single();
+
+    if (error || !data) {
+      alert("Username not found.");
+      return;
     }
 
-    // Check if username already taken
-    const { data: existingUser } = await supabaseClient.from("profiles").select("*").eq("username", username).single();
-    if (existingUser) return alert("Username already taken.");
-
-    // Sign up user
-    const { data, error } = await supabaseClient.auth.signUp({
-      email,
-      password,
-      options: { data: { username } }
-    });
-
-    if (error) return alert("Sign up failed: " + error.message);
-
-    // Check if profile exists (to avoid 409 conflict)
-    const { data: existingProfile } = await supabaseClient.from("profiles").select("*").eq("id", data.user.id).single();
-
-    if (!existingProfile) {
-      // Insert profile row
-      const { error: insertError } = await supabaseClient.from("profiles").insert({
-        id: data.user.id,
-        username,
-      });
-      if (insertError) return alert("Error creating profile: " + insertError.message);
-    }
-
-    alert("Signup successful! Please check your email for confirmation.");
+    currentUsername = data.username;
   }
-
-  async function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-    if (error) return alert("Login failed: " + error.message);
-    document.getElementById("auth-container").style.display = "none";
-    document.getElementById("reels-app").style.display = "block";
-    loadPosts();
-  }
-
-  async function logout() {
-    await supabaseClient.auth.signOut();
-    location.reload();
-  }
-
-  window.addEventListener("DOMContentLoaded", async () => {
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    if (session) {
-      document.getElementById("auth-container").style.display = "none";
-      document.getElementById("reels-app").style.display = "block";
-      loadPosts();
-    }
-  });
-
-  const form = document.getElementById("uploadForm");
-  const feed = document.getElementById("feed");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const desc = document.getElementById("desc").value;
-    const file = document.getElementById("mediaInput").files[0];
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    const { data: profile } = await supabaseClient.from("profiles").select("username").eq("id", user.id).single();
-    const username = profile?.username || "User";
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "Suxcedo_uploads");
-    formData.append("folder", "suxcedo_reels");
-
-    const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
-      method: "POST",
-      body: formData
-    });
-
-    const cloudData = await cloudRes.json();
-    if (!cloudData.secure_url) return alert("Upload failed");
-
-    await supabaseClient.from("posts").insert({
-      title: username,
-      description: desc,
-      media_url: cloudData.secure_url,
-      likes: 0,
-      comments: [],
-      user_id: user.id
-    });
-
-    form.reset();
-    loadPosts();
-  });
 
   async function loadPosts() {
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    const { data: profile } = await supabaseClient.from("profiles").select("username").eq("id", user.id).single();
-    const isAdmin = profile?.username === "SUXCEDO" && user.email === "suxcedo@gmail.com";
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-    const { data } = await supabaseClient.from("posts").select("*").order("created_at", { ascending: false });
+    if (error) {
+      console.error("Error loading posts:", error);
+      return;
+    }
+
+    const feed = document.getElementById("feed");
     feed.innerHTML = "";
+
     data.forEach(post => {
       const isVideo = post.media_url.includes(".mp4") || post.media_url.includes("video");
-      const media = isVideo ? `<video controls src="${post.media_url}"></video>` : `<img src="${post.media_url}" />`;
-      const showDelete = isAdmin || post.user_id === user.id;
+      const media = isVideo
+        ? `<video controls src="${post.media_url}"></video>`
+        : `<img src="${post.media_url}" />`;
+
+      const canDelete =
+        currentUsername === "SUXCEDO" || currentUserId === post.user_id;
 
       feed.innerHTML += `
         <div class="feed-item">
@@ -336,25 +270,70 @@
           ${media}
           <div class="actions">
             <span onclick="likePost(${post.id})">❤️ <span id="like-count-${post.id}">${post.likes || 0}</span></span>
-            <span onclick="toggleComments(${post.id})">💬 <span id="comment-count-${post.id}">${post.comments?.length || 0}</span></span>
+            <span onclick="toggleComments(${post.id})">💬 <span id="comment-count-${post.id}">${post.comments ? post.comments.length : 0}</span></span>
           </div>
           <div id="comment-section-${post.id}" class="comment-section" style="display: none;">
             <div id="comments-${post.id}">
-              ${(post.comments || []).map(c => `<p><strong>${c.user || 'User'}:</strong> ${c.text}</p>`).join('')}
+              ${(post.comments || [])
+                .map(comment => `<p><strong>${comment.user || 'User'}:</strong> ${comment.text}</p>`)
+                .join("")}
             </div>
             <input type="text" id="new-comment-${post.id}" placeholder="Write a comment..." />
             <button onclick="submitComment(${post.id})">Post</button>
           </div>
-          ${showDelete ? `<button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>` : ""}
+          ${canDelete ? `<button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>` : ''}
         </div>
       `;
     });
   }
 
+  const form = document.getElementById("uploadForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const desc = document.getElementById("desc").value;
+    const file = document.getElementById("mediaInput").files[0];
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "Suxcedo_uploads");
+      formData.append("folder", "suxcedo_reels");
+
+      const cloudRes = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      const cloudData = await cloudRes.json();
+      if (!cloudData.secure_url) throw new Error("Upload failed");
+
+      const isVideo = file.type.includes("video");
+
+      const { error } = await supabase.from("posts").insert({
+        title: currentUsername,
+        description: desc,
+        media_url: cloudData.secure_url,
+        is_video: isVideo,
+        user_id: currentUserId,
+        likes: 0,
+        comments: []
+      });
+
+      if (error) throw error;
+
+      form.reset();
+      loadPosts();
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert("Post upload failed. Check console.");
+    }
+  });
+
   async function likePost(id) {
-    const { data: post } = await supabaseClient.from("posts").select("likes").eq("id", id).single();
+    const { data: post } = await supabase.from("posts").select("likes").eq("id", id).single();
     const newLikes = (post.likes || 0) + 1;
-    await supabaseClient.from("posts").update({ likes: newLikes }).eq("id", id);
+    await supabase.from("posts").update({ likes: newLikes }).eq("id", id);
     document.getElementById(`like-count-${id}`).innerText = newLikes;
   }
 
@@ -368,21 +347,25 @@
     const newText = input.value.trim();
     if (!newText) return;
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    const { data: profile } = await supabaseClient.from("profiles").select("username").eq("id", user.id).single();
+    const { data: post } = await supabase.from("posts").select("comments").eq("id", id).single();
+    const newComments = [...(post.comments || []), { user: currentUsername, text: newText }];
 
-    const { data: post } = await supabaseClient.from("posts").select("comments").eq("id", id).single();
-    const newComments = [...(post.comments || []), { user: profile?.username || "User", text: newText }];
-
-    await supabaseClient.from("posts").update({ comments: newComments }).eq("id", id);
+    await supabase.from("posts").update({ comments: newComments }).eq("id", id);
     loadPosts();
   }
 
   async function deletePost(id) {
-    await supabaseClient.from("posts").delete().eq("id", id);
+    await supabase.from("posts").delete().eq("id", id);
     loadPosts();
   }
+
+  // Init everything
+  (async () => {
+    await getCurrentUser();
+    await loadPosts();
+  })();
 </script>
+
 
 </body>
 </html>
