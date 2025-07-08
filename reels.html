@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SuxcedoReels</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #f4e3d3, #e7c9a9);
+      color: #2d1b0e;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #5b3924;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .header .logo {
+      height: 40px;
+      margin-right: 12px;
+    }
+    .header h1 {
+      font-size: 24px;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 280px;
+      background-color: #d9bfa3;
+      padding: 20px;
+      box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+      cursor: pointer;
+    }
+    .profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 12px #b88c63;
+      border: 3px solid #5b3924;
+    }
+    .profile span {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    form input[type="file"],
+    form textarea,
+    form button {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    form textarea {
+      resize: vertical;
+      height: 70px;
+      font-family: inherit;
+    }
+    form button {
+      background-color: #5b3924;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background-color: #3f2616;
+    }
+    .feed {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+    }
+    .post {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+      padding: 15px;
+      color: #2d1b0e;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .post-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #5b3924;
+    }
+    .post-header .username {
+      font-weight: 700;
+    }
+    .post-media {
+      max-height: 400px;
+      max-width: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      background: #eee;
+    }
+    .post-description {
+      font-size: 15px;
+    }
+    .post-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .post-actions button {
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: #5b3924;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+    .post-actions button:hover {
+      color: #3f2616;
+    }
+    .delete-btn {
+      margin-left: auto;
+      color: #a00;
+      font-weight: 700;
+    }
+    #update-avatar-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #5b3924;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#update-avatar-btn:hover {
+  background-color: #3f2616;
+}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <img src="favicon.png" alt="logo" class="logo" />
+    <h1>SuxcedoReels</h1>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="profile" id="profile-section">
+  <img id="profile-pic" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" />
+<span id="username-display"></span>
+<button id="update-avatar-btn">Update Avatar</button>
+  
+</div>
+
+
+      <form id="upload-form">
+  <input type="file" id="file-input" />
+  <input type="text" id="description" placeholder="Write something..." />
+  <button type="submit">Post</button>
+</form>
+    </aside>
+    <div id="posts-container"></div>
+
+    <main class="feed" id="posts-container">
+      <!-- Posts get appended here -->
+    </main>
+  </div><script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+  const supa = createClient(
+    'https://bojsjxlolzxwvueiuviv.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvanNqeGxvbHp4d3Z1ZWl1dml2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4ODM1NTQsImV4cCI6MjA2NzQ1OTU1NH0.kqdHP7uxhBaPUShoYODzeNKHbfj_u7b8rocQ-tvOsGg'
+  
+  );
+
+  const cloudName = 'dzorvvwp8';
+  const uploadPreset = 'suxcedo_reels_uploads';
+
+  const fileInput = document.getElementById('file-input');
+  const descriptionInput = document.getElementById('description');
+  const uploadForm = document.getElementById('upload-form');
+  const postsContainer = document.getElementById('posts-container');
+  const profilePicEl = document.getElementById('profile-pic');
+  const usernameDisplayEl = document.getElementById('username-display');
+  const updateAvatarBtn = document.getElementById('update-avatar-btn');
+
+  let currentUser = null;
+  let profile = null;
+
+  async function loadUserProfile() {
+    const { data: { user }, error: userError } = await supa.auth.getUser();
+    if (!user || userError) {
+      window.location.href = 'login.html';
+      return;
+    }
+    currentUser = user;
+
+    const { data, error } = await supa
+      .from('profiles')
+      .select('username, avatar_url')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !data) {
+      alert('Profile not found!');
+      return;
+    }
+
+    profile = data;
+    usernameDisplayEl.textContent = profile.username;
+    profilePicEl.src = profile.avatar_url || 'default-profile.png';
+  }
+
+  updateAvatarBtn.addEventListener('click', async () => {
+    const file = await selectFile();
+    if (!file) return;
+
+    const uploadedUrl = await uploadToCloudinary(file);
+    if (!uploadedUrl) return alert('Avatar upload failed');
+
+    const { error } = await supa
+      .from('profiles')
+      .update({ avatar_url: uploadedUrl })
+      .eq('id', currentUser.id);
+
+    if (error) return alert('Failed to update avatar');
+
+    profilePicEl.src = uploadedUrl;
+  });
+
+  function selectFile() {
+    return new Promise(resolve => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = () => resolve(input.files[0]);
+      input.click();
+    });
+  }
+
+  async function uploadToCloudinary(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
+
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      return data.secure_url;
+    } catch (err) {
+      console.error('Upload failed', err);
+      return null;
+    }
+  }
+
+  uploadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const file = fileInput.files[0];
+    const description = descriptionInput.value.trim();
+
+    if (!file) return alert('Please select an image or video');
+
+    const mediaUrl = await uploadToCloudinary(file);
+    if (!mediaUrl) return alert('Upload failed');
+
+    const { error } = await supa.from('post').insert({
+      user_id: currentUser.id,
+      username: profile.username,
+      media_url: mediaUrl,
+      description
+    });
+
+    if (error) return alert('Failed to post: ' + error.message);
+
+    uploadForm.reset();
+    loadPosts();
+  });
+
+  async function loadPosts() {
+    postsContainer.innerHTML = '';
+
+    const { data: posts, error } = await supa
+      .from('post')
+      .select(`
+        id,
+        user_id,
+        username,
+        media_url,
+        description,
+        created_at,
+        profiles (
+          avatar_url
+        )
+      `)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      postsContainer.innerHTML = '<p>Error loading posts.</p>';
+      return;
+    }
+
+    posts.forEach(post => {
+      const isOwner = post.user_id === currentUser.id;
+      const postEl = document.createElement('article');
+      postEl.className = 'post';
+      postEl.innerHTML = `
+        <div class="post-header">
+          <img src="${post.profiles?.avatar_url || 'default-profile.png'}" alt="avatar" />
+          <span class="username">@${post.username}</span>
+          ${isOwner ? `<button class="delete-btn" data-id="${post.id}">Delete</button>` : ''}
+        </div>
+        ${
+          /\.(mp4|webm|ogg)$/i.test(post.media_url)
+            ? `<video controls class="post-media" src="${post.media_url}"></video>`
+            : `<img class="post-media" src="${post.media_url}" alt="media" />`
+        }
+        <p class="post-description">${post.description || ''}</p>
+      `;
+
+      postsContainer.appendChild(postEl);
+
+      if (isOwner) {
+        postEl.querySelector('.delete-btn').addEventListener('click', async () => {
+          if (confirm('Delete this post?')) {
+            const { error } = await supa.from('post').delete().eq('id', post.id);
+            if (!error) loadPosts();
+          }
+        });
+      }
+    });
+  }
+
+  // INIT
+  loadUserProfile().then(loadPosts);
+</script>
+
+
+</body>
+</html>
