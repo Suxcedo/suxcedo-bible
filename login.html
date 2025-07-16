@@ -2,74 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login - SUXCEDO Reels</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Load Supabase library early in head (no defer) -->
+  <title>Login | SUXCEDO Reels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #e8d3b9;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: #4e3620;
+      color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 320px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: #ffd9a0;
+      margin-bottom: 1rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #a86c32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #8c5728;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Login</h2>
-    <form id="login-form">
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+
+  <div class="login-box">
+    <h2>Login to Reels</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="logIn()">Log In</button>
+    <div class="status" id="status"></div>
   </div>
 
-  <!-- Your script after the Supabase lib and HTML elements -->
   <script>
-    // Now the supabase global is definitely loaded, so we can use it safely
-    const supa = supabase.createClient(
-      'https://bojsjxlolzxwvueiuviv.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvanNqeGxvbHp4d3Z1ZWl1dml2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4ODM1NTQsImV4cCI6MjA2NzQ1OTU1NH0.kqdHP7uxhBaPUShoYODzeNKHbfj_u7b8rocQ-tvOsGg'
+    const client = supabase.createClient(
+      'https://wqknmsiqbjyzoscbbgdt.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc'
     );
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("login-form");
+    async function logIn() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const status = document.getElementById("status");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+      if (!email || !password) {
+        status.textContent = "Please fill in both fields.";
+        return;
+      }
 
-        const email = form.email.value.trim();
-        const password = form.password.value;
+      status.textContent = "Logging in...";
 
-        if (!email || !password) {
-          alert("Please enter both email and password.");
-          return;
-        }
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
 
-        const { data: { user }, error } = await supa.auth.signInWithPassword({
-          email,
-          password
-        });
+      if (error) {
+        status.textContent = "❌ " + error.message;
+        return;
+      }
 
-        if (error) {
-          alert("Login failed: " + error.message);
-          return;
-        }
+      const userId = data.user?.id;
 
-        const { data: profile, error: profileError } = await supa
-          .from('profiles')
-          .select('role')
-          .eq('id', user.id)
-          .single();
+      // Fetch profile info
+      const { data: profile, error: profileError } = await client
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-        if (profileError || !profile) {
-          alert("Could not fetch user role.");
-          return;
-        }
+      if (profileError || !profile) {
+        status.textContent = "❌ Could not fetch profile.";
+        return;
+      }
 
-        if (profile.role === 'admin') {
-          window.location.href = "admin.html";
-        } else {
-          window.location.href = "reels.html";
-        }
-      });
-    });
+      // Store username for display later
+      localStorage.setItem('username', profile.username || 'User');
+
+      // Redirect based on role
+      if (profile.role === 'admin') {
+        window.location.href = 'admin.html';
+      } else {
+        window.location.href = 'reels.html';
+      }
+    }
   </script>
+
 </body>
 </html>
