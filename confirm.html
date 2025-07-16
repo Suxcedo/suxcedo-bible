@@ -2,55 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Email Confirmed - SUXCEDO Reels</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Email Confirmed | SUXCEDO Reels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: white;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f5e0c3, #caa472);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
 
-    .container {
+    .confirm-box {
+      background-color: #fffdf8;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 400px;
       text-align: center;
-      background: #1f1f1f;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
-    h2 {
-      color: #4CAF50;
+    .confirm-box h2 {
+      color: #4e3620;
+      margin-bottom: 1rem;
     }
 
-    a button {
-      margin-top: 1rem;
-      padding: 0.75rem 2rem;
-      border: none;
-      background: #4CAF50;
-      color: white;
+    .confirm-box p {
+      color: #333;
       font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
+      margin-bottom: 2rem;
     }
 
-    a button:hover {
-      background: #45a049;
+    .confirm-box button {
+      background-color: #a86c32;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .confirm-box button:hover {
+      background-color: #8c5728;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <div class="confirm-box">
     <h2>🎉 Email Confirmed!</h2>
-    <p>Your account has been successfully verified.</p>
-    <p>You can now log in to SUXCEDO Reels and start sharing your content!</p>
-    <a href="login.html"><button>Go to Login</button></a>
+    <p>You're all set to start using SUXCEDO Reels.<br />Please click below to log in to your account.</p>
+    <button onclick="goToLogin()">Go to Login</button>
   </div>
+
+  <script>
+    function goToLogin() {
+      window.location.href = 'login.html';
+    }
+  </script>
+
 </body>
 </html>
