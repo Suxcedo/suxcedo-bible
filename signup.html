@@ -2,29 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Signup - SUXCEDO Reels</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/@supabase/supabase-js" defer></script>
-  <script src="auth.js" defer></script>
+  <title>SUXCEDO Reels | Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #e8d3b9; /* light brown */
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-box {
+      background-color: #4e3620; /* dark brown */
+      color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 320px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .signup-box h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #ffd9a0;
+    }
+
+    .signup-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .signup-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #a86c32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    .signup-box button:hover {
+      background-color: #8c5728;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <div class="form-container" id="signup-box">
+
+  <div class="signup-box">
     <h2>Create Account</h2>
-    <form id="signup-form">
-      <input type="text" name="username" placeholder="Username" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="signUp()">Sign Up</button>
+    <div class="status" id="status"></div>
   </div>
 
-  <div class="form-container" id="confirmation-box" style="display: none; text-align: center;">
-    <h2>🎉 Signup Successful!</h2>
-    <p>A confirmation email has been sent to your inbox.</p>
-    <p>Please verify your email before logging in.</p>
-    <a href="login.html"><button>Go to Login</button></a>
-  </div>
+  <script>
+    const client = supabase.createClient(
+      'https://wqknmsiqbjyzoscbbgdt.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc'
+    );
+
+    async function signUp() {
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const status = document.getElementById("status");
+
+      if (!username || !email || !password) {
+        status.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      status.textContent = "Signing you up...";
+
+      const { data, error } = await client.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: 'https://suxcedo.github.io/TestReels/confirm.html'
+        }
+      });
+
+      if (error) {
+        status.textContent = "❌ " + error.message;
+        return;
+      }
+
+      const userId = data.user?.id;
+
+      // Save to 'profiles' table
+      await client.from('profiles').insert([
+        { id: userId, username, email, role: 'user' }
+      ]);
+
+      status.textContent = "✅ Confirmation email sent. Check your inbox!";
+      document.getElementById("username").value = '';
+      document.getElementById("email").value = '';
+      document.getElementById("password").value = '';
+    }
+  </script>
+
 </body>
 </html>
