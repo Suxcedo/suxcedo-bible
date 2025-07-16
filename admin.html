@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | SUXCEDO Reels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #f5e0c3;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10vh;
+      color: #4e3620;
+    }
+
+    .admin-box {
+      background-color: #fffdf8;
+      border: 2px solid #d4aa7d;
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .admin-box h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #6b4e16;
+    }
+
+    .admin-box p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background-color: #a86c32;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      background-color: #8c5728;
+    }
+
+    .admin-section {
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .admin-section h3 {
+      color: #6b4e16;
+      margin-bottom: 10px;
+    }
+
+    .admin-section ul {
+      padding-left: 1.2rem;
+    }
+
+    .admin-section li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-box">
+    <h1>Welcome Admin, <span id="username">User</span> 👑</h1>
+    <p>You have full access to manage SUXCEDO Reels.</p>
+
+    <div class="admin-section">
+      <h3>Admin Actions (coming soon):</h3>
+      <ul>
+        <li>📋 View all users</li>
+        <li>🎬 Manage uploaded reels</li>
+        <li>🗑️ Delete inappropriate content</li>
+        <li>⚙️ Change user roles</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="logOut()">Logout</button>
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script>
+    const username = localStorage.getItem('username') || 'User';
+    document.getElementById("username").textContent = username;
+
+    const client = supabase.createClient(
+      'https://wqknmsiqbjyzoscbbgdt.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc'
+    );
+
+    async function logOut() {
+      await client.auth.signOut();
+      localStorage.clear();
+      window.location.href = 'login.html';
+    }
+  </script>
+
+</body>
+</html>
