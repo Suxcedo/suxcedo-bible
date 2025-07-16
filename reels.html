@@ -2,81 +2,252 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Welcome | SUXCEDO Reels</title>
+  <title>SuxcedoReels | Welcome</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Favicon for tab -->
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+
   <style>
-    body {
-      margin: 0;
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0; height: 100%;
       font-family: 'Segoe UI', sans-serif;
       background: #f5e0c3;
       color: #4e3620;
+      overflow: hidden;
+    }
+
+    /* Fixed header */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: #a86c32;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      z-index: 1000;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .header .logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    /* Container split */
+    .container {
+      margin-top: 60px; /* to avoid header */
+      display: flex;
+      height: calc(100vh - 60px);
+      width: 100vw;
+    }
+
+    /* Left sidebar */
+    .sidebar {
+      background: #fffdf8;
+      border-right: 3px solid #d4aa7d;
+      width: 320px;
+      padding: 2rem 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 10vh;
+      gap: 2rem;
+      box-shadow: 5px 0 15px rgba(0,0,0,0.05);
     }
 
-    .welcome-box {
-      background-color: #fffdf8;
-      border: 2px solid #d4aa7d;
-      border-radius: 12px;
-      padding: 2rem 2.5rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    .sidebar h2 {
+      font-size: 1.8rem;
+      color: #6b4e16;
+      margin-bottom: 0;
       text-align: center;
-      max-width: 500px;
     }
 
-    .welcome-box h1 {
-      margin-bottom: 1rem;
-      font-size: 2rem;
+    /* Profile upload circle */
+    .profile-upload {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #d4aa7d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(168, 108, 50, 0.6);
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      color: #fffdf8;
+      font-size: 1.1rem;
+      text-align: center;
+      user-select: none;
+    }
+    .profile-upload:hover {
+      background: #a86c32;
+    }
+
+    /* Hidden file input */
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Username text */
+    .username-text {
+      font-size: 1.3rem;
+      font-weight: 600;
       color: #6b4e16;
     }
 
-    .welcome-box p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
+    /* Logout button */
     .btn {
       background-color: #a86c32;
       color: #fff;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 12px 25px;
+      border-radius: 10px;
       font-size: 1rem;
       cursor: pointer;
+      width: 100%;
       transition: background-color 0.2s ease-in-out;
     }
-
     .btn:hover {
       background-color: #8c5728;
+    }
+
+    /* Right content area (reels feed placeholder) */
+    .reels-feed {
+      flex: 1;
+      background: #f9f2e7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: #c49e59;
+      user-select: none;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-left: 3px solid #d4aa7d;
+    }
+
+      .upload-section {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff8ef;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      border: 2px dashed #a86c32;
+    }
+
+    .upload-section input {
+      margin-top: 10px;
+    }
+
+    .upload-preview {
+      margin-top: 1rem;
+      max-width: 300px;
+    }
+
+    .upload-progress {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #6b4e16;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="welcome-box">
-    <h1>Welcome, <span id="username">User</span> 👋</h1>
-    <p>This is your Reels page. Upload and explore short videos!</p>
-    <button class="btn" onclick="logOut()">Logout</button>
+  <header class="header">
+    <img src="favicon.png" alt="SuxcedoReels Logo" class="logo" />
+    <h1>SuxcedoReels</h1>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Welcome, <span id="username">User</span> 👋</h2>
+
+      <label for="profile-upload" class="profile-upload" title="Upload Profile Picture">
+        Upload Profile
+      </label>
+      <input type="file" id="profile-upload" accept="image/*" />
+
+      <button class="btn" onclick="logOut()">Logout</button>
+    </aside>
+
+    <main class="reels-feed">
+      <div class="upload-section">
+        <h3>Upload Your Reel 🎥</h3>
+        <input type="file" id="video-upload" accept="video/*" />
+        <div class="upload-progress" id="progress">No file uploaded yet</div>
+        <div class="upload-preview" id="videoPreview"></div>
+      </div>
+    </main>
   </div>
 
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <script>
     const username = localStorage.getItem('username') || 'User';
     document.getElementById("username").textContent = username;
 
-    const client = supabase.createClient(
-      'https://wqknmsiqbjyzoscbbgdt.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc'
-    );
-
-    async function logOut() {
-      await client.auth.signOut();
+    function logOut() {
+      alert("Logging out...");
       localStorage.clear();
       window.location.href = 'login.html';
     }
+
+    const videoInput = document.getElementById("video-upload");
+    const preview = document.getElementById("videoPreview");
+    const progress = document.getElementById("progress");
+
+    videoInput.addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      progress.textContent = "Uploading...";
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "working_reels");
+      formData.append("cloud_name", "dzorvvwp8");
+
+      try {
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/dzorvvwp8/video/upload",
+          formData,
+          {
+            onUploadProgress: (p) => {
+              const percent = Math.round((p.loaded * 100) / p.total);
+              progress.textContent = `Uploading: ${percent}%`;
+            }
+          }
+        );
+
+        const videoUrl = res.data.secure_url;
+        progress.textContent = "✅ Upload complete!";
+        preview.innerHTML = `<video controls src="${videoUrl}"></video>`;
+
+        // Optional: save videoUrl to Supabase later here
+      } catch (err) {
+        console.error(err);
+        progress.textContent = "❌ Upload failed.";
+      }
+    });
   </script>
 
 </body>
