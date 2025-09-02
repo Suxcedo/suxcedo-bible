@@ -258,14 +258,13 @@
   const input = document.querySelector(".search-bar");
   const button = document.querySelector(".search-button");
 
-  // Create suggestion box
+  // Suggestion box
   const suggestionBox = document.createElement("div");
   suggestionBox.style.position = "absolute";
   suggestionBox.style.zIndex = "1000";
-  suggestionBox.style.width = input.offsetWidth + "px";
   suggestionBox.style.maxHeight = "200px";
   suggestionBox.style.overflowY = "auto";
-  suggestionBox.style.background = "#e0f2ff"; // light sky blue
+  suggestionBox.style.background = "#e0f2ff";
   suggestionBox.style.border = "1px solid #4a90e2";
   suggestionBox.style.color = "#003f8a";
   suggestionBox.style.borderRadius = "5px";
@@ -273,25 +272,33 @@
   suggestionBox.style.display = "none";
   document.body.appendChild(suggestionBox);
 
-  // Position box under input
   function updateBoxPosition() {
     const rect = input.getBoundingClientRect();
     suggestionBox.style.top = rect.bottom + window.scrollY + "px";
     suggestionBox.style.left = rect.left + window.scrollX + "px";
     suggestionBox.style.width = rect.width + "px";
   }
-
   window.addEventListener("resize", updateBoxPosition);
   window.addEventListener("scroll", updateBoxPosition);
 
-  function normalize(text) {
-    return text.replace(/\s+/g, "").toLowerCase();
+  // Normalize query (accept gen1, gen 1, Genesis1)
+  function normalizeQuery(query) {
+    query = query.toLowerCase().trim();
+    query = query.replace(/\s+/g, ""); // remove spaces
+
+    if (/^gen\d+$/i.test(query)) {
+      query = "genesis " + query.replace("gen", "");
+    } else if (/^genesis\d+$/i.test(query)) {
+      query = "genesis " + query.replace("genesis", "");
+    }
+    return query;
   }
 
   function searchBible() {
-    const rawQuery = input.value.toLowerCase().trim().replace(/\s+/g, "");
-    let match = Object.keys(searchIndex).find(chap => normalize(chap) === rawQuery);
+    let raw = input.value;
+    let query = normalizeQuery(raw);
 
+    let match = Object.keys(searchIndex).find(chap => chap.replace(/\s+/g,"") === query);
     if (match) {
       window.location.href = searchIndex[match];
     } else {
@@ -300,7 +307,7 @@
   }
 
   function showSuggestions() {
-    const value = normalize(input.value.trim());
+    const value = normalizeQuery(input.value.trim());
     suggestionBox.innerHTML = "";
 
     if (!value) {
@@ -308,7 +315,9 @@
       return;
     }
 
-    const suggestions = Object.keys(searchIndex).filter(chap => normalize(chap).startsWith(value)).slice(0, 50);
+    const suggestions = Object.keys(searchIndex)
+      .filter(chap => chap.replace(/\s+/g,"").startsWith(value))
+      .slice(0, 50);
 
     if (suggestions.length === 0) {
       suggestionBox.style.display = "none";
@@ -321,13 +330,8 @@
       div.style.padding = "8px 12px";
       div.style.cursor = "pointer";
 
-      div.addEventListener("mouseover", () => {
-        div.style.background = "#cce4ff";
-      });
-
-      div.addEventListener("mouseout", () => {
-        div.style.background = "#e0f2ff";
-      });
+      div.addEventListener("mouseover", () => div.style.background = "#cce4ff");
+      div.addEventListener("mouseout", () => div.style.background = "#e0f2ff");
 
       div.addEventListener("click", () => {
         input.value = chap;
@@ -356,5 +360,7 @@
     }
   });
 </script>
+
 </body>
 </html>
+
