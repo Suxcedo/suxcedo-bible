@@ -2,170 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Profile | SuxcedoReels</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5e0c3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .profile-card {
-      background-color: #fff3e9;
-      padding: 30px;
-      border-radius: 20px;
-      width: 400px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background-color: #d4aa7d;
-      display: inline-block;
-      cursor: pointer;
-      overflow: hidden;
-      border: 4px solid #a65c38;
-      margin-bottom: 15px;
-    }
-
-    .profile-pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    h2 { color: #a65c38; margin: 10px 0 5px; }
-    p { color: #6b4e20; margin: 0 0 20px; }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    .save-btn { background-color: #a65c38; color: #fff; }
-    .delete-btn { background-color: #d9534f; color: #fff; }
-  </style>
+  <title>Profile Page</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
 
-<div class="profile-card">
-  <div class="profile-pic" id="profile-pic-container">
-    <img id="profilePic" src="" alt="Profile Picture">
-  </div>
-  <input type="file" id="profile-upload" accept="image/*" style="display:none">
+<h2 id="username">User</h2>
 
-  <h2 id="fullName">Your Name</h2>
-  <p id="username">@username</p>
-
-  <form id="profileForm">
-    <input type="text" id="nameInput" placeholder="Full Name">
-    <input type="text" id="usernameInput" placeholder="Username">
-    <textarea id="bioInput" rows="3" placeholder="Bio"></textarea>
-    <input type="email" id="emailInput" placeholder="Email">
-    <button type="submit" class="save-btn">Save Profile</button>
-    <button type="button" class="delete-btn" onclick="confirm('Delete profile?')">Delete Profile</button>
-  </form>
+<div id="profile-container">
+  <img id="profilePic" src="" alt="Profile" style="width:150px;height:150px;border-radius:50%;cursor:pointer;">
+  <input type="file" id="profile-upload" accept="image/*" style="display:none;">
 </div>
 
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
 <script>
-  // --- Supabase setup ---
+  // 1️⃣ Initialize Supabase
   const supabaseUrl = "https://reels.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ...";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2TcY"; // replace with your anon key
   const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
   const profilePic = document.getElementById('profilePic');
   const profileInput = document.getElementById('profile-upload');
+  const usernameEl = document.getElementById('username');
 
-  let currentUser = null;
-
+  // 2️⃣ Load user info
   async function loadProfile() {
     const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) {
-      alert("Please login first.");
+      alert("Please log in first.");
       return;
     }
-    currentUser = user;
 
-    // Load profile picture
-    const { data: picData } = await supabase
-      .from('profile_picture')
-      .select('*')
-      .eq('user_id', currentUser.id)
+    // Set username
+    const { data: profile } = await supabase
+      .from('profiles') // replace with your table for username
+      .select('username')
+      .eq('id', user.id)
       .single();
 
-    if (picData && picData.avatar_url) profilePic.src = picData.avatar_url;
-    else profilePic.src = ""; // empty for now
+    if (profile && profile.username) usernameEl.textContent = profile.username;
 
-    // Load other profile info if you store them in Supabase
-    // Example: fullName, username, bio, email
+    // Set profile pic
+    const { data: avatar } = await supabase
+      .from('profile_picture') // table storing avatar_url
+      .select('avatar_url')
+      .eq('user_id', user.id)
+      .single();
+
+    if (avatar && avatar.avatar_url) profilePic.src = avatar.avatar_url;
   }
 
   loadProfile();
 
-  // --- Profile Pic click to open file selector ---
-  document.getElementById('profile-pic-container').addEventListener('click', () => {
-    profileInput.click();
-  });
+  // 3️⃣ Open file explorer when clicking image
+  profilePic.addEventListener('click', () => profileInput.click());
 
-  // --- Upload picture to Cloudinary & save in Supabase ---
+  // 4️⃣ Upload new profile picture to Cloudinary & update Supabase
   profileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    // Upload to Cloudinary
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'profile_upload'); // your Cloudinary preset
+    formData.append('upload_preset', 'profile_upload'); // your preset
 
-    try {
-      const res = await fetch("https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload", {
-        method: "POST",
-        body: formData
-      });
-      const data = await res.json();
-      if (!data.secure_url) throw new Error("Upload failed");
+    const res = await fetch('https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
 
-      // Save to Supabase
-      const { error } = await supabase
+    if (data.secure_url) {
+      profilePic.src = data.secure_url;
+
+      // Save URL in Supabase
+      const { data: upsertData, error } = await supabase
         .from('profile_picture')
         .upsert({
-          user_id: currentUser.id,
+          user_id: supabase.auth.user().id,
           avatar_url: data.secure_url
         }, { onConflict: 'user_id' });
 
-      if (error) throw error;
-
-      // Update front-end
-      profilePic.src = data.secure_url;
-
-    } catch (err) {
-      console.error(err);
-      alert("Failed to upload profile picture");
+      if (error) console.error("Supabase update error:", error);
     }
   });
 </script>
-
 </body>
 </html>
