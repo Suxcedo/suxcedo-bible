@@ -2,91 +2,189 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Profile Page</title>
-  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - SuxcedoReels</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #D2B48C; /* medium brown */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .profile-wrapper {
+      background-color: #F5DEB3; /* lighter brown */
+      padding: 30px;
+      border-radius: 20px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    #profilePic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #A0522D;
+      cursor: pointer;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      color: #8B4513;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #A0522D;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .save-btn {
+      background-color: #8B4513;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: #D9534F;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<h2 id="username">User</h2>
+  <div class="profile-wrapper">
+    <img id="profilePic" src="" alt="Profile">
+    <h2 id="username">User</h2>
 
-<div id="profile-container">
-  <img id="profilePic" src="" alt="Profile" style="width:150px;height:150px;border-radius:50%;cursor:pointer;">
-  <input type="file" id="profile-upload" accept="image/*" style="display:none;">
-</div>
+    <form id="profileForm">
+      <input type="text" id="fullName" placeholder="Full Name" />
+      <input type="text" id="userNameInput" placeholder="Username" />
+      <textarea id="bio" rows="3" placeholder="Bio"></textarea>
+      <input type="email" id="email" placeholder="Email" />
 
-<script src="https://unpkg.com/@supabase/supabase-js"></script>
-<script>
-  // 1️⃣ Initialize Supabase
-  const supabaseUrl = "https://reels.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2TcY"; // replace with your anon key
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+      <button type="submit" class="save-btn">Save Profile</button>
+      <button type="button" class="delete-btn" onclick="confirm('Delete profile?')">Delete Profile</button>
+    </form>
 
-  const profilePic = document.getElementById('profilePic');
-  const profileInput = document.getElementById('profile-upload');
-  const usernameEl = document.getElementById('username');
+    <input type="file" id="profile-upload" accept="image/*" style="display:none">
+  </div>
 
-  // 2️⃣ Load user info
-  async function loadProfile() {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    if (error || !user) {
-      alert("Please log in first.");
-      return;
-    }
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script>
+    // 1️⃣ Supabase setup
+    const supabaseUrl = "https://reels.supabase.co";
+    const supabaseKey = "YOUR_ANON_KEY"; // replace with your anon key
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Set username
-    const { data: profile } = await supabase
-      .from('profiles') // replace with your table for username
-      .select('username')
-      .eq('id', user.id)
-      .single();
+    const profilePic = document.getElementById('profilePic');
+    const profileInput = document.getElementById('profile-upload');
+    const usernameEl = document.getElementById('username');
 
-    if (profile && profile.username) usernameEl.textContent = profile.username;
+    async function loadProfile() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error || !user) {
+        alert("Please log in first.");
+        return;
+      }
 
-    // Set profile pic
-    const { data: avatar } = await supabase
-      .from('profile_picture') // table storing avatar_url
-      .select('avatar_url')
-      .eq('user_id', user.id)
-      .single();
+      // Fetch username
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('username, full_name, bio, email')
+        .eq('id', user.id)
+        .single();
 
-    if (avatar && avatar.avatar_url) profilePic.src = avatar.avatar_url;
-  }
+      if (profile) {
+        usernameEl.textContent = profile.username || "User";
+        document.getElementById('fullName').value = profile.full_name || "";
+        document.getElementById('userNameInput').value = profile.username || "";
+        document.getElementById('bio').value = profile.bio || "";
+        document.getElementById('email').value = profile.email || "";
+      }
 
-  loadProfile();
-
-  // 3️⃣ Open file explorer when clicking image
-  profilePic.addEventListener('click', () => profileInput.click());
-
-  // 4️⃣ Upload new profile picture to Cloudinary & update Supabase
-  profileInput.addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    // Upload to Cloudinary
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'profile_upload'); // your preset
-
-    const res = await fetch('https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload', {
-      method: 'POST',
-      body: formData
-    });
-    const data = await res.json();
-
-    if (data.secure_url) {
-      profilePic.src = data.secure_url;
-
-      // Save URL in Supabase
-      const { data: upsertData, error } = await supabase
+      // Fetch avatar
+      const { data: avatar } = await supabase
         .from('profile_picture')
-        .upsert({
-          user_id: supabase.auth.user().id,
-          avatar_url: data.secure_url
-        }, { onConflict: 'user_id' });
+        .select('avatar_url')
+        .eq('user_id', user.id)
+        .single();
 
-      if (error) console.error("Supabase update error:", error);
+      if (avatar && avatar.avatar_url) profilePic.src = avatar.avatar_url;
     }
-  });
-</script>
+
+    loadProfile();
+
+    // 2️⃣ Upload image on click
+    profilePic.addEventListener('click', () => profileInput.click());
+
+    profileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'profile_upload'); // replace with your Cloudinary preset
+
+      try {
+        const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.secure_url) {
+          profilePic.src = data.secure_url;
+
+          const { error } = await supabase
+            .from('profile_picture')
+            .upsert({
+              user_id: supabase.auth.user().id,
+              avatar_url: data.secure_url
+            }, { onConflict: 'user_id' });
+
+          if (error) console.error("Supabase avatar update error:", error);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Upload failed");
+      }
+    });
+
+    // 3️⃣ Save profile button
+    document.getElementById('profileForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const { error } = await supabase
+        .from('profiles')
+        .upsert({
+          id: supabase.auth.user().id,
+          full_name: document.getElementById('fullName').value,
+          username: document.getElementById('userNameInput').value,
+          bio: document.getElementById('bio').value,
+          email: document.getElementById('email').value
+        }, { onConflict: 'id' });
+
+      if (error) alert("Error saving profile");
+      else alert("Profile saved!");
+    });
+  </script>
 </body>
 </html>
