@@ -92,7 +92,7 @@
   <script>
     // 1️⃣ Supabase setup
     const supabaseUrl = "https://reels.supabase.co";
-    const supabaseKey = "YOUR_ANON_KEY"; // replace with your anon key
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc"; // replace with your anon key
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     const profilePic = document.getElementById('profilePic');
@@ -145,7 +145,7 @@
       formData.append('upload_preset', 'profile_upload'); // replace with your Cloudinary preset
 
       try {
-        const res = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {
+        const res = await fetch('https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload', {
           method: 'POST',
           body: formData
         });
