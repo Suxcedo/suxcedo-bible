@@ -3,28 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>rofile - SuxcedoReels</title>
+  <title>Profile - SuxcedoReels</title>
   <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #D2B48C; /* medium brown */
+      background-color: #D2B48C;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
     }
-
     .profile-wrapper {
-      background-color: #F5DEB3; /* lighter brown */
+      background-color: #F5DEB3;
       padding: 30px;
       border-radius: 20px;
       width: 400px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
     #profilePic {
       width: 120px;
       height: 120px;
@@ -34,12 +33,10 @@
       object-fit: cover;
       margin-bottom: 15px;
     }
-
-    h2 {
+    h2, h3 {
       color: #8B4513;
       margin-bottom: 5px;
     }
-
     input, textarea {
       width: 100%;
       padding: 10px;
@@ -48,7 +45,6 @@
       border: 1px solid #A0522D;
       font-size: 14px;
     }
-
     button {
       padding: 10px 20px;
       border: none;
@@ -57,139 +53,82 @@
       cursor: pointer;
       margin: 5px;
     }
-
-    .save-btn {
-      background-color: #8B4513;
-      color: white;
-    }
-
-    .delete-btn {
-      background-color: #D9534F;
-      color: white;
-    }
+    .save-btn { background-color: #8B4513; color: white; }
+    .delete-btn { background-color: #D9534F; color: white; }
   </style>
 </head>
 <body>
 
-  <div class="profile-wrapper">
-    <img id="profilePic" src="default-avatar.jpeg" alt="Profile">
-    <h2 id="username">User</h2>
-
-    <form id="profileForm">
-      <input type="text" id="fullName" placeholder="Full Name" />
-      <input type="text" id="userNameInput" placeholder="Username" />
-      <textarea id="bio" rows="3" placeholder="Bio"></textarea>
-      <input type="email" id="email" placeholder="Email" />
-
-      <button type="submit" class="save-btn">Save Profile</button>
-      <button type="button" class="delete-btn" onclick="confirm('Delete profile?')">Delete Profile</button>
-    </form>
-
-    <input type="file" id="profile-upload" accept="image/*" style="display:none">
+<div class="profile-wrapper">
+  <div class="profile-img-container">
+    <img id="profilePic" src="avatar.jpeg" alt="Profile" class="profile-img">
+    <div class="upload-icon"><i class="fas fa-camera"></i></div>
   </div>
+  <h3 id="profileName">User Name</h3>
+  <p id="profileUsername">@username</p>
+</div>
 
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
-  <script>
-    // 1️⃣ Supabase setup
-    const supabaseUrl = "https://reels.supabase.co"; // your Supabase URL
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc"; // your Supabase anon key
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<script>
+const supabaseUrl = 'https://wqknmsiqbjyzoscbbgdt.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    const profilePic = document.getElementById('profilePic');
-    const profileInput = document.getElementById('profile-upload');
-    const usernameEl = document.getElementById('username');
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload';
+const UPLOAD_PRESET = 'working_reels';
 
-    async function loadProfile() {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const user = sessionData?.session?.user;
+async function loadProfile() {
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  if (userError || !user) { console.log('No user logged in'); return; }
 
-      if (!user) {
-        alert("Please log in first.");
-        return;
-      }
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
 
-      // Fetch username from profiles table
-      const { data: profile, error: profileErr } = await supabase
+  if (profileError || !profile) { console.log('Could not fetch profile', profileError); return; }
+
+  document.getElementById('profileName').textContent = profile.username || 'User Name';
+  document.getElementById('profileUsername').textContent = '@' + (profile.username || 'username');
+  document.getElementById('profilePic').src = profile.avatar_url || 'avatar.jpeg';
+}
+
+document.querySelector('.upload-icon').addEventListener('click', async () => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  fileInput.click();
+
+  fileInput.onchange = async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+    formData.append('folder', 'avatars');
+
+    const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
+    const data = await res.json();
+
+    if (data.secure_url) {
+      const { data: userData } = await supabase.auth.getUser();
+      const userId = userData.user.id;
+
+      const { error: updateError } = await supabase
         .from('profiles')
-        .select('username, full_name, bio, email')
-        .eq('id', user.id)
-        .single();
+        .update({ avatar_url: data.secure_url })
+        .eq('id', userId);
 
-      if (profile) {
-        usernameEl.textContent = profile.username || "User";
-        document.getElementById('fullName').value = profile.full_name || "";
-        document.getElementById('userNameInput').value = profile.username || "";
-        document.getElementById('bio').value = profile.bio || "";
-        document.getElementById('email').value = profile.email || "";
-      }
+      if (!updateError) document.getElementById('profilePic').src = data.secure_url;
+      else console.log('Error updating avatar in Supabase:', updateError);
+    } else console.log('Error uploading to Cloudinary:', data);
+  };
+});
 
-      // Fetch avatar from profile_picture table
-      const { data: avatar } = await supabase
-        .from('profile_picture')
-        .select('avatar_url')
-        .eq('user_id', user.id)
-        .single();
+loadProfile();
+</script>
 
-      if (avatar && avatar.avatar_url) profilePic.src = avatar.avatar_url;
-    }
-
-    loadProfile();
-
-    // 2️⃣ Upload image on click
-    profilePic.addEventListener('click', () => profileInput.click());
-
-    profileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', 'profile_upload'); // Cloudinary preset
-      try {
-        const res = await fetch('https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        if (data.secure_url) {
-          profilePic.src = data.secure_url;
-
-          // Save avatar in Supabase
-          const { data: sessionData } = await supabase.auth.getSession();
-          const user = sessionData?.session?.user;
-          if (!user) return;
-
-          const { error } = await supabase
-            .from('profile_picture')
-            .upsert({
-              user_id: user.id,
-              avatar_url: data.secure_url
-            }, { onConflict: 'user_id' });
-
-          if (error) console.error("Supabase avatar update error:", error);
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Upload failed");
-      }
-    });
-
-    // 3️⃣ Save profile button (just logs for now)
-    document.getElementById('profileForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const { data: sessionData } = await supabase.auth.getSession();
-      const user = sessionData?.session?.user;
-      if (!user) return;
-
-      console.log({
-        full_name: document.getElementById('fullName').value,
-        username: document.getElementById('userNameInput').value,
-        bio: document.getElementById('bio').value,
-        email: document.getElementById('email').value
-      });
-
-      alert("Profile data logged (saving not implemented yet)");
-    });
-  </script>
 </body>
 </html>
