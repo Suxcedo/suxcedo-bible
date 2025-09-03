@@ -1,254 +1,655 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>SuxcedoReels | Welcome</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuxcedoReels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <!-- Favicon for tab -->
-  <link rel="icon" type="image/x-icon" href="favicon.png" />
+        body {
+            background: linear-gradient(to bottom, #8B4513, #A0522D);
+            color: #FFF8DC;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-  <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-    }
-    body, html {
-      margin: 0; padding: 0; height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5e0c3;
-      color: #4e3620;
-      overflow: hidden;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            gap: 20px;
+        }
 
-    /* Fixed header */
-    .header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 60px;
-      background: #a86c32;
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      z-index: 1000;
-      font-family: 'Segoe UI', sans-serif;
-    }
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #6D4C41;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
 
-    .header .logo {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-    }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #D7CCC8;
+        }
 
-    /* Container split */
-    .container {
-      margin-top: 60px; /* to avoid header */
-      display: flex;
-      height: calc(100vh - 60px);
-      width: 100vw;
-    }
+        .logo span {
+            color: #FFCC80;
+        }
 
-    /* Left sidebar */
-    .sidebar {
-      background: #fffdf8;
-      border-right: 3px solid #d4aa7d;
-      width: 320px;
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      box-shadow: 5px 0 15px rgba(0,0,0,0.05);
-    }
+        .search-bar {
+            display: flex;
+            background: #5D4037;
+            border-radius: 24px;
+            padding: 8px 15px;
+            width: 300px;
+        }
 
-    .sidebar h2 {
-      font-size: 1.8rem;
-      color: #6b4e16;
-      margin-bottom: 0;
-      text-align: center;
-    }
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: #D7CCC8;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+        }
 
-    /* Profile upload circle */
-    .profile-upload {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: #d4aa7d;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 0 8px rgba(168, 108, 50, 0.6);
-      position: relative;
-      overflow: hidden;
-      transition: background-color 0.3s ease;
-      font-weight: bold;
-      color: #fffdf8;
-      font-size: 1.1rem;
-      text-align: center;
-      user-select: none;
-    }
-    .profile-upload:hover {
-      background: #a86c32;
-    }
+        .search-bar i {
+            color: #D7CCC8;
+            margin-right: 10px;
+        }
 
-    /* Hidden file input */
-    input[type="file"] {
-      display: none;
-    }
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-    /* Username text */
-    .username-text {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #6b4e16;
-    }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
 
-    /* Logout button */
-    .btn {
-      background-color: #a86c32;
-      color: #fff;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      width: 100%;
-      transition: background-color 0.2s ease-in-out;
-    }
-    .btn:hover {
-      background-color: #8c5728;
-    }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #FFCC80;
+        }
 
-    /* Right content area (reels feed placeholder) */
-    .reels-feed {
-      flex: 1;
-      background: #f9f2e7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      color: #c49e59;
-      user-select: none;
-      font-weight: 700;
-      letter-spacing: 2px;
-      border-left: 3px solid #d4aa7d;
-    }
+        .sidebar {
+            background-color: #6D4C41;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
 
-      .upload-section {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff8ef;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      text-align: center;
-      border: 2px dashed #a86c32;
-    }
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
 
-    .upload-section input {
-      margin-top: 10px;
-    }
+        .sidebar-menu li {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-    .upload-preview {
-      margin-top: 1rem;
-      max-width: 300px;
-    }
+        .sidebar-menu li:hover {
+            background: #5D4037;
+        }
 
-    .upload-progress {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: #6b4e16;
-    }
+        .sidebar-menu li.active {
+            background: #5D4037;
+            border-left: 4px solid #FFCC80;
+        }
 
-    video {
-      width: 100%;
-      border-radius: 10px;
-    }
-  </style>
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .main-content {
+            background-color: #7E5C4D;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FFCC80;
+            color: #FFCC80;
+        }
+
+        .reels-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .reel-card {
+            background: #6D4C41;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .reel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reel-media {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reel-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .reel-card:hover .reel-media img {
+            transform: scale(1.05);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .reel-card:hover .play-button {
+            opacity: 1;
+        }
+
+        .reel-info {
+            padding: 15px;
+        }
+
+        .reel-user {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reel-user img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid #FFCC80;
+        }
+
+        .reel-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #D7CCC8;
+            font-size: 14px;
+        }
+
+        .reel-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .right-sidebar {
+            background-color: #6D4C41;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-section {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: fit-content;
+            margin: 0 auto 15px;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FFCC80;
+        }
+
+        .upload-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #5D4037;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFCC80;
+            cursor: pointer;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-username {
+            color: #D7CCC8;
+            margin-bottom: 15px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFCC80;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #D7CCC8;
+        }
+
+        .trending-section {
+            margin-top: 30px;
+        }
+
+        .trending-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .trending-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #5D4037;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trending-list li:last-child {
+            border-bottom: none;
+        }
+
+        .trending-number {
+            font-weight: 700;
+            color: #FFCC80;
+            font-size: 18px;
+        }
+
+        .add-reel-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #FFCC80;
+            color: #5D4037;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        .add-reel-button:hover {
+            background: #FFB74D;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar, .right-sidebar {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div class="logo">Suxcedo<span>Reels</span></div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search reels...">
+            </div>
+            <div class="user-actions">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-envelope"></i>
+                <div class="user-profile">
+                    <img src="profile.html" alt="Profile" class="profile-pic">
+                    <span>Jessica_22</span>
+                </div>
+            </div>
+        </header>
 
-  <header class="header">
-    <img src="favicon.png" alt="SuxcedoReels Logo" class="logo" />
-    <h1>SuxcedoReels</h1>
-  </header>
+        <aside class="sidebar">
+            <h3>Menu</h3>
+            <ul class="sidebar-menu">
+                <li class="active"><i class="fas fa-home"></i> Home Feed</li>
+                <li><i class="fas fa-fire"></i> Trending</li>
+                <li><i class="fas fa-users"></i> Friends</li>
+                <li><i class="fas fa-bookmark"></i> Saved Reels</li>
+                <li><i class="fas fa-history"></i> History</li>
+                <li><i class="fas fa-cog"></i> Settings</li>
+            </ul>
+        </aside>
 
-  <div class="container">
-    <aside class="sidebar">
-      <h2>Welcome, <span id="username">User</span> 👋</h2>
+        <main class="main-content">
+            <h2 class="section-title">Public Reels Feed</h2>
+            <div class="reels-container">
+                <!-- Reel 1 -->
+                <div class="reel-card">
+                    <div class="reel-media">
+                        <img src="https://res.cloudinary.com/demo/image/upload/w_500,h_500,c_fill/q_auto/beach.jpg" alt="Reel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <div class="reel-user">
+                            <img src="https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_fill,r_max/avatar2.jpg" alt="User">
+                            <span>Travel_Adventures</span>
+                        </div>
+                        <p>Beautiful sunset at the beach! 🌅 #sunset #beach</p>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> 2.4K
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> 142
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-share"></i> 56
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <label for="profile-upload" class="profile-upload" title="Upload Profile Picture">
-        Upload Profile
-      </label>
-      <input type="file" id="profile-upload" accept="image/*" />
+                <!-- Reel 2 -->
+                <div class="reel-card">
+                    <div class="reel-media">
+                        <img src="https://res.cloudinary.com/demo/image/upload/w_500,h_500,c_fill/q_auto/dog.jpg" alt="Reel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <div class="reel-user">
+                            <img src="https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_fill,r_max/avatar3.jpg" alt="User">
+                            <span>PetLover99</span>
+                        </div>
+                        <p>My new puppy is so cute! 🐶 #puppy #dog</p>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> 3.8K
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> 321
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-share"></i> 128
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <button class="btn" onclick="logOut()">Logout</button>
-    </aside>
+                <!-- Reel 3 -->
+                <div class="reel-card">
+                    <div class="reel-media">
+                        <img src="https://res.cloudinary.com/demo/image/upload/w_500,h_500,c_fill/q_auto/hiking.jpg" alt="Reel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <div class="reel-user">
+                            <img src="https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_fill,r_max/avatar4.jpg" alt="User">
+                            <span>MountainExplorer</span>
+                        </div>
+                        <p>Morning hike with amazing views! 🏞️ #hiking #nature</p>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> 5.1K
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> 287
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-share"></i> 94
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <main class="reels-feed">
-      <div class="upload-section">
-        <h3>Upload Your Reel 🎥</h3>
-        <input type="file" id="video-upload" accept="video/*" />
-        <div class="upload-progress" id="progress">No file uploaded yet</div>
-        <div class="upload-preview" id="videoPreview"></div>
-      </div>
-    </main>
-  </div>
+                <!-- Reel 4 -->
+                <div class="reel-card">
+                    <div class="reel-media">
+                        <img src="https://res.cloudinary.com/demo/image/upload/w_500,h_500,c_fill/q_auto/cooking.jpg" alt="Reel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <div class="reel-user">
+                            <img src="https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_fill,r_max/avatar5.jpg" alt="User">
+                            <span>ChefLife</span>
+                        </div>
+                        <p>New recipe experiment! 🍳 #cooking #foodie</p>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> 4.2K
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> 189
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-share"></i> 73
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  <script>
-    const username = localStorage.getItem('username') || 'User';
-    document.getElementById("username").textContent = username;
+                <!-- Reel 5 -->
+                <div class="reel-card">
+                    <div class="reel-media">
+                        <img src="https://res.cloudinary.com/demo/image/upload/w_500,h_500,c_fill/q_auto/city.jpg" alt="Reel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <div class="reel-user">
+                            <img src="https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_fill,r_max/avatar6.jpg" alt="User">
+                            <span>UrbanPhotographer</span>
+                        </div>
+                        <p>City lights never looked better! 🌃 #urban #nightphotography</p>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> 3.5K
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> 204
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-share"></i> 62
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    function logOut() {
-      alert("Logging out...");
-      localStorage.clear();
-      window.location.href = 'login.html';
-    }
+                <!-- Reel 6 -->
+                <div class="reel-card">
+                    <div class="reel-media">
+                        <img src="https://res.cloudinary.com/demo/image/upload/w_500,h_500,c_fill/q_auto/art.jpg" alt="Reel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <div class="reel-user">
+                            <img src="https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_fill,r_max/avatar7.jpg" alt="User">
+                            <span>ArtStudio</span>
+                        </div>
+                        <p>New painting almost finished! 🎨 #art #painting</p>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> 2.9K
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> 176
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-share"></i> 48
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-    const videoInput = document.getElementById("video-upload");
-    const preview = document.getElementById("videoPreview");
-    const progress = document.getElementById("progress");
+        <aside class="right-sidebar">
+            <div class="profile-section">
+                <div class="profile-img-container">
+                    <img src="https://res.cloudinary.com/demo/image/upload/w_150,h_150,c_fill,r_max/avatar1.jpg" alt="Profile" class="profile-img">
+                    <div class="upload-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <h3 class="profile-name">Jessica Smith</h3>
+                <p class="profile-username">@jessica_22</p>
+                <p>Travel enthusiast & photography lover ✈️📸</p>
+                
+                <div class="profile-stats">
+                    <div class="stat">
+                        <div class="stat-value">247</div>
+                        <div class="stat-label">Reels</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">12.5K</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">1.2K</div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+                
+                <button class="add-reel-button">
+                    <i class="fas fa-plus"></i> Add New Reel
+                </button>
+            </div>
 
-    videoInput.addEventListener("change", async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+            <div class="trending-section">
+                <h3>Trending Topics</h3>
+                <ul class="trending-list">
+                    <li>
+                        <span class="trending-number">1</span>
+                        <span>#SummerVibes</span>
+                    </li>
+                    <li>
+                        <span class="trending-number">2</span>
+                        <span>#TravelDiaries</span>
+                    </li>
+                    <li>
+                        <span class="trending-number">3</span>
+                        <span>#Foodie</span>
+                    </li>
+                    <li>
+                        <span class="trending-number">4</span>
+                        <span>#SunsetLovers</span>
+                    </li>
+                    <li>
+                        <span class="trending-number">5</span>
+                        <span>#PetLife</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
 
-      progress.textContent = "Uploading...";
-
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "working_reels");
-      formData.append("cloud_name", "dzorvvwp8");
-
-      try {
-        const res = await axios.post(
-          "https://api.cloudinary.com/v1_1/dzorvvwp8/video/upload",
-          formData,
-          {
-            onUploadProgress: (p) => {
-              const percent = Math.round((p.loaded * 100) / p.total);
-              progress.textContent = `Uploading: ${percent}%`;
-            }
-          }
-        );
-
-        const videoUrl = res.data.secure_url;
-        progress.textContent = "✅ Upload complete!";
-        preview.innerHTML = `<video controls src="${videoUrl}"></video>`;
-
-        // Optional: save videoUrl to Supabase later here
-      } catch (err) {
-        console.error(err);
-        progress.textContent = "❌ Upload failed.";
-      }
-    });
-  </script>
-
+    <script>
+        // Cloudinary configuration
+        const CLOUD_NAME = 'your_cloud_name'; // Replace with your Cloudinary cloud name
+        const UPLOAD_PRESET = 'your_upload_preset'; // Replace with your upload preset
+        
+        // Sample functionality for profile picture upload
+        document.querySelector('.upload-icon').addEventListener('click', function() {
+            alert('Cloudinary upload would be triggered here. In a real app, this would open a file selector and upload to your Cloudinary account.');
+        });
+        
+        // Add reel button functionality
+        document.querySelector('.add-reel-button').addEventListener('click', function() {
+            alert('This would open a reel creation modal with Cloudinary upload functionality.');
+        });
+        
+        // Simulate like functionality
+        document.querySelectorAll('.fa-heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.classList.toggle('fas');
+                this.classList.toggle('far');
+            });
+        });
+    </script>
 </body>
 </html>
