@@ -1,134 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile - SuxcedoReels</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <title>SuxcedoReels | Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon for tab -->
+  <link rel="icon" type="image/x-icon" href="favicon.png" />
+
   <style>
-    body {
-      margin: 0;
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0; height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #D2B48C;
+      background: #f5e0c3;
+      color: #4e3620;
+      overflow: hidden;
+    }
+
+    /* Fixed header */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: #a86c32;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      z-index: 1000;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .header .logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    /* Container split */
+    .container {
+      margin-top: 60px; /* to avoid header */
+      display: flex;
+      height: calc(100vh - 60px);
+      width: 100vw;
+    }
+
+    /* Left sidebar */
+    .sidebar {
+      background: #fffdf8;
+      border-right: 3px solid #d4aa7d;
+      width: 320px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+    }
+
+    .sidebar h2 {
+      font-size: 1.8rem;
+      color: #6b4e16;
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    /* Profile upload circle */
+    .profile-upload {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #d4aa7d;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-    }
-    .profile-wrapper {
-      background-color: #F5DEB3;
-      padding: 30px;
-      border-radius: 20px;
-      width: 400px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    #profilePic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid #A0522D;
       cursor: pointer;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-    h2, h3 {
-      color: #8B4513;
-      margin-bottom: 5px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #A0522D;
-      font-size: 14px;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(168, 108, 50, 0.6);
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.3s ease;
       font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
+      color: #fffdf8;
+      font-size: 1.1rem;
+      text-align: center;
+      user-select: none;
     }
-    .save-btn { background-color: #8B4513; color: white; }
-    .delete-btn { background-color: #D9534F; color: white; }
+    .profile-upload:hover {
+      background: #a86c32;
+    }
+
+    /* Hidden file input */
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Username text */
+    .username-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #6b4e16;
+    }
+
+    /* Logout button */
+    .btn {
+      background-color: #a86c32;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .btn:hover {
+      background-color: #8c5728;
+    }
+
+    /* Right content area (reels feed placeholder) */
+    .reels-feed {
+      flex: 1;
+      background: #f9f2e7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: #c49e59;
+      user-select: none;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-left: 3px solid #d4aa7d;
+    }
+
+      .upload-section {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff8ef;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      border: 2px dashed #a86c32;
+    }
+
+    .upload-section input {
+      margin-top: 10px;
+    }
+
+    .upload-preview {
+      margin-top: 1rem;
+      max-width: 300px;
+    }
+
+    .upload-progress {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #6b4e16;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
 
-<div class="profile-wrapper">
-  <div class="profile-img-container">
-    <img id="profilePic" src="avatar.jpeg" alt="Profile" class="profile-img">
-    <div class="upload-icon"><i class="fas fa-camera"></i></div>
+  <header class="header">
+    <img src="favicon.png" alt="SuxcedoReels Logo" class="logo" />
+    <h1>SuxcedoReels</h1>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Welcome, <span id="username">User</span> 👋</h2>
+
+      <label for="profile-upload" class="profile-upload" title="Upload Profile Picture">
+        Upload Profile
+      </label>
+      <input type="file" id="profile-upload" accept="image/*" />
+
+      <button class="btn" onclick="logOut()">Logout</button>
+    </aside>
+
+    <main class="reels-feed">
+      <div class="upload-section">
+        <h3>Upload Your Reel 🎥</h3>
+        <input type="file" id="video-upload" accept="video/*" />
+        <div class="upload-progress" id="progress">No file uploaded yet</div>
+        <div class="upload-preview" id="videoPreview"></div>
+      </div>
+    </main>
   </div>
-  <h3 id="profileName">User Name</h3>
-  <p id="profileUsername">@username</p>
-</div>
 
-<script src="https://unpkg.com/@supabase/supabase-js"></script>
-<script>
-const supabaseUrl = 'https://wqknmsiqbjyzoscbbgdt.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  <script>
+    const username = localStorage.getItem('username') || 'User';
+    document.getElementById("username").textContent = username;
 
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload';
-const UPLOAD_PRESET = 'working_reels';
+    function logOut() {
+      alert("Logging out...");
+      localStorage.clear();
+      window.location.href = 'login.html';
+    }
 
-async function loadProfile() {
-  const { data: { user }, error: userError } = await supabase.auth.getUser();
-  if (userError || !user) { console.log('No user logged in'); return; }
+    const videoInput = document.getElementById("video-upload");
+    const preview = document.getElementById("videoPreview");
+    const progress = document.getElementById("progress");
 
-  const { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', user.id)
-    .single();
+    videoInput.addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-  if (profileError || !profile) { console.log('Could not fetch profile', profileError); return; }
+      progress.textContent = "Uploading...";
 
-  document.getElementById('profileName').textContent = profile.username || 'User Name';
-  document.getElementById('profileUsername').textContent = '@' + (profile.username || 'username');
-  document.getElementById('profilePic').src = profile.avatar_url || 'avatar.jpeg';
-}
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "working_reels");
+      formData.append("cloud_name", "dzorvvwp8");
 
-document.querySelector('.upload-icon').addEventListener('click', async () => {
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = 'image/*';
-  fileInput.click();
+      try {
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/dzorvvwp8/video/upload",
+          formData,
+          {
+            onUploadProgress: (p) => {
+              const percent = Math.round((p.loaded * 100) / p.total);
+              progress.textContent = Uploading: ${percent}%;
+            }
+          }
+        );
 
-  fileInput.onchange = async () => {
-    const file = fileInput.files[0];
-    if (!file) return;
+        const videoUrl = res.data.secure_url;
+        progress.textContent = "✅ Upload complete!";
+        preview.innerHTML = <video controls src="${videoUrl}"></video>;
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', UPLOAD_PRESET);
-    formData.append('folder', 'avatars');
-
-    const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
-    const data = await res.json();
-
-    if (data.secure_url) {
-      const { data: userData } = await supabase.auth.getUser();
-      const userId = userData.user.id;
-
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({ avatar_url: data.secure_url })
-        .eq('id', userId);
-
-      if (!updateError) document.getElementById('profilePic').src = data.secure_url;
-      else console.log('Error updating avatar in Supabase:', updateError);
-    } else console.log('Error uploading to Cloudinary:', data);
-  };
-});
-
-loadProfile();
-</script>
+        // Optional: save videoUrl to Supabase later here
+      } catch (err) {
+        console.error(err);
+        progress.textContent = "❌ Upload failed.";
+      }
+    });
+  </script>
 
 </body>
 </html>
