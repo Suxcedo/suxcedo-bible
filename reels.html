@@ -661,31 +661,33 @@
         <script src="https://unpkg.com/@supabase/supabase-js"></script>
 <script>
 const supabaseUrl = "https://reels.supabase.co";
-const supabaseKey = "YOUR_ANON_KEY"; // replace with your anon key
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc"; // replace with your anon key
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-async function loadHeaderProfile() {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    if (error || !user) return;
+async function loadUserProfileSection() {
+    // Get currently logged-in user
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError || !user) return console.log("No logged-in user");
 
-    // Fetch avatar and username
+    // Fetch profile info from 'profiles' table
     const { data: profile, error: profileError } = await supabase
-        .from('profiles')  // your table for username
-        .select('username')
+        .from('profiles')
+        .select('username, avatar_url')
         .eq('id', user.id)
         .single();
 
-    const { data: avatar, error: avatarError } = await supabase
-        .from('profile_picture')  // table for avatar_url
-        .select('avatar_url')
-        .eq('user_id', user.id)
-        .single();
+    if (profileError) return console.log(profileError);
 
-    if (profile && profile.username) document.getElementById('username').textContent = profile.username;
-    if (avatar && avatar.avatar_url) document.getElementById('profilePic').src = avatar.avatar_url;
+    // Update the reels page profile section
+    if (profile.avatar_url) document.querySelector('.profile-img').src = profile.avatar_url;
+    if (profile.username) {
+        document.querySelector('.profile-name').textContent = profile.username;
+        document.querySelector('.profile-username').textContent = '@' + profile.username;
+    }
 }
 
-loadHeaderProfile();
+loadUserProfileSection();
+
 </script>
 
 </body>
