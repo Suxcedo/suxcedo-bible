@@ -260,6 +260,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #FFCC80;
+            cursor: pointer;
         }
 
         .upload-icon {
@@ -578,14 +579,14 @@
         <aside class="right-sidebar">
             <div class="profile-section">
                 <div class="profile-img-container">
-                    <img src="https://res.cloudinary.com/demo/image/upload/w_150,h_150,c_fill,r_max/avatar1.jpg" alt="Profile" class="profile-img">
+                    <img id="profileImage" src="https://res.cloudinary.com/demo/image/upload/w_150,h_150,c_fill,r_max/avatar1.jpg" alt="Profile" class="profile-img">
                     <div class="upload-icon">
                         <i class="fas fa-camera"></i>
                     </div>
                 </div>
-                <h3 class="profile-name">Jessica Smith</h3>
-                <p class="profile-username">@jessica_22</p>
-                <p>Travel enthusiast & photography lover ✈️📸</p>
+                <h3 class="profile-name" id="profileName">Jessica Smith</h3>
+                <p class="profile-username" id="profileUsername">@jessica_22</p>
+                <p id="profileBio">Travel enthusiast & photography lover ✈️📸</p>
                 
                 <div class="profile-stats">
                     <div class="stat">
@@ -635,21 +636,116 @@
         </aside>
     </div>
 
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
     <script>
+        // Initialize Supabase
+        const supabaseUrl = "https://wqknmsiqbjyzoscbbgdt.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc";
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
         // Cloudinary configuration
-        const CLOUD_NAME = 'your_cloud_name'; // Replace with your Cloudinary cloud name
-        const UPLOAD_PRESET = 'your_upload_preset'; // Replace with your upload preset
-        
-        // Sample functionality for profile picture upload
+        const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dzorvvwp8/image/upload";
+        const UPLOAD_PRESET = "working_reels";
+
+        let currentUserId = null;
+
+        // Load user profile data
+        async function loadUserProfileSection() {
+            // Get currently logged-in user
+            const { data: { user }, error: userError } = await supabase.auth.getUser();
+            if (userError || !user) {
+                console.log("No logged-in user");
+                return;
+            }
+            
+            currentUserId = user.id;
+
+            // Fetch profile info from 'profiles' table
+            const { data: profile, error: profileError } = await supabase
+                .from('profiles')
+                .select('username, avatar_url, bio')
+                .eq('id', user.id)
+                .single();
+
+            if (profileError) {
+                console.log("Error loading profile:", profileError);
+                return;
+            }
+
+            // Update the reels page profile section
+            if (profile.avatar_url) {
+                document.getElementById('profileImage').src = profile.avatar_url;
+                document.getElementById('profilePic').src = profile.avatar_url;
+            }
+            
+            if (profile.username) {
+                document.getElementById('profileName').textContent = profile.username;
+                document.getElementById('profileUsername').textContent = '@' + profile.username;
+                document.getElementById('username').textContent = profile.username;
+            }
+            
+            if (profile.bio) {
+                document.getElementById('profileBio').textContent = profile.bio;
+            }
+        }
+
+        // Upload avatar functionality
         document.querySelector('.upload-icon').addEventListener('click', function() {
-            alert('Cloudinary upload would be triggered here. In a real app, this would open a file selector and upload to your Cloudinary account.');
+            // Trigger the file input click
+            document.getElementById('profileImage').click();
         });
-        
+
+        document.getElementById('profileImage').addEventListener('click', async () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.click();
+
+            fileInput.onchange = async () => {
+                const file = fileInput.files[0];
+                if (!file) return;
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', UPLOAD_PRESET);
+                formData.append('folder', 'avatars');
+
+                try {
+                    const res = await fetch(CLOUDINARY_URL, {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const data = await res.json();
+
+                    if (data.secure_url) {
+                        // Update profile in Supabase
+                        const { error } = await supabase
+                            .from('profiles')
+                            .update({ avatar_url: data.secure_url })
+                            .eq('id', currentUserId);
+
+                        if (!error) {
+                            // Update all profile images on the page
+                            document.getElementById('profileImage').src = data.secure_url;
+                            document.getElementById('profilePic').src = data.secure_url;
+                            alert('Profile picture updated!');
+                        } else {
+                            console.log('Update error:', error);
+                        }
+                    } else {
+                        console.log('Error uploading:', data);
+                    }
+                } catch (error) {
+                    console.log('Upload error:', error);
+                }
+            };
+        });
+
         // Add reel button functionality
         document.querySelector('.add-reel-button').addEventListener('click', function() {
             alert('This would open a reel creation modal with Cloudinary upload functionality.');
         });
-        
+
         // Simulate like functionality
         document.querySelectorAll('.fa-heart').forEach(heart => {
             heart.addEventListener('click', function() {
@@ -657,38 +753,9 @@
                 this.classList.toggle('far');
             });
         });
+
+        // Load profile on page load
+        loadUserProfileSection();
     </script>
-        <script src="https://unpkg.com/@supabase/supabase-js"></script>
-<script>
-const supabaseUrl = "https://reels.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indxa25tc2lxYmp5em9zY2JiZ2R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NTYwMTEsImV4cCI6MjA2ODIzMjAxMX0.KoDQ-JR8b2U7UNr_ZdYRtJmtqdFRKnjLROzbEOLM2Tc"; // replace with your anon key
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-async function loadUserProfileSection() {
-    // Get currently logged-in user
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    if (userError || !user) return console.log("No logged-in user");
-
-    // Fetch profile info from 'profiles' table
-    const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('username, avatar_url')
-        .eq('id', user.id)
-        .single();
-
-    if (profileError) return console.log(profileError);
-
-    // Update the reels page profile section
-    if (profile.avatar_url) document.querySelector('.profile-img').src = profile.avatar_url;
-    if (profile.username) {
-        document.querySelector('.profile-name').textContent = profile.username;
-        document.querySelector('.profile-username').textContent = '@' + profile.username;
-    }
-}
-
-loadUserProfileSection();
-
-</script>
-
 </body>
 </html>
