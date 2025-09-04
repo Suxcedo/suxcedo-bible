@@ -5,15 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - SuxcedoReels</title>
   <link rel="icon" type="image/png" href="favicon.png" />
-  <style>
+    <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #D2B48C;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background-color: #F5DEB3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .suxcedo {
+      color: #5C3317;
+    }
+
+    .reels {
+      color: #A0522D;
     }
 
     .profile-wrapper {
@@ -23,6 +51,7 @@
       width: 400px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-top: 40px;
     }
 
     #profilePic {
@@ -62,17 +91,42 @@
       background-color: #8B4513;
       color: white;
     }
+
+    .floating-back {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #8B4513;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .floating-back:hover {
+      background-color: #A0522D;
+    }
   </style>
 </head>
 <body>
+  <header class="header">
+    <img src="suxcedo.png" alt="Suxcedo Logo" class="logo" />
+    <span class="title"><span class="suxcedo">Suxcedo</span><span class="reels">Reels</span></span>
+  </header>
+
   <div class="profile-wrapper">
-    <img id="profilePic" src="avatar.jpeg" alt="Profile">
+    <img id="profilePic" src="avatar.jpeg" alt="Profile" />
     <h2 id="profileName">User Name</h2>
     <p id="profileUsername">@username</p>
 
     <input id="bioInput" type="text" placeholder="Your bio..." />
     <button class="save-btn" onclick="saveProfile()">Save Changes</button>
   </div>
+
+  <a href="reels.html" class="floating-back">&#8592; Back</a>
 
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <script>
