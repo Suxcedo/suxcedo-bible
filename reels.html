@@ -380,12 +380,7 @@
                 <i class="fas fa-bell"></i>
                 <i class="fas fa-envelope"></i>
                 
-    <div class="user-profile">
-  <a href="profile.html" id="profileLink">
-    <img id="profilePic" src="https://via.placeholder.com/40" alt="Profile" class="profile-pic">
-    <span id="username">User</span>
-  </a>
-</div>
+
 
 
             </div>
@@ -577,63 +572,45 @@
         </main>
 
         <aside class="right-sidebar">
-            <div class="profile-section">
-                <div class="profile-img-container">
-                    <img id="profileImage" src="https://res.cloudinary.com/demo/image/upload/w_150,h_150,c_fill,r_max/avatar1.jpg" alt="Profile" class="profile-img">
-                    <div class="upload-icon">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                </div>
-                <h3 class="profile-name" id="profileName">Jessica Smith</h3>
-                <p class="profile-username" id="profileUsername">@jessica_22</p>
-                <p id="profileBio">Travel enthusiast & photography lover ✈️📸</p>
-                
-                <div class="profile-stats">
-                    <div class="stat">
-                        <div class="stat-value">247</div>
-                        <div class="stat-label">Reels</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">12.5K</div>
-                        <div class="stat-label">Followers</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">1.2K</div>
-                        <div class="stat-label">Following</div>
-                    </div>
-                </div>
-                
-                <button class="add-reel-button">
-                    <i class="fas fa-plus"></i> Add New Reel
-                </button>
-            </div>
+    <div class="profile-section">
+        <div class="profile-img-container">
+            <img id="sidebarProfileImage" 
+                 src="https://res.cloudinary.com/demo/image/upload/w_150,h_150,c_fill,r_max/avatar1.jpg" 
+                 alt="Profile" 
+                 class="profile-img">
+        </div>
+        <h3 class="profile-name" id="sidebarProfileName">Your name</h3>
+        <p class="profile-username" id="sidebarProfileUsername">@user</p>
+        <p id="sidebarProfileBio">Travel enthusiast & photography lover ✈️📸</p>
+    </div>
 
-            <div class="trending-section">
-                <h3>Trending Topics</h3>
-                <ul class="trending-list">
-                    <li>
-                        <span class="trending-number">1</span>
-                        <span>#SummerVibes</span>
-                    </li>
-                    <li>
-                        <span class="trending-number">2</span>
-                        <span>#TravelDiaries</span>
-                    </li>
-                    <li>
-                        <span class="trending-number">3</span>
-                        <span>#Foodie</span>
-                    </li>
-                    <li>
-                        <span class="trending-number">4</span>
-                        <span>#SunsetLovers</span>
-                    </li>
-                    <li>
-                        <span class="trending-number">5</span>
-                        <span>#PetLife</span>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+    <div class="trending-section">
+        <h3>Trending Topics</h3>
+        <ul class="trending-list">
+            <li>
+                <span class="trending-number">1</span>
+                <span>#SummerVibes</span>
+            </li>
+            <li>
+                <span class="trending-number">2</span>
+                <span>#TravelDiaries</span>
+            </li>
+            <li>
+                <span class="trending-number">3</span>
+                <span>#Foodie</span>
+            </li>
+            <li>
+                <span class="trending-number">4</span>
+                <span>#SunsetLovers</span>
+            </li>
+            <li>
+                <span class="trending-number">5</span>
+                <span>#PetLife</span>
+            </li>
+        </ul>
+    </div>
+</aside>
+
     </div>
 
     <script src="https://unpkg.com/@supabase/supabase-js"></script>
@@ -651,111 +628,56 @@
 
         // Load user profile data
         async function loadUserProfileSection() {
-            // Get currently logged-in user
-            const { data: { user }, error: userError } = await supabase.auth.getUser();
-            if (userError || !user) {
-                console.log("No logged-in user");
-                return;
-            }
-            
-            currentUserId = user.id;
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError || !user) {
+        console.log("No logged-in user");
+        return;
+    }
 
-            // Fetch profile info from 'profiles' table
-            const { data: profile, error: profileError } = await supabase
-                .from('profiles')
-                .select('username, avatar_url, bio')
-                .eq('id', user.id)
-                .single();
+    currentUserId = user.id;
 
-            if (profileError) {
-                console.log("Error loading profile:", profileError);
-                return;
-            }
+    const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('username, avatar_url, bio')
+        .eq('id', user.id)
+        .single();
 
-            // Update the reels page profile section
-            if (profile.avatar_url) {
-                document.getElementById('profileImage').src = profile.avatar_url;
-                document.getElementById('profilePic').src = profile.avatar_url;
-            }
-            
-            if (profile.username) {
-                document.getElementById('profileName').textContent = profile.username;
-                document.getElementById('profileUsername').textContent = '@' + profile.username;
-                document.getElementById('username').textContent = profile.username;
-            }
-            
-            if (profile.bio) {
-                document.getElementById('profileBio').textContent = profile.bio;
-            }
-        }
+    if (profileError) {
+        console.log("Error loading profile:", profileError);
+        return;
+    }
 
-        // Upload avatar functionality
-        document.querySelector('.upload-icon').addEventListener('click', function() {
-            // Trigger the file input click
-            document.getElementById('profileImage').click();
-        });
+    // Update main profile section
+    if (profile.avatar_url) {
+        document.getElementById('profileImage').src = profile.avatar_url;
+        document.getElementById('profilePic').src = profile.avatar_url;
+    }
 
-        document.getElementById('profileImage').addEventListener('click', async () => {
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = 'image/*';
-            fileInput.click();
+    if (profile.username) {
+        document.getElementById('profileName').textContent = profile.username;
+        document.getElementById('profileUsername').textContent = '@' + profile.username;
+        document.getElementById('username').textContent = profile.username;
+    }
 
-            fileInput.onchange = async () => {
-                const file = fileInput.files[0];
-                if (!file) return;
+    if (profile.bio) {
+        document.getElementById('profileBio').textContent = profile.bio;
+    }
 
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('upload_preset', UPLOAD_PRESET);
-                formData.append('folder', 'avatars');
+    // ✅ Update sidebar profile section
+    if (profile.avatar_url) {
+        document.getElementById('sidebarProfileImage').src = profile.avatar_url;
+    }
+    if (profile.username) {
+        document.getElementById('sidebarProfileName').textContent = profile.username;
+        document.getElementById('sidebarProfileUsername').textContent = '@' + profile.username;
+    }
+    if (profile.bio) {
+        document.getElementById('sidebarProfileBio').textContent = profile.bio;
+    } else {
+        document.getElementById('sidebarProfileBio').style.display = "none";
+    }
+}
 
-                try {
-                    const res = await fetch(CLOUDINARY_URL, {
-                        method: 'POST',
-                        body: formData,
-                    });
-                    const data = await res.json();
-
-                    if (data.secure_url) {
-                        // Update profile in Supabase
-                        const { error } = await supabase
-                            .from('profiles')
-                            .update({ avatar_url: data.secure_url })
-                            .eq('id', currentUserId);
-
-                        if (!error) {
-                            // Update all profile images on the page
-                            document.getElementById('profileImage').src = data.secure_url;
-                            document.getElementById('profilePic').src = data.secure_url;
-                            alert('Profile picture updated!');
-                        } else {
-                            console.log('Update error:', error);
-                        }
-                    } else {
-                        console.log('Error uploading:', data);
-                    }
-                } catch (error) {
-                    console.log('Upload error:', error);
-                }
-            };
-        });
-
-        // Add reel button functionality
-        document.querySelector('.add-reel-button').addEventListener('click', function() {
-            alert('This would open a reel creation modal with Cloudinary upload functionality.');
-        });
-
-        // Simulate like functionality
-        document.querySelectorAll('.fa-heart').forEach(heart => {
-            heart.addEventListener('click', function() {
-                this.classList.toggle('fas');
-                this.classList.toggle('far');
-            });
-        });
-
-        // Load profile on page load
-        loadUserProfileSection();
     </script>
 </body>
 </html>
