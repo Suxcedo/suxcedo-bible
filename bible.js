@@ -151,22 +151,22 @@
 
   // ---------- Search ----------
   function searchBible() {
-    const { key, verse } = parseQuery(input.value);
-    const keyNorm = norm(key);
+  const { key, verse } = parseQuery(input.value);
+  const keyNorm = norm(key);
 
-    // Compare normalized on BOTH sides (fixes the bug)
-    const match = Object.keys(searchIndex).find(chap => norm(chap) === keyNorm);
+  // Compare normalized on BOTH sides (fixes the bug)
+  const match = Object.keys(searchIndex).find(chap => norm(chap) === keyNorm);
 
-    if (match) {
-      let url = searchIndex[match];
-      if (verse) url += `?v=${verse}`; // pass verse along
-      window.location.href = url;
-    } else if (searchIndex[key.toLowerCase()]) {
-      window.location.href = searchIndex[key.toLowerCase()];
-    } else {
-      alert("Chapter not found. Try e.g. Genesis 3 or gen3");
-    }
+  if (match) {
+    let url = searchIndex[match];
+    if (verse) url += `?v=${verse}`; // pass verse along
+    window.location.href = url;
+  } else if (searchIndex[key.toLowerCase()]) {
+    window.location.href = searchIndex[key.toLowerCase()];
+  } else {
+    alert("Chapter not found. Try e.g. Genesis 3 or gen3");
   }
+}
 
   input.addEventListener("input", showSuggestions);
   input.addEventListener("focus", showSuggestions);
